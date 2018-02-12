@@ -31,5 +31,5 @@ class Response(models.Model):
     Response = models.FloatField()
     Field = models.IntegerField()
 
-#def get_absolute_url(self):
-#    return reverse('Charity:Charity_details',args=[self.slug]
+def get_absolute_url(self):
+    return reverse('Charity:Charity_details',args=[self.slug])
