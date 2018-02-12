@@ -19,3 +19,5 @@ def gentella_html(request):
     template = loader.get_template('app/' + load_template)
     return HttpResponse(template.render(context, request))
 
+#TODO def Charity_details(request,Name):
+        #charity = Charity.objects.filter(slug=Name)
