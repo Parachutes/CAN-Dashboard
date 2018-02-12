@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'Dashboard',
     'forms_builder.forms',
     'django.contrib.sites',
+    # $ install the app {Shichao Ma / 12 Feb}
+    'app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,7 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
+                # $ removed the line below, otherwise an error will occur {Shichao Ma / 12 Feb}
+                #'django.core.context_processors.request',
             ],
         },
     },
