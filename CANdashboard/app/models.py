@@ -13,6 +13,8 @@ class Charity(models.Model):
 
     class Meta:
         ordering = ('Name',)
+        verbose_name = 'Charity'
+        verbose_name_plural = 'Charities'
 
     def __str__(self):
         return self.Name
@@ -23,7 +25,7 @@ class Charity_details(models.Model):
     Financial_health = models.IntegerField(blank=True, default = '0')   #2
     Strength_of_system = models.IntegerField(blank=True, default = '0') #3
     Progress = models.IntegerField(blank=True, default = '0')   #4
-    
+
 class Response(models.Model):
     Name = models.ForeignKey(Charity_details)
     Response = models.FloatField()
