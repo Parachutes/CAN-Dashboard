@@ -9,6 +9,16 @@ def index(request):
     template = loader.get_template('app/index.html')
     return HttpResponse(template.render(context, request))
 
+def indexUser(request):
+    context = {}
+    template = loader.get_template('app/indexUser.html')
+    return HttpResponse(template.render(context, request))
+
+def indexAdmin(request):
+    context = {}
+    template = loader.get_template('app/indexAdmin.html')
+    return HttpResponse(template.render(context, request))
+
 
 def gentella_html(request):
     context = {}

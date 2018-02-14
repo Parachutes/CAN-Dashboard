@@ -10,6 +10,10 @@ urlpatterns = [
 
     # The home page
     url(r'^admin/', include(admin.site.urls)),
+
     url(r'^$', views.index, name='index'),
+    url(r'^myUser/', views.indexUser, name='indexUser'),
+    url(r'^myAdmin/', views.indexAdmin, name='indexAdmin'),
+
     url(r'(?P<Name>[-\w]+)/$',views.Charity_detail, name = 'charity_detail'),
 ]
