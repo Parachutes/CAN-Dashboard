@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from app import views
+from dashboard import views
 from django.contrib import admin
 
 urlpatterns = [

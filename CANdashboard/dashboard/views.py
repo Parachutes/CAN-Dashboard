@@ -32,5 +32,5 @@ def gentella_html(request):
 
 def Charity_detail(request,Name):
         charity = Charity.objects.filter(slug=Name)
-        template = loader.get_template('app/index.html')
-        return render(request,'app/index.html',{'charity': charity})
+        template = loader.get_template('dashboard/index.html')
+        return render(request,'dashboard/index.html',{'charity': charity})

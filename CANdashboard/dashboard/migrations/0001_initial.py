@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('Financial_health', models.IntegerField(default='0', blank=True)),
                 ('Strength_of_system', models.IntegerField(default='0', blank=True)),
                 ('Progress', models.IntegerField(default='0', blank=True)),
-                ('Name', models.ForeignKey(to='app.Charity')),
+                ('Name', models.ForeignKey(to='dashboard.Charity')),
             ],
         ),
     ]
