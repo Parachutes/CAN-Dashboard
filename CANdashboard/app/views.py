@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
+from .models import Charity
 
 
 def index(request):
@@ -19,5 +20,7 @@ def gentella_html(request):
     template = loader.get_template('app/' + load_template)
     return HttpResponse(template.render(context, request))
 
-#TODO def Charity_details(request,Name):
-        #charity = Charity.objects.filter(slug=Name)
+def Charity_detail(request,Name):
+        charity = Charity.objects.filter(slug=Name)
+        template = loader.get_template('app/index.html')
+        return render(request,'app/index.html',{'charity': charity})
