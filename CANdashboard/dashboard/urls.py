@@ -8,9 +8,16 @@ urlpatterns = [
     # Or create a separate django app.
     url(r'^.*\.html', views.gentella_html, name='gentella'),
 
-    # The home page
     url(r'^admin/', include(admin.site.urls)),
+
+    # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
+    url(r'^myUser/', views.indexUser, name='indexUser'),
+    url(r'^myAdmin/', views.indexAdmin, name='indexAdmin'),
+
+    # to be deleted just for testing
+    url(r'^test/', views.indexTest, name='indexTest'),
+
     url(r'(?P<Name>[-\w]+)/$',views.Charity_detail, name = 'charity_detail'),
 
 
