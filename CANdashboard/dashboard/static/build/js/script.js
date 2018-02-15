@@ -4,31 +4,21 @@ var w = 200,
 var colorscale = d3.scale.category10;
 
 //Legend titles
-var LegendOptions = ['test1','test2'];
+//var LegendOptions = ['Survey Analysis',];
 
 //Data
 var d = [
 		  [
-			{axis:"var1",value:0.59},
-			{axis:"var2",value:0.56},
-			{axis:"var3",value:0.42},
-			{axis:"var4",value:0.34},
+			{axis:"Delivery",value:0.59},
+			{axis:"Financial Health",value:0.56},
+			{axis:"Strength of Charity",value:0.42},
+			{axis:"Progress",value:0.34},
 			{axis:"var5",value:0.48},
-			{axis:"var6",value:0.14},
-			{axis:"var7",value:0.11},
-			{axis:"var8",value:0.05},
-		
-		  ],[
-			{axis:"var1",value:0.48},
-			{axis:"var2",value:0.41},
-			{axis:"var3",value:0.27},
-			{axis:"var4",value:0.28},
-			{axis:"var5",value:0.46},
-			{axis:"var6",value:0.29},
-			{axis:"var7",value:0.11},
-			{axis:"var8",value:0.14},
-			
-		  ]
+			//{axis:"var6",value:0.14},
+			//{axis:"var7",value:0.11},
+			//{axis:"var8",value:0.05},
+
+		  ],
 		];
 
 //Options for the Radar chart, other than default
@@ -57,19 +47,19 @@ var svg = d3.select('#body')
 //Create the title for the legend
 var text = svg.append("text")
 	.attr("class", "title")
-	.attr('transform', 'translate(90,0)') 
+	.attr('transform', 'translate(90,0)')
 	.attr("x", w - 70)
 	.attr("y", 10)
 	.attr("font-size", "12px")
 	.attr("fill", "#404040")
-	.text("What % of owners use a specific service in a week");
-		
-//Initiate Legend	
+	//.text("Summary of Survey Statistics");
+
+//Initiate Legend
 var legend = svg.append("g")
 	.attr("class", "legend")
 	.attr("height", 100)
 	.attr("width", 200)
-	.attr('transform', 'translate(90,20)') 
+	.attr('transform', 'translate(90,20)')
 	;
 	//Create colour squares
 	legend.selectAll('rect')
@@ -92,4 +82,4 @@ var legend = svg.append("g")
 	  .attr("font-size", "11px")
 	  .attr("fill", "#737373")
 	  .text(function(d) { return d; })
-	  ;	
+	  ;
