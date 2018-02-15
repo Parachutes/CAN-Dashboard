@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'forms_builder.forms',
     'django.contrib.sites',
     # $ install the app {Shichao Ma / 12 Feb}
-    'app',
+    'dashboard',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'CANdashboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['app/templates'],
+        'DIRS': ['dashboard/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,5 +110,5 @@ SITE_ID = 1 # may change
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'app', 'static'),
+    os.path.join(BASE_DIR, 'dashboard', 'static'),
 )
