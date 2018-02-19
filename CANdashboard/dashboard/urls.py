@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from dashboard import views
 from django.contrib import admin
+import forms_builder.forms.urls
 
 urlpatterns = [
     # Matches any html file - to be used for gentella
@@ -9,6 +10,7 @@ urlpatterns = [
     url(r'^.*\.html', views.gentella_html, name='gentella'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^forms/', include(forms_builder.forms.urls)),
 
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
