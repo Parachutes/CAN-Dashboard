@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     # $ install the app {Shichao Ma / 12 Feb}
     'dashboard',
+    'directmessages',
 )
 
 MIDDLEWARE_CLASSES = (
