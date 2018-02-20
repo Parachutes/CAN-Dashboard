@@ -40,3 +40,24 @@ def Charity_detail(request,Name):
         charity = Charity.objects.filter(slug=Name)
         template = loader.get_template('app/index.html')
         return render(request,'app/index.html',{'charity': charity})
+
+        
+
+#TODO request username for list messages from login
+#def list_messages(request):
+#    touser =User.objects.get(username ='ALS')
+#    touser.username = touser
+#    mes = Inbox.get_unread_messages(touser).values_list('content',flat=True)
+#    html = "<html><body>It is now %s.</body></html>" % mes
+#    return HttpResponse(html)
+
+# TODO request other charity name and obtain from_user from login
+#def send_message(request):
+    #user =User.objects.get(username ='zaki')
+    #user.username = user
+    #touser =User.objects.get(username ='ALS')
+    #touser.username = touser
+    #message = 'Hello'
+    #Inbox.send_message(user, touser, message)
+    #html = "<html><body>It is now %s.</body></html>" %message
+    #return HttpResponse(html)
