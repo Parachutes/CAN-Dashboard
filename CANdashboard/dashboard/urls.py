@@ -3,6 +3,8 @@ from dashboard import views
 from django.contrib import admin
 from django.contrib import admin
 import forms_builder.forms.urls
+from directmessages.apps import Inbox
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     # Matches any html file - to be used for gentella
@@ -16,14 +18,15 @@ urlpatterns = [
 
     url(r'^forms/', include(forms_builder.forms.urls)),
     url(r'^profile/$', views.indexUser, name='indexUser'),
+    url(r'^messages/$',views.list_messages,name='messages'),
 
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
     url(r'^myUser/', views.indexUser, name='indexUser'),
-    url(r'^myAdmin/', views.indexAdmin, name='indexAdmin'),
+    #url(r'^myAdmin/', views.indexAdmin, name='indexAdmin'),
 
     # to be deleted just for testing
-    url(r'^test/', views.indexTest, name='indexTest'),
+    #url(r'^test/', views.indexTest, name='indexTest'),
 
     url(r'(?P<Name>[-\w]+)/$',views.Charity_detail, name = 'charity_detail'),
 
