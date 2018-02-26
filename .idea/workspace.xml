@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1361581-ace5-4e70-812c-18807edbe950" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/login.html" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/login.html" />
       <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAdmin.html" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAdmin.html" />
       <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html" />
       <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForUser.html" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForUser.html" />
@@ -30,8 +28,8 @@
       <file leaf-file-name="sidebarForAudience.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+            <state relative-caret-position="374">
+              <caret line="54" column="13" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="54" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -49,21 +47,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sidebarForAdmin.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sidebarForAdmin.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAdmin.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+            <state relative-caret-position="512">
+              <caret line="69" column="13" lean-forward="false" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sidebarForUser.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sidebarForUser.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForUser.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+            <state relative-caret-position="403">
+              <caret line="68" column="13" lean-forward="false" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -119,10 +117,10 @@
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/views.py" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/static/build/js/custom.js" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/index.html" />
-        <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/login.html" />
-        <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForUser.html" />
+        <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAdmin.html" />
+        <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForUser.html" />
       </list>
     </option>
   </component>
@@ -532,16 +530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -558,10 +546,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForUser.html">
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        <state relative-caret-position="374">
+          <caret line="54" column="13" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="54" selection-end-column="13" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
@@ -570,9 +558,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAdmin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        <state relative-caret-position="512">
+          <caret line="69" column="13" lean-forward="false" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForUser.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="68" column="13" lean-forward="false" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
