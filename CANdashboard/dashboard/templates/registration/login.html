@@ -23,17 +23,21 @@
             <h1>Login</h1>
               {% csrf_token %}
               {{ form.as_p }}
-              <button type="submit">Login</button>
             </form>
             <div>
+              <button type="submit">Login</button>
               <a class="reset_pass" href="#">Lost your password?</a>
             </div>
             <div class="clearfix"></div>
 
             <div class="separator">
-              <p class="change_link">New to site?
-                <a href="#signup" class="to_register"> Create Account </a>
+              <p class="change_link"> Are you an administrator?
+<<<<<<< HEAD:CANdashboard/dashboard/templates/app/login.html
+                <a href="#signup" class="to_register"> Admin Login </a>
               </p>
+=======
+                <a href="#signinAdmin" class="to_register"> Admin Login </a>
+>>>>>>> f97830ce6b6f0cb2cf88a322955acafba1a9df3a:CANdashboard/dashboard/templates/registration/login.html
 
               <div class="clearfix"></div>
               <br />
@@ -67,8 +71,13 @@
             <div class="clearfix"></div>
 
             <div class="separator">
+<<<<<<< HEAD:CANdashboard/dashboard/templates/app/login.html
+              <p class="change_link"> Are you an User?
+                <a href="#signin" class="to_register"> Users Login </a>
+=======
               <p class="change_link">Already a member ?
                 <a href="#signin" class="to_register"> Log in </a>
+>>>>>>> f97830ce6b6f0cb2cf88a322955acafba1a9df3a:CANdashboard/dashboard/templates/registration/login.html
               </p>
 
               <div class="clearfix"></div>

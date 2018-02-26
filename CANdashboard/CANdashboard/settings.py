@@ -41,7 +41,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     # $ install the app {Shichao Ma / 12 Feb}
     'dashboard',
-    'directmessages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,8 +104,6 @@ USE_TZ = True
 SITE_ID = 1 # may change
 
 LOGIN_REDIRECT_URL = '/profile/'
-
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
