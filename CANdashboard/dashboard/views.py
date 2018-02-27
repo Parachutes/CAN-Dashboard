@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Charity, User
 from django.contrib.auth.decorators import login_required
 from directmessages.apps import Inbox
+from directmessages.models import Message
 
 
 
@@ -38,8 +39,12 @@ def Charity_detail(request,Name):
 @login_required
 def list_messages(request):
     user = User.objects.get(username=request.user.username)
-    messages = Inbox.get_unread_messages(user).values_list('content',flat=True)
-    return render(request,'app/inboxUser.html',{'messages': messages})
+    messages = Message.objects.all()
+    mes = {
+    "lk": messages
+}
+    #messages = Inbox.get_unread_messages(user).values_list('content',flat=True)
+    return render(request,'app/inboxUser.html',mes)
 
 
 # TODO request other charity name and obtain from_user from login
