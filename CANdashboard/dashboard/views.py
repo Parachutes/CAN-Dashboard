@@ -46,7 +46,6 @@ def list_messages(request):
     mes = {
     "lk": messages
 }
-    #messages = Inbox.get_unread_messages(user).values_list('content',flat=True)
     return render(request,'app/inboxUser.html',mes)
 
 def list_charity(request):
