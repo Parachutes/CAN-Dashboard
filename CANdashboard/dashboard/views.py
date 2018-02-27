@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from directmessages.apps import Inbox
 from directmessages.models import Message
 
+from forms_builder.forms.models import FormManager,Form
+from forms_builder.forms.views import FormDetail
+
 
 
 def index(request):
@@ -45,6 +48,19 @@ def list_messages(request):
 }
     #messages = Inbox.get_unread_messages(user).values_list('content',flat=True)
     return render(request,'app/inboxUser.html',mes)
+
+def list_charity(request):
+    chairities = Charity.objects.all().values_list('Name',flat=True)
+    html = "<html><body>It is now %s.</body></html>" %chairities
+    return HttpResponse(html)
+
+
+
+def list_survey(request):
+    surveys = Form.objects.all().values_list('title',flat=True)
+    html = "<html><body>It is now %s.</body></html>" %surveys
+    return HttpResponse(html)
+
 
 
 # TODO request other charity name and obtain from_user from login
