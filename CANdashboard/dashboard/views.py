@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 from directmessages.apps import Inbox
 from directmessages.models import Message
 
-from forms_builder.forms.models import FormManager,Form
+from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
 from forms_builder.forms.views import FormDetail
-
+from forms_builder.forms.forms import EntriesForm,FormForForm
 
 
 def index(request):
@@ -59,6 +59,10 @@ def list_survey(request):
     surveys = Form.objects.all().values_list('title',flat=True)
     html = "<html><body>It is now %s.</body></html>" %surveys
     return HttpResponse(html)
+
+def add_survey(request):
+    form = FormDetail()
+    return render(request,'app/index.html',{'form': form})
 
 
 

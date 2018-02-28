@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^messages/$',views.list_messages,name='messages'),
     url(r'^survey_list/$',views.list_survey,name='survey_list'),
     url(r'^charity_list/$',views.list_charity,name='charity_list'),
+    url(r'^add/$',views.add_survey,name='messages'),
 
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
