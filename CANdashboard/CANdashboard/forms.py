@@ -10,7 +10,7 @@ class allField(forms.ModelForm):
 
     class Meta:
         model = Field
-        exclude = ('slug',)
+        exclude = ('slug','form')
 
 
 class addSurvey(forms.ModelForm):
@@ -23,4 +23,4 @@ class addSurvey(forms.ModelForm):
 class Description(forms.ModelForm):
     class Meta:
         model = Form
-        exclude = ('slug',)
+        exclude = ('slug','sites','redirect_url','email_from','response')

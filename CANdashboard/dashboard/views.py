@@ -63,7 +63,7 @@ def list_survey(request):
 
 def add_survey(request):
     allFiel = allField()
-    fields = addSurvey()
+    fields = addSurvey() ## UNNESSECARYY
     form = Description()
     return render(request,'app/samplePage.html',{'form': form,'fields':fields,'allFiel':allFiel})
 
