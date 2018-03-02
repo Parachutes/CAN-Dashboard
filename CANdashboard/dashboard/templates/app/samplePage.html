@@ -13,16 +13,17 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="dashboard_graph">
           <H1> Charity A </H1>
-            <p>some description</p>
         </div>
       </div>
+      {{form.as_ul}}
+      {{fields.as_p}}
+      {{allFiel.as_p}}
     </div>
 </div>
 
 {% endblock content %}
 
+
 {% block javascripts %}
   {{ block.super}}
 {% endblock javascripts %}
-
-

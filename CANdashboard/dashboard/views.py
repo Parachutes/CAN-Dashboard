@@ -5,6 +5,7 @@ from .models import Charity, User
 from django.contrib.auth.decorators import login_required
 from directmessages.apps import Inbox
 from directmessages.models import Message
+from CANdashboard.forms import addSurvey, allField, Description
 
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
 from forms_builder.forms.views import FormDetail
@@ -61,8 +62,10 @@ def list_survey(request):
     return HttpResponse(html)
 
 def add_survey(request):
-    form = FormDetail()
-    return render(request,'app/index.html',{'form': form})
+    allFiel = allField()
+    fields = addSurvey()
+    form = Description()
+    return render(request,'app/samplePage.html',{'form': form,'fields':fields,'allFiel':allFiel})
 
 
 
