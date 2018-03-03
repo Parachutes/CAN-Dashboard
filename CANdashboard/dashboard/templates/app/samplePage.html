@@ -9,15 +9,163 @@
 {% block content %}
 
 <div class="right_col" role="main">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="dashboard_graph">
-          <H1> Charity A </H1>
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Create a Survey</h3>
         </div>
       </div>
-      {{form.as_ul}}
-      <!-- {{fields.as_p}} -->
-      {{allFiel.as_p}}
+
+      <!-- General Part [Shichao / 3rd March] -->
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>General</h2>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+              <br/>
+
+              <!-- General -->
+              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                <!-- Title -->
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="title" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <!-- Status -->
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Status: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <p style="margin-top: 10px">
+                      Draft:
+                      <input type="radio" class="flat" name="Status" id="StatusDraft" value="Draft" checked="" required />
+                      Published:
+                      <input type="radio" class="flat" name="Status" id="StatusPublished" value="Published" />
+                      &nbsp&nbsp&nbsp
+                      <input type="checkbox" name="loginRequired" id="loginRequired" value="loginRequired" class="flat" /> Login required*
+                      <br/>
+                      <small>(*If checked, only logged in users can view the form)</small>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Published From -->
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Published from: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <fieldset>
+                      <div class="control-group">
+                        <div class="controls">
+                          <div class="input-prepend input-group">
+                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                            <input type="text" name="reservation-time" id="reservation-time" class="form-control" value="01/01/2016 - 01/25/2016" />
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+
+                <!-- Intro -->
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Intro: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div>
+                      <textarea class="resizable_textarea form-control" placeholder="Please write down the Introduction for the survey here..."></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Button text  -->
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="buttonText">Button text: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="buttonText" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <!-- Intro -->
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Response: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div>
+                      <textarea class="resizable_textarea form-control" placeholder="Please write down the Response after submitting here..."></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Redirect url  -->
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="redirectURL">Redirect URL: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="redirectURL" required="required" class="form-control col-md-7 col-xs-12" placeholder="An alternate URL to redirect to after form submission">
+                  </div>
+                </div>
+
+              </form>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Email Part [Shichao / 3rd March] TODO -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Email</h2>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Fields Part [Shichao / 3rd March] TODO -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Fields</h2>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <!--{{form.as_ul}}
+      &lt;!&ndash; {{fields.as_p}} &ndash;&gt;
+      {{allFiel.as_p}}-->
+
+      <!--{{form.title}}-->
+
     </div>
 </div>
 
