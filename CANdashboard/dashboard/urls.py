@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^survey_list/$',views.list_survey,name='survey_list'),
     url(r'^charity_list/$',views.list_charity,name='charity_list'),
     url(r'^add/$',views.add_survey,name='messages'),
-
+    url(r'^register/$',views.register_page,name='register'),
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
     url(r'^myUser/', views.indexUser, name='indexUser'),

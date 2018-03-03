@@ -2,11 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -19,6 +21,7 @@ class Migration(migrations.Migration):
                 ('Website', models.URLField(default='', blank=True)),
                 ('Email', models.EmailField(default='', max_length=254, blank=True)),
                 ('slug', models.SlugField(unique=True, max_length=200)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('Name',),

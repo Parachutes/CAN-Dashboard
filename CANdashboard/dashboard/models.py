@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 
 
 class Charity(models.Model):
+    user = models.ForeignKey(User)
     Name = models.CharField(max_length=80)
-    Country = models.CharField(max_length=20, default = '')
+    Country = models.CharField(max_length=20, blank=True)
     Website = models.URLField(blank=True,default = '')
     Email = models.EmailField(blank=True,default = '')
     slug = models.SlugField(max_length=200, unique=True)
