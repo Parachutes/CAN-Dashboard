@@ -16,7 +16,7 @@ class RegistrationForm(forms.Form):
                           widget=forms.PasswordInput())
     password2 = forms.CharField(label='Password (Again)',
                         widget=forms.PasswordInput())
-def clean_password2(self):
+    def clean_password2(self):
         if 'password1' in self.cleaned_data:
             password1 = self.cleaned_data['password1']
             password2 = self.cleaned_data['password2']
@@ -24,7 +24,7 @@ def clean_password2(self):
                 return password2
         raise forms.ValidationError('Passwords do not match.')
 
-def clean_username(self):
+    def clean_username(self):
         username = self.cleaned_data['username']
         if not re.search(r'^\w+$', username):
             raise forms.ValidationError('Username can only contain alphanumeric characters and the underscore.')
