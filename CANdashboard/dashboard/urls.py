@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^charity_list/$',views.list_charity,name='charity_list'),
     url(r'^add/$',views.add_survey,name='messages'),
     url(r'^register/$',views.register_page,name='register'),
+    url(r'^accounts/update/$', views.edit_profile, name='update_user'),
+    url(r'^accounts/update/change-pass/$', views.change_password, name='change_password'),
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
     url(r'^myUser/', views.indexUser, name='indexUser'),
