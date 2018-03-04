@@ -3,11 +3,19 @@ from django.forms import ModelForm
 import re
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from dashboard.models import *
+from dashboard.views import *
+from django.contrib.auth.forms import UserChangeForm
 
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm, Field
 from forms_builder.forms.views import FormDetail
 from forms_builder.forms.forms import EntriesForm,FormForForm
 
+
+# class UpdateUser(forms.Form):
+#     class Meta:
+#         model = UpdateCharity
+#
 
 class RegistrationForm(forms.Form):
     username = forms.CharField(label='Username', max_length=30)
@@ -33,6 +41,11 @@ class RegistrationForm(forms.Form):
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError('Username is already taken.')
+
+class EditProfile(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name','email','password')
 
 
 

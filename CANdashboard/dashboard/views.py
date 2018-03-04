@@ -1,14 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
 from .models import Charity, User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from directmessages.apps import Inbox
 from directmessages.models import Message
 from CANdashboard.forms import *
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.views.generic.edit import FormView
+from django.views.generic import UpdateView
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+
 
 
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
@@ -28,6 +32,40 @@ def register_page(request):
     variables = RequestContext(request, {'form': form})
     return render_to_response('registration/signUp.html',variables)
 
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfile(request.POST, instance = request.user)
+        if form.is_valid():
+            form.save()
+            context = {}
+            template = loader.get_template('app/indexUser.html')
+            return HttpResponse(template.render(context, request))
+    else :
+        form = EditProfile(instance=request.user)
+        return render(request,'app/charity_form.html',{'form':form})
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user = request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            context = {}
+            template = loader.get_template('app/indexUser.html')
+            return HttpResponse(template.render(context, request))
+        else:
+            form = PasswordChangeForm(user=request.user)
+            return render (request,'app/changepassword.html',{'form':form})
+    else :
+        form = PasswordChangeForm(user=request.user)
+        return render(request,'app/changepassword.html',{'form':form})
+
+
+
+class UpdateCharity(UpdateView):
+    model = Charity
+    fields = ['Name','Country','Website','Email']
+    template_name = 'app/charity_form.html'
 
 def index(request):
     context = {}
