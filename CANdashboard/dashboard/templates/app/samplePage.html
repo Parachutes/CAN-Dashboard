@@ -30,7 +30,7 @@
               <br/>
 
               <!-- General -->
-              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+              <form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
                 <!-- Title -->
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title: </label>
@@ -127,11 +127,55 @@
               <h2>Email</h2>
               <div class="clearfix"></div>
             </div>
-
             <div class="x_content">
+              <fieldset class="module aligned ">
 
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <p style="margin-top: 10px">
+                      <input type="checkbox" name="" id="" value="" class="flat" /> Send email*
+                      <br/>
+                      <small>(*If checked, the person entering the form will be sent an email)</small>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">From address: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12" placeholder="The address the email will be sent from">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Send copies to: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12" placeholder="One or more email addresses, separated by commas">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Subject: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12" placeholder="">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Message: </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div>
+                      <textarea class="resizable_textarea form-control" placeholder=""></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                </form>
+              </fieldset>
             </div>
-
           </div>
         </div>
       </div>
@@ -147,6 +191,8 @@
             </div>
 
             <div class="x_content">
+
+
 
             </div>
 
@@ -168,6 +214,10 @@
 
     </div>
 </div>
+
+
+
+
 
 {% endblock content %}
 
