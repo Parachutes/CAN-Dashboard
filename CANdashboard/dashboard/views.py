@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import Charity, User
+from .models import Charity, User, Charity_details
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from directmessages.apps import Inbox
@@ -91,18 +91,20 @@ def indexUser(request):
 #     return HttpResponse(template.render(context, request))
 
 
-
+@login_required
 def Charity_detail(request,Name):
         charity = Charity.objects.filter(slug=Name)
         template = loader.get_template('app/index.html')
         return render(request,'app/indexUser.html',{'charity': charity})
 
 
-def Charity_finance(request,Name):
-        charity = Charity.objects.filter(slug=Name)
-        finance=Charity.objects.filter(slug=Name).values_list('Financial_health', flat=True)
-        template = loader.get_template('app/index.html')
-        return render(request,'app/index.html',{'finance': finance})
+def Charity_finance(request):
+        user = User.objects.get(username='Evain')
+        charity = Charity.objects.get(user=user)
+        Charity_detail = Charity_details.objects.get(Name=charity)
+        html = "<html><body>It is now %s.</body></html>" %Charity_detail.Financial_health
+        return HttpResponse(html)
+        #return render(request,'app/index.html',{'user': user,'ma':ma})
 
 
 
