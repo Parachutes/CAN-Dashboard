@@ -32,6 +32,7 @@ def register_page(request):
     variables = RequestContext(request, {'form': form})
     return render_to_response('registration/signUp.html',variables)
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfile(request.POST, instance = request.user)
@@ -44,6 +45,7 @@ def edit_profile(request):
         form = EditProfile(instance=request.user)
         return render(request,'app/charity_form.html',{'form':form})
 
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user = request.user)
@@ -61,7 +63,7 @@ def change_password(request):
         return render(request,'app/changepassword.html',{'form':form})
 
 
-
+@login_required
 class UpdateCharity(UpdateView):
     model = Charity
     fields = ['Name','Country','Website','Email']
@@ -72,6 +74,7 @@ def index(request):
     template = loader.get_template('app/index.html')
     return HttpResponse(template.render(context, request))
 
+@login_required
 def indexUser(request):
     context = {}
     template = loader.get_template('app/indexUser.html')
@@ -93,7 +96,8 @@ def Charity_detail(request,Name):
         charity = Charity.objects.filter(slug=Name)
         template = loader.get_template('app/index.html')
         return render(request,'app/indexUser.html',{'charity': charity})
-    
+
+
 def Charity_finance(request,Name):
         charity = Charity.objects.filter(slug=Name)
         finance=Charity.objects.filter(slug=Name).values_list('Financial_health', flat=True)
