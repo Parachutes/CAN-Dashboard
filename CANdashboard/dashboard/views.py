@@ -93,6 +93,36 @@ def Charity_detail(request,Name):
         charity = Charity.objects.filter(slug=Name)
         template = loader.get_template('app/index.html')
         return render(request,'app/indexUser.html',{'charity': charity})
+    
+def Charity_finance(request,Name):
+        charity = Charity.objects.filter(slug=Name)
+        finance=Charity.objects.filter(slug=Name).values_list('Financial_health', flat=True)
+        template = loader.get_template('app/index.html')
+        return render(request,'app/index.html',{'finance': finance})
+
+
+
+
+def Strength_of_system(request,Name):
+        charity = Charity.objects.filter(slug=Name)
+        strength=Charity.objects.filter(slug=Name).values_list('Strength_of_system', flat=True)
+        template = loader.get_template('app/index.html')
+        return render(request,'app/index.html',{'strength': strength})
+
+
+def Delivery(request,Name):
+        charity = Charity.objects.filter(slug=Name)
+        delivery=Charity.objects.filter(slug=Name).values_list('Delivery', flat=True)
+        template = loader.get_template('app/index.html')
+        return render(request,'app/index.html',{'delivery': delivery})
+
+
+def Progress(request,Name):
+        charity = Charity.objects.filter(slug=Name)
+        progress=Charity.objects.filter(slug=Name).values_list('Progress', flat=True)
+        template = loader.get_template('app/index.html')
+        return render(request,'app/index.html',{'progress': progress})
+
 
 
 @login_required
