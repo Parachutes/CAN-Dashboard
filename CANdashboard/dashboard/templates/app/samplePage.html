@@ -17,6 +17,18 @@
     padding: 14px;
     text-decoration: none;
   }
+  .empty-form {
+    display: none;
+  }
+  /* RELATED FIELD ADD ONE / LOOKUP */
+  form .related-widget-wrapper ul {
+    display: inline-block;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .clearable-file-input input {
+    margin-top: 0;
+  }
 </style>
 
 {% endblock stylesheets %}
@@ -428,7 +440,7 @@
 
 
 
-                            <tr class="form-row row2  empty-form" id="fields-empty">
+                            <tr class="form-row row2  empty-form " id="fields-empty">
                               <td class="original">
                                 <input id="id_fields-__prefix__-id" name="fields-__prefix__-id" type="hidden" />
                                 <input id="id_fields-__prefix__-form" name="fields-__prefix__-form" type="hidden" />
@@ -496,13 +508,14 @@
         </div>
       </div>
 
-
-
       <!-- buttons row -->
-
-
-
-
+      <div class="ln_solid"></div>
+      <div class="submit-row" style="margin-left: 25%">
+            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-success">Save and add another</button>
+            <button type="button" class="btn btn-info">Save and continue editing</button>
+      </div>
+      <br/>
 
     </div>
 </div>
