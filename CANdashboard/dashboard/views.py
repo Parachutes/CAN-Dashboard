@@ -96,7 +96,7 @@ def Charity_detail(request):
         user = User.objects.get(username='Evain')
         charity = Charity.objects.get(user=user)
         Charity_detail = Charity_details.objects.get(Name=charity)
-        html = "<html><body>It is now %s.</body></html>" %Charity_detail.Financial_health
+        html = "<html><body> The Financial Health of the Charity is %s.</body></html>" %Charity_detail.Financial_health
         return HttpResponse(html)
         #return render(request,'app/index.html',{'user': user,'ma':ma})
 
