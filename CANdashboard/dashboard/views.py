@@ -91,45 +91,14 @@ def indexUser(request):
 #     return HttpResponse(template.render(context, request))
 
 
-@login_required
-def Charity_detail(request,Name):
-        charity = Charity.objects.filter(slug=Name)
-        template = loader.get_template('app/index.html')
-        return render(request,'app/indexUser.html',{'charity': charity})
-
-
-def Charity_finance(request):
+#@login_required
+def Charity_detail(request):
         user = User.objects.get(username='Evain')
         charity = Charity.objects.get(user=user)
         Charity_detail = Charity_details.objects.get(Name=charity)
         html = "<html><body>It is now %s.</body></html>" %Charity_detail.Financial_health
         return HttpResponse(html)
         #return render(request,'app/index.html',{'user': user,'ma':ma})
-
-
-
-
-def Strength_of_system(request,Name):
-        charity = Charity.objects.filter(slug=Name)
-        strength=Charity.objects.filter(slug=Name).values_list('Strength_of_system', flat=True)
-        template = loader.get_template('app/index.html')
-        return render(request,'app/index.html',{'strength': strength})
-
-
-def Delivery(request,Name):
-        charity = Charity.objects.filter(slug=Name)
-        delivery=Charity.objects.filter(slug=Name).values_list('Delivery', flat=True)
-        template = loader.get_template('app/index.html')
-        return render(request,'app/index.html',{'delivery': delivery})
-
-
-def Progress(request,Name):
-        charity = Charity.objects.filter(slug=Name)
-        progress=Charity.objects.filter(slug=Name).values_list('Progress', flat=True)
-        template = loader.get_template('app/index.html')
-        return render(request,'app/index.html',{'progress': progress})
-
-
 
 @login_required
 def list_messages(request):
