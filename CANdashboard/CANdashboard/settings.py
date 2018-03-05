@@ -114,4 +114,6 @@ LOGIN_REDIRECT_URL = '/profile/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'dashboard', 'static'),
+    '/venv/lib/python3.6/site-packages/django/contrib/admin/static/'
+
 )

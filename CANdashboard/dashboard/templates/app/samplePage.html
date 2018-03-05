@@ -261,7 +261,8 @@
                               <th class="required">Type</th>
                               <th>Required</th>
                               <th>Visible</th>
-                              <th>Choices&nbsp;<img src="/static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character.)" title="Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character." /></th>
+                              {% load static %}
+                              <th>Choices&nbsp;<img src= "{% static "static/admin/img/icon-unknown.svg" %}" class="help help-tooltip" width="10" height="10" alt="(Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character.)" title="Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character." /></th>
                               <th>Default value</th>
                               <th>Placeholder Text</th>
                               <th>Help text</th>

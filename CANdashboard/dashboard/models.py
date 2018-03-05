@@ -3,7 +3,7 @@ from django.db import models
 from django.forms import ModelForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-
+from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm,Field
 
 class Charity(models.Model):
     user = models.ForeignKey(User)
@@ -31,3 +31,7 @@ class Charity_details(models.Model):
 
 def get_absolute_url(self):
     return reverse('Charity:Charity_details',args=[self.slug])
+
+class RelatedQuestion(models.Model):
+    question = models.ForeignKey(Field)
+    category = models.ForeignKey(Charity_details)
