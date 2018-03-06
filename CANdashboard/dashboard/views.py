@@ -26,8 +26,9 @@ def register_page(request):
             user = User.objects.create_user(username=form.cleaned_data['username'],password=form.cleaned_data['password1'],email=form.cleaned_data['email'])
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
-            charity = Charity.objects.create(user=user,Name=request.user.username,slug=request.user.username)
-            return render(request,'app/indexUser.html',{'charity':charity})
+            charity = Charity.objects.create(user=user,Name=request.user.username)
+            charity_detail = Charity_details.objects.create(Name=charity)
+            return render(request,'app/indexUser.html',{'charity':charity,'charity_detail':charity_detail})
     form = RegistrationForm()
     variables = RequestContext(request, {'form': form})
     return render_to_response('registration/signUp.html',variables)
