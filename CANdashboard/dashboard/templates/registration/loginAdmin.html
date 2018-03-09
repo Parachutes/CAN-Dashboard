@@ -22,10 +22,10 @@
             <h1> Admin Login </h1>
             <div>
               {% csrf_token %}
+              {{ form.as_p }}
+            <!-- TODO add correct form -->
             </div>
             <div>
-
-              {{ form.as_p }}
             </div>
             <div>
               <button type="submit">Login</button>
@@ -53,6 +53,3 @@
 
 
 {% endblock body %}
-
-
-

@@ -80,7 +80,7 @@ def index(request):
 
 @login_required
 def indexUser(request):
-    # TODO add the chartiy_details inside this method 
+    # TODO add the chartiy_details inside this method
     context = {}
     template = loader.get_template('app/indexUser.html')
     return HttpResponse(template.render(context, request))
@@ -122,6 +122,9 @@ def list_charity(request):
     html = "<html><body>It is now %s.</body></html>" %chairities
     return HttpResponse(html)
 
+def loginAdmin(request):
+    # TODO add admin login func
+    return render(request,'registration/loginAdmin.html')
 
 
 def list_survey(request):

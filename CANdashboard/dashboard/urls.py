@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^register/$',views.register_page,name='register'),
     url(r'^accounts/update/$', views.edit_profile, name='update_user'),
     url(r'^accounts/update/change-pass/$', views.change_password, name='change_password'),
+    url(r'^loginAdmin/$', views.loginAdmin, name='adminLogin'),
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
     url(r'^myUser/', views.indexUser, name='indexUser'),
