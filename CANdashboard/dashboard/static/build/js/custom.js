@@ -2325,6 +2325,8 @@ function init_charts() {
     if ($('#canvasRadar').length) {
 
         var ctx = document.getElementById("canvasRadar");
+
+        // its just a sample data
         var data = {
             labels: ["Delivery", "Financial Health", "Strength of Charity", "Progress", "Other"],
             datasets: [{
@@ -2335,7 +2337,7 @@ function init_charts() {
                 pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
                 pointHoverBackgroundColor: "#fff",
                 pointHoverBorderColor: "rgba(220,220,220,1)",
-                data: [100, 0,100, 100, 100]
+                data: [ 0, 50, 0, 100, 100]
             }, {
                 label: "My Second dataset",
                 backgroundColor: "rgba(38, 185, 154, 0.2)",
@@ -2344,13 +2346,13 @@ function init_charts() {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [30,100,50,100,70]
+                data: [30,100,0,100,70]
             }]
         };
 
         var canvasRadar = new Chart(ctx, {
             type: 'radar',
-            data: data,
+            data: myData,
         });
 
     }
