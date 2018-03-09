@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Charity, User, Charity_details
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -12,6 +12,8 @@ from django.shortcuts import render_to_response
 from django.views.generic.edit import FormView
 from django.views.generic import UpdateView
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.core import serializers
+import json
 
 
 
@@ -93,13 +95,16 @@ def indexUser(request):
 
 
 #@login_required
-def Charity_detail(request):
-        user = User.objects.get(username='Evain')
-        charity = Charity.objects.get(user=user)
-        Charity_detail = Charity_details.objects.get(Name=charity)
-        html = "<html><body> The Financial Health of the Charity is %s.</body></html>" %Charity_detail.Financial_health
-        return HttpResponse(html)
-        #return render(request,'app/index.html',{'user': user,'ma':ma})
+def Charity_detail(request,*args,**kwargs):
+    user = User.objects.filter(username='Evain')
+    charity = Charity.objects.get(user=user)
+    Charity_detail = Charity_details.objects.get(Name=charity)
+    #return JsonResponse(data)
+    #return JsonResponse(serializers.serialize('json', user),safe=False)
+    return render(request,'app/chart.html',{'Charity_detail':Charity_detail})
+
+
+
 
 @login_required
 def list_messages(request):

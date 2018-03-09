@@ -2326,16 +2326,16 @@ function init_charts() {
 
         var ctx = document.getElementById("canvasRadar");
         var data = {
-            labels: ["Delivery", "Financial Health", "Strength of Charity", "Progress", "An other attribute"],
+            labels: ["Delivery", "Financial Health", "Strength of Charity", "Progress", "Other"],
             datasets: [{
-                label: "My First dataset",
+                label: "Charity",
                 backgroundColor: "rgba(3, 88, 106, 0.2)",
                 borderColor: "rgba(3, 88, 106, 0.80)",
                 pointBorderColor: "rgba(3, 88, 106, 0.80)",
                 pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
                 pointHoverBackgroundColor: "#fff",
                 pointHoverBorderColor: "rgba(220,220,220,1)",
-                data: [65, 59, 90, 81, 56]
+                data: [90, 10,10 , 10, 90]
             }, {
                 label: "My Second dataset",
                 backgroundColor: "rgba(38, 185, 154, 0.2)",
@@ -2344,7 +2344,7 @@ function init_charts() {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [77, 48, 89, 19, 96,]
+                data: [30,40,50,60,70 ,]
             }]
         };
 
