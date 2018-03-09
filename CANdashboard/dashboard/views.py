@@ -80,9 +80,12 @@ def index(request):
 
 @login_required
 def indexUser(request):
+    # TODO add the chartiy_details inside this method 
     context = {}
     template = loader.get_template('app/indexUser.html')
     return HttpResponse(template.render(context, request))
+
+
 #
 # def indexAdmin(request):
 #     context = {}
