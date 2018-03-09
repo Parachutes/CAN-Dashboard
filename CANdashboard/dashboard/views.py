@@ -73,9 +73,10 @@ class UpdateCharity(UpdateView):
     template_name = 'app/charity_form.html'
 
 def index(request):
-    context = {}
-    template = loader.get_template('app/index.html')
-    return HttpResponse(template.render(context, request))
+    user = User.objects.filter(username='Evain')
+    charity = Charity.objects.get(user=user)
+    char = Charity_details.objects.get(Name=charity)
+    return render(request,'app/index.html',{'char':char})
 
 @login_required
 def indexUser(request):
@@ -102,8 +103,6 @@ def Charity_detail(request,*args,**kwargs):
     #return JsonResponse(data)
     #return JsonResponse(serializers.serialize('json', user),safe=False)
     return render(request,'app/chart.html',{'Charity_detail':Charity_detail})
-
-
 
 
 @login_required
