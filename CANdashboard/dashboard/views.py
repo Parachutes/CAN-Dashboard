@@ -108,7 +108,11 @@ def indexUser(request):
 
 @login_required
 def indexAdmin(request):
-    return render(request,'app/indexAdmin.html')
+    user = User.objects.filter(username='Evain')
+    charity = Charity.objects.get(user=user)
+    Charity_detail = Charity_details.objects.get(Name=charity)
+
+    return render(request,'app/indexAdmin.html',{'Charity_detail':Charity_detail})
 
 
 
