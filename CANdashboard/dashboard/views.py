@@ -41,11 +41,20 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             context = {}
-            template = loader.get_template('app/indexUser.html')
-            return HttpResponse(template.render(context, request))
+            if not request.user.is_superuser:
+                template = loader.get_template('app/indexAdmin.html')
+                return HttpResponse(template.render(context, request))
+            else:
+                template = loader.get_template('app/indexUser.html')
+                return HttpResponse(template.render(context, request))
     else :
         form = EditProfile(instance=request.user)
-        return render(request,'app/charity_form.html',{'form':form})
+        if not request.user.is_superuser:
+            return render(request,'app/charity_form.html',{'form':form})
+        else:
+            return render(request,'app/admin_form.html',{'form':form})
+
+
 
 @login_required
 def change_password(request):
@@ -83,6 +92,12 @@ def indexUser(request):
     charity = Charity.objects.get(user=user)
     Charity_detail = Charity_details.objects.get(Name=charity)
     return render(request,'app/indexUser.html',{'Charity_detail':Charity_detail})
+
+
+@login_required
+def indexAdmin(request):
+    return render(request,'app/indexAdmin.html')
+
 
 
 #@login_required

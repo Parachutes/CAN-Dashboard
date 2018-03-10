@@ -1,7 +1,4 @@
 <div class="left_col scroll-view">
-  <div class="navbar nav_title" style="border: 0;">
-    <a href="index.html" class="site_title"><i class="fa fa-circle-o-notch"></i> <span>Dashboard</span></a>
-  </div>
 
   <div class="clearfix"></div>
 
@@ -12,7 +9,7 @@
     </div>
     <div class="profile_info">
       <span>Welcome,</span>
-      <h2>Alice Admin Doe</h2>
+      <h2>{{request.user.username}}</h2>
     </div>
   </div>
   <!-- /menu profile quick info -->
@@ -26,8 +23,8 @@
       <ul class="nav side-menu">
         <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="index.html">Personal</a></li>
+            <li><a href= "{%url 'AdminProfile' %}">Dashboard</a></li>
+            <li><a href="{%url 'update_user' %}">Personal</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-group"></i> Charities <span class="fa fa-chevron-down"></span></a>
