@@ -13,7 +13,6 @@ from django.views.generic.edit import FormView
 from django.views.generic import UpdateView
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.core import serializers
-import json
 
 
 
@@ -86,18 +85,6 @@ def indexUser(request):
     return HttpResponse(template.render(context, request))
 
 
-#
-# def indexAdmin(request):
-#     context = {}
-#     template = loader.get_template('app/indexAdmin.html')
-#     return HttpResponse(template.render(context, request))
-
-# def indexTest(request):
-#     context = {}
-#     template = loader.get_template('app/indexBackUp.html')
-#     return HttpResponse(template.render(context, request))
-
-
 #@login_required
 def Charity_detail(request,*args,**kwargs):
     user = User.objects.filter(username='Evain')
@@ -122,9 +109,32 @@ def list_charity(request):
     html = "<html><body>It is now %s.</body></html>" %chairities
     return HttpResponse(html)
 
+
 def loginAdmin(request):
-    # TODO add admin login func
-    return render(request,'registration/loginAdmin.html')
+    context = {}
+    if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    if user.is_superuser:
+                        login(request, user)
+                        template = loader.get_template('app/indexAdmin.html')
+                        return HttpResponse(template.render(context, request))
+                    else:
+                        template = loader.get_template('registration/loginAdmin.html')
+                        return HttpResponse(template.render(context, request))
+                else:
+                    template = loader.get_template('registration/loginAdmin.html')
+                    return HttpResponse(template.render(context, request))
+            else:
+                template = loader.get_template('registration/loginAdmin.html')
+                return HttpResponse(template.render(context, request))
+    else:
+        template = loader.get_template('registration/loginAdmin.html')
+        return HttpResponse(template.render(context, request))
+
 
 
 def list_survey(request):
