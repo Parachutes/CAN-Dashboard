@@ -1,6 +1,6 @@
-{% extends "app/base_site.html" %}
+{% extends "app/base_siteAdmin.html" %}
 
-{% block title %} Charity A {% endblock title %}
+{% block title %} CAN Charity{% endblock title %}
 
 {% block stylesheets %}
   {{ block.super }}
@@ -12,7 +12,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Sign Up</h3>
+          <h3>Create a new Charity</h3>
         </div>
       </div>
 
@@ -22,8 +22,9 @@
 
       <form method="post" action=".">
 
-
-{{form.as_p}}
+<table>
+{{form.as_table}}
+</table>
 
 <input type="submit" value="login" />
 <input type="hidden" name="next" value="/" />

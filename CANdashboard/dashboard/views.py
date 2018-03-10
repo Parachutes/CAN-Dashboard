@@ -20,6 +20,7 @@ from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, 
 from forms_builder.forms.views import FormDetail
 from forms_builder.forms.forms import EntriesForm,FormForForm
 
+@login_required
 def register_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -29,7 +30,7 @@ def register_page(request):
             login(request, user)
             charity = Charity.objects.create(user=user,Name=request.user.username)
             charity_detail = Charity_details.objects.create(Name=charity)
-            return render(request,'app/indexUser.html',{'charity':charity,'charity_detail':charity_detail})
+            return render(request,'app/indexAdmin.html')
     form = RegistrationForm()
     variables = RequestContext(request, {'form': form})
     return render_to_response('registration/signUp.html',variables)
