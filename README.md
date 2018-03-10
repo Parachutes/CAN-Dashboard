@@ -1,4 +1,4 @@
-# SEG-Major-project
+# CAN Charity Dashboard (SEG-Major-Project)
 
 CAN Dashboard, creates and sends Surveys. Visualizes the data in a dashboard.
 
@@ -8,7 +8,7 @@ django-forms-builder: pip install -U django-forms-builder
  
 direct messaging between users: pip install django-directmessages
 
-### Requirements
+## Requirements
 
 * Allow CAN to Develop Surveys :+1:
 
@@ -20,7 +20,7 @@ direct messaging between users: pip install django-directmessages
 
 * View the results of the surveys 
 
-* Anteractive diagrams showing data :+1:
+* An interactive diagrams showing data :+1:
 
 * Summary table of quotes and questions :+1:
 
@@ -32,7 +32,7 @@ direct messaging between users: pip install django-directmessages
 
 
 
-## Running the tests
+## Testing
 
 Tests are to be run in the Django Directory of the app (MORE SOON)
 
@@ -42,7 +42,7 @@ Go to manage.py File
 
 Insert : python manage.py runserver
 
-## Versioning
+## Version
 
 Initial Work - Prototype
 
