@@ -59,20 +59,31 @@ def edit_profile(request):
 
 @login_required
 def change_password(request):
+    user = request.user
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user = request.user)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
             context = {}
-            template = loader.get_template('app/indexUser.html')
-            return HttpResponse(template.render(context, request))
+            if not user.is_superuser:
+                template = loader.get_template('app/indexUser.html')
+                return HttpResponse(template.render(context, request))
+            else:
+                template = loader.get_template('app/indexAdmin.html')
+                return HttpResponse(template.render(context, request))
         else:
             form = PasswordChangeForm(user=request.user)
-            return render (request,'app/changepassword.html',{'form':form})
+            if not user.is_superuser:
+                return render (request,'app/changepassword.html',{'form':form})
+            else:
+                return render (request,'app/changepasswordAdmin.html',{'form':form})
     else :
         form = PasswordChangeForm(user=request.user)
-        return render(request,'app/changepassword.html',{'form':form})
+        if not user.is_superuser:
+            return render (request,'app/changepassword.html',{'form':form})
+        else:
+            return render (request,'app/changepasswordAdmin.html',{'form':form})
 
 
 @login_required
@@ -118,7 +129,10 @@ def list_messages(request):
     mes = {
     "lk": messages
 }
-    return render(request,'app/inboxUser.html',mes)
+    if user.is_superuser:
+        return render(request,'app/inboxAdmin.html',mes)
+    else:
+        return render(request,'app/inboxUser.html',mes)
 
 def list_charity(request):
     chairities = Charity.objects.all().values_list('Name',flat=True)
@@ -162,7 +176,7 @@ def add_survey(request):
     allFiel = allField()
     fields = addSurvey() ## UNNESSECARYY
     form = Description()
-    return render(request,'app/samplePage.html',{'form': form,'fields':fields,'allFiel':allFiel})
+    return render(request,'app/add_survey.html',{'form': form,'fields':fields,'allFiel':allFiel})
 
 
 
