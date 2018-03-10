@@ -79,20 +79,20 @@ def index(request):
 
 @login_required
 def indexUser(request):
-    # TODO add the chartiy_details inside this method
-    context = {}
-    template = loader.get_template('app/indexUser.html')
-    return HttpResponse(template.render(context, request))
-
-
-#@login_required
-def Charity_detail(request,*args,**kwargs):
     user = User.objects.filter(username='Evain')
     charity = Charity.objects.get(user=user)
     Charity_detail = Charity_details.objects.get(Name=charity)
-    #return JsonResponse(data)
-    #return JsonResponse(serializers.serialize('json', user),safe=False)
-    return render(request,'app/chart.html',{'Charity_detail':Charity_detail})
+    return render(request,'app/indexUser.html',{'Charity_detail':Charity_detail})
+
+
+#@login_required
+# def Charity_detail(request,*args,**kwargs):
+#     user = User.objects.filter(username='Evain')
+#     charity = Charity.objects.get(user=user)
+#     Charity_detail = Charity_details.objects.get(Name=charity)
+#     #return JsonResponse(data)
+#     #return JsonResponse(serializers.serialize('json', user),safe=False)
+#     return render(request,'app/chart.html',{'Charity_detail':Charity_detail})
 
 
 @login_required
