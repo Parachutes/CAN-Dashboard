@@ -39,3 +39,6 @@ class RelatedQuestion(models.Model):
 
 class SurveyMessage(Message):
     survey = models.ForeignKey(Form)
+
+    def __str__(self):
+        return self.content

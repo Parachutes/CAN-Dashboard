@@ -130,7 +130,7 @@ def indexAdmin(request):
 @login_required
 def list_messages(request):
     user = User.objects.get(username=request.user.username)
-    messages = SurveyMessage.objects.all()
+    messages = SurveyMessage.objects.filter(recipient=user)
     mes = {
     "lk": messages
 }
@@ -183,22 +183,31 @@ def add_survey(request):
     form = Description()
     return render(request,'app/add_survey.html',{'form': form,'fields':fields,'allFiel':allFiel})
 
-
+@login_required
 def send_message(request):
+    user = request.user
     if request.method == 'POST':
         form = SendMessage(request.POST)
-        user = request.user
         if form.is_valid():
-            message = SurveyMessage(sender=user,recipient=form.cleaned_data['recipient'],content=str(form),survey=form.cleaned_data['survey'])
+            message = SurveyMessage(sender=user,recipient=form.cleaned_data['recipient'],content=form.cleaned_data['content'],survey=form.cleaned_data['survey'])
             message.save()
             message_sent.send(sender= message,from_user=message.sender,to=message.recipient)
-            return render(request,'app/indexAdmin.html')
+            if user.is_superuser:
+                return render(request,'app/indexAdmin.html')
+            else:
+                return render(request,'app/indexUser')
         else:
-            return render(request,'app/chart.html')
+            if not user.is_superuser:
+                return render(request,'app/send_message.html')
+            else:
+                return render(request,'app/send_messageAdmin.html')
     else:
         form = SendMessage()
         variables = RequestContext(request, {'form': form})
-        return render_to_response('app/chart.html',variables)
+        if not user.is_superuser:
+            return render_to_response('app/send_message.html',variables)
+        else:
+            return render_to_response('app/send_messageAdmin.html',variables)
 
 
 
