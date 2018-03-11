@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm,Field
+from directmessages.models import Message
 
 class Charity(models.Model):
     user = models.ForeignKey(User)
@@ -35,3 +36,6 @@ def get_absolute_url(self):
 class RelatedQuestion(models.Model):
     question = models.ForeignKey(Field)
     category = models.ForeignKey(Charity_details)
+
+class SurveyMessage(Message):
+    survey = models.ForeignKey(Form)

@@ -1,42 +1,19 @@
 <html>
-{% block extrahead %}
-<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-$( document ).ready(function() {
-  var data = {
-      labels: ["Delivery", "Financial Health", "Strength of Charity", "Progress", "Other"],
-      datasets: [
-          {
-              label: "Site Registrations in the Last 30 Days",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              data: [{{Charity_detail.Delivery}},{{Charity_detail.Financial_health}},
-                {{Charity_detail.Strength_of_system}},{{Charity_detail.Progress}},50]
-          }
-      ]
-
-  };
-
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var myRadarChart = new Chart(ctx).Radar(data);
-});
-</script>
-{% endblock %}
-
-<head>
-
-
-</head>
-
 <body>
-<h3> Summary for Charity </h3>
-<canvas id="myChart" width="400" height="400"></canvas>
+
+  <form method="post" class="form" a>
+    <h1> Send A Message </h1>
+    <div>
+      {% csrf_token %}
+          {{ form.as_p }}
+    </div>
+    <div>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
 
 
 
 </body>
+
 </html>

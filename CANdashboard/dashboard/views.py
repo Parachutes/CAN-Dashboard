@@ -13,6 +13,7 @@ from django.views.generic.edit import FormView
 from django.views.generic import UpdateView
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.core import serializers
+from directmessages.signals import message_read, message_sent
 
 
 
@@ -129,7 +130,7 @@ def indexAdmin(request):
 @login_required
 def list_messages(request):
     user = User.objects.get(username=request.user.username)
-    messages = Message.objects.all()
+    messages = SurveyMessage.objects.all()
     mes = {
     "lk": messages
 }
@@ -181,6 +182,24 @@ def add_survey(request):
     fields = addSurvey() ## UNNESSECARYY
     form = Description()
     return render(request,'app/add_survey.html',{'form': form,'fields':fields,'allFiel':allFiel})
+
+
+def send_message(request):
+    if request.method == 'POST':
+        form = SendMessage(request.POST)
+        user = request.user
+        if form.is_valid():
+            message = SurveyMessage(sender=user,recipient=form.cleaned_data['recipient'],content=str(form),survey=form.cleaned_data['survey'])
+            message.save()
+            message_sent.send(sender= message,from_user=message.sender,to=message.recipient)
+            return render(request,'app/indexAdmin.html')
+        else:
+            return render(request,'app/chart.html')
+    else:
+        form = SendMessage()
+        variables = RequestContext(request, {'form': form})
+        return render_to_response('app/chart.html',variables)
+
 
 
 

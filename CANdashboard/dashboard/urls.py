@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^myUser/', views.indexUser, name='indexUser'),
     #url(r'^myAdmin/', views.indexAdmin, name='indexAdmin'),
-    # url(r'^bla/', views.Charity_detail, name="bla"),
+    url(r'^bla/', views.send_message, name="send"),
     # to be deleted just for testing
     #url(r'^test/', views.indexTest, name='indexTest'),
 
