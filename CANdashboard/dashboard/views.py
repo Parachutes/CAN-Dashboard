@@ -141,9 +141,11 @@ def list_messages(request):
         return render(request,'app/inboxUser.html',mes)
 
 def list_charity(request):
-    chairities = Charity.objects.all().values_list('Name',flat=True)
-    html = "<html><body>It is now %s.</body></html>" %chairities
-    return HttpResponse(html)
+    charity = Charity.objects.all()
+    chars = {
+    "charity": charity
+}
+    return render(request,'app/charities_list.html',chars)
 
 
 def loginAdmin(request):
@@ -187,7 +189,7 @@ def bla(request):
 
 
 def list_survey(request):
-    surveys = Form.objects.all().values_list('title',flat=True)
+    surveys = Form.objects.all()
     surv = {
         "survey": surveys
     }

@@ -29,28 +29,20 @@
                     <th>#</th>
                     <th> Charity Name </th>
                     <th> Country </th>
-                    <th> may be another attribute </th>
+                    <th> Email </th>
+                    <th> Overall Score </th>
                   </tr>
                 </thead>
                 <tbody>
+                    {% for char in charity %}
                   <tr>
                     <th scope="row">1</th>
-                    <td> Charity A </td>
-                    <td> UK </td>
-                    <td> lalala </td>
+                    <td> {{char.Name}} </td>
+                    <td> {{char.Country}} </td>
+                    <td> {{char.email}} </td>
+                    <td> 50 </td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td> Charity B </td>
-                    <td> France </td>
-                    <td> lalala </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td> Charity C </td>
-                    <td> Germany </td>
-                    <td> lalala </td>
-                  </tr>
+                  {%endfor%}
                 </tbody>
               </table>
 

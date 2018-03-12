@@ -46,7 +46,7 @@
 
                     {% for sur in survey %}
 
-                    <td><a href="">{{sur.title}}</a></td>
+                    <td><a href="{% url 'survey_view' sur.slug}">{{sur.title}}</a></td>
                     <td>{{sur.publish_date}}t</td>
                     <td>{{sur.expiry_date}}</td>
                     <td>{{sur.login_required}}</td>
