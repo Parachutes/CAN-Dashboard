@@ -1,0 +1,36 @@
+
+{% extends "app/base_siteUser.html" %}
+
+{% block title %} Charity A {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Survey Questions</h3>
+        </div>
+      </div>
+
+      <!-- General Part [Shichao / 3rd March] -->
+      <div class="clearfix"></div>
+
+<form method="post">
+{%csrf_token%}
+{{form_for_form.as_p}}
+<button type="submit">Submit</body>
+</form>
+
+</div>
+
+{% endblock content %}
+
+
+{% block javascripts %}
+  {{ block.super}}
+{% endblock javascripts %}

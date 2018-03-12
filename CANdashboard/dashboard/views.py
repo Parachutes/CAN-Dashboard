@@ -171,6 +171,13 @@ def loginAdmin(request):
         return HttpResponse(template.render(context, request))
 
 
+def survey_view(request,title):
+    question = Form.objects.get(title=title)
+    form_for_form = FormForForm(question, RequestContext(request),
+                                    request.POST or None,
+                                    request.FILES or None)
+    return render(request,'app/view_survey.html',{'form_for_form':form_for_form})
+
 
 def list_survey(request):
     surveys = Form.objects.all().values_list('title',flat=True)

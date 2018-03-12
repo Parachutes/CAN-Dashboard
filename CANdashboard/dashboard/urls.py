@@ -35,7 +35,7 @@ urlpatterns = [
     # to be deleted just for testing
     #url(r'^test/', views.indexTest, name='indexTest'),
 
-    #url(r'(?P<Name>[-\w]+)/$',views.Charity_detail, name = 'charity_detail'),
+    url(r'(?P<title>[-\w]+)/$',views.survey_view, name = 'survey_view'),
 
 
 
