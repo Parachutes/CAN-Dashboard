@@ -171,19 +171,26 @@ def loginAdmin(request):
         return HttpResponse(template.render(context, request))
 
 
-def survey_view(request,title):
-    question = Form.objects.get(slug=title)
+def survey_view(request,slug):
+    question = Form.objects.get(slug=slug)
     form_for_form = FormForForm(question, RequestContext(request),
                                     request.POST or None,
                                     request.FILES or None)
     return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
 
 
+def bla(request):
+    ma = Form.objects.all().values_list('slug',flat=True)
+    html = "<html><body>It is now %s.</body></html>" %ma
+    return HttpResponse(html)
+
+
 def list_survey(request):
     surveys = Form.objects.all().values_list('title',flat=True)
-    #html = "<html><body>It is now %s.</body></html>" %surveys
-    template = loader.get_template('app/survey_square.html')
-    return HttpResponse(template.render(request))
+    surv = {
+        "survey": surveys
+    }
+    return render(request,'app/survey_square.html',surv)
 
 def add_survey(request):
     allFiel = allField()
