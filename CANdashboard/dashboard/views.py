@@ -27,9 +27,10 @@ def register_page(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(username=form.cleaned_data['username'],password=form.cleaned_data['password1'],email=form.cleaned_data['email'])
+            #user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             user.backend = 'django.contrib.auth.backends.ModelBackend'
-            login(request, user)
-            charity = Charity.objects.create(user=user,Name=request.user.username)
+            #login(request, user)
+            charity = Charity.objects.create(user=user,Name= user.username, slug=user.username)
             charity_detail = Charity_details.objects.create(Name=charity)
             return render(request,'app/indexAdmin.html')
     form = RegistrationForm()
