@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1361581-ace5-4e70-812c-18807edbe950" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/index.html" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/index.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/survey_square.html" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/view_survey.html" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/view_survey.html" />
+      <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/signUp.html" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/signUp.html" />
+      <change beforePath="$PROJECT_DIR$/CANdashboard/dashboard/views.py" afterPath="$PROJECT_DIR$/CANdashboard/dashboard/views.py" />
+      <change beforePath="$PROJECT_DIR$/CANdashboard/db.sqlite3" afterPath="$PROJECT_DIR$/CANdashboard/db.sqlite3" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,58 +29,31 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="indexUser.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/indexUser.html">
+    <leaf>
+      <file leaf-file-name="view_survey.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/view_survey.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="176">
+              <caret line="31" column="36" lean-forward="false" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CANdashboard/CANdashboard/settings.py">
+      <file leaf-file-name="survey_square.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/survey_square.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-694">
-              <caret line="44" column="1" lean-forward="false" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-              <folding>
-                <marker date="1520629491765" expanded="true" signature="887:1209" ph="..." />
-                <marker date="1520629491765" expanded="true" signature="1698:1700" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+            <state relative-caret-position="356">
+              <caret line="516" column="0" lean-forward="true" selection-start-line="516" selection-start-column="0" selection-end-line="516" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="custom.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/static/build/js/custom.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1515">
-              <caret line="2328" column="33" lean-forward="false" selection-start-line="2328" selection-start-column="33" selection-end-line="2328" selection-end-column="33" />
-              <folding>
-                <marker date="1520633233392" expanded="true" signature="31641:31673" ph="..." />
-                <marker date="1520633233392" expanded="true" signature="33201:33208" ph="×" />
-                <marker date="1520633233392" expanded="true" signature="55588:55600" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="-2050">
               <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -85,11 +63,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/urls.py">
+      <file leaf-file-name="sidebarForAudience.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+            <state relative-caret-position="192">
+              <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="charity_form.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/charity_form.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inboxUser.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/inboxUser.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="55" column="12" lean-forward="false" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -98,18 +106,18 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
-              <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+            <state relative-caret-position="366">
+              <caret line="185" column="49" lean-forward="false" selection-start-line="185" selection-start-column="49" selection-end-line="185" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexAdmin.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/indexAdmin.html">
+      <file leaf-file-name="signUp.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/signUp.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+            <state relative-caret-position="450">
+              <caret line="30" column="45" lean-forward="false" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -183,7 +191,6 @@
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/test.html" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/urls.py" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/samplePage2.html" />
-        <option value="$PROJECT_DIR$/CANdashboard/dashboard/views.py" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/static/build/css/custom.css" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/samplePage.html" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/indexUser.html" />
@@ -191,6 +198,10 @@
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/loginAdmin.html" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/static/build/js/custom.js" />
         <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/index.html" />
+        <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/signUp.html" />
+        <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/view_survey.html" />
+        <option value="$PROJECT_DIR$/CANdashboard/dashboard/views.py" />
+        <option value="$PROJECT_DIR$/CANdashboard/dashboard/templates/app/survey_square.html" />
       </list>
     </option>
   </component>
@@ -256,45 +267,6 @@
               <item name="SEG-Major-project" type="462c0819:PsiDirectoryNode" />
               <item name="CANdashboard" type="462c0819:PsiDirectoryNode" />
               <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SEG-Major-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SEG-Major-project" type="462c0819:PsiDirectoryNode" />
-              <item name="CANdashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SEG-Major-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SEG-Major-project" type="462c0819:PsiDirectoryNode" />
-              <item name="CANdashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SEG-Major-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SEG-Major-project" type="462c0819:PsiDirectoryNode" />
-              <item name="CANdashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SEG-Major-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SEG-Major-project" type="462c0819:PsiDirectoryNode" />
-              <item name="CANdashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SEG-Major-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SEG-Major-project" type="462c0819:PsiDirectoryNode" />
-              <item name="CANdashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SEG-Major-project" type="b2602c69:ProjectViewProjectNode" />
@@ -412,7 +384,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17331499" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22294022" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22617124" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -452,9 +424,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CANdashboard/app/static/build/images/loading.gif" />
-    <entry file="file://$PROJECT_DIR$/CANdashboard/app/static/build/images/forward_disabled.png" />
-    <entry file="file://$PROJECT_DIR$/CANdashboard/app/static/images/prod-1.jpg" />
     <entry file="file://$PROJECT_DIR$/CANdashboard/app/static/images/visa.png" />
     <entry file="file://$PROJECT_DIR$/CANdashboard/app/static/images/paypal.png" />
     <entry file="file://$PROJECT_DIR$/CANdashboard/app/static/images/loading.gif" />
@@ -526,10 +495,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-694">
           <caret line="44" column="1" lean-forward="false" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-          <folding>
-            <marker date="1520629491765" expanded="true" signature="887:1209" ph="..." />
-            <marker date="1520629491765" expanded="true" signature="1698:1700" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -562,13 +527,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/login.html" />
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/inboxUser.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2791">
-          <caret line="140" column="54" lean-forward="false" selection-start-line="140" selection-start-column="54" selection-end-line="140" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/static/build/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-681">
@@ -594,14 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="870">
           <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -634,25 +584,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/static/admin/js/admin/DateTimeShortcuts.js" />
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/samplePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/samplePage.html" />
     <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/indexUser.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/signUp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -660,14 +596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="543">
           <caret line="69" column="13" lean-forward="false" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -682,15 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -698,7 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -706,7 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -714,22 +631,81 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1515">
           <caret line="2328" column="33" lean-forward="false" selection-start-line="2328" selection-start-column="33" selection-end-line="2328" selection-end-column="33" />
-          <folding>
-            <marker date="1520633233392" expanded="true" signature="31641:31673" ph="..." />
-            <marker date="1520633233392" expanded="true" signature="33201:33208" ph="×" />
-            <marker date="1520633233392" expanded="true" signature="55588:55600" ph="..." />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/registration/signUp.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="45" lean-forward="false" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/inboxUser.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="55" column="12" lean-forward="false" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/charity_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/view_survey.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="31" column="36" lean-forward="false" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="185" column="49" lean-forward="false" selection-start-line="185" selection-start-column="49" selection-end-line="185" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="-2050">
           <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/sidebarForAudience.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CANdashboard/dashboard/templates/app/survey_square.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="516" column="0" lean-forward="true" selection-start-line="516" selection-start-column="0" selection-end-line="516" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

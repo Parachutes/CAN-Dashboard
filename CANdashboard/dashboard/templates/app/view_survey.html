@@ -13,20 +13,34 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Survey Questions</h3>
+          <h3> {{ form.title }} </h3>
         </div>
       </div>
 
       <!-- General Part [Shichao / 3rd March] -->
       <div class="clearfix"></div>
 
-<form method="post">
-{%csrf_token%}
-<!-- {{question}} -->
-{{form_for_form.as_p}}
-<button type="submit">Submit</body>
-</form>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_content">
 
+              <form method="post">
+                {%csrf_token%}
+                <!-- {{question}} -->
+                <!--{{form_for_form.as_p}}-->
+                {{form_for_form.as_p}}
+
+                <button type="submit">Submit</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  </div>
 </div>
 
 {% endblock content %}

@@ -21,7 +21,7 @@ from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, 
 from forms_builder.forms.views import FormDetail
 from forms_builder.forms.forms import EntriesForm,FormForForm
 
-@login_required
+
 def register_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -181,8 +181,9 @@ def survey_view(request,title):
 
 def list_survey(request):
     surveys = Form.objects.all().values_list('title',flat=True)
-    html = "<html><body>It is now %s.</body></html>" %surveys
-    return HttpResponse(html)
+    #html = "<html><body>It is now %s.</body></html>" %surveys
+    template = loader.get_template('app/survey_square.html')
+    return HttpResponse(template.render(request))
 
 def add_survey(request):
     allFiel = allField()
