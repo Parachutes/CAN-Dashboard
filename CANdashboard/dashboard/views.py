@@ -21,7 +21,7 @@ from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, 
 from forms_builder.forms.views import FormDetail
 from forms_builder.forms.forms import EntriesForm,FormForForm
 
-@login_required
+
 def register_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -141,9 +141,8 @@ def list_messages(request):
 
 def list_charity(request):
     chairities = Charity.objects.all().values_list('Name',flat=True)
-    #html = "<html><body>It is now %s.</body></html>" %chairities
-    template = loader.get_template('app/charities_list.html')
-    return HttpResponse(template.render(request))
+    html = "<html><body>It is now %s.</body></html>" %chairities
+    return HttpResponse(html)
 
 
 def loginAdmin(request):
@@ -172,24 +171,26 @@ def loginAdmin(request):
         return HttpResponse(template.render(context, request))
 
 
-def survey_view(request,title):
-    user = request.user
-    question = Form.objects.get(slug=title)
+def survey_view(request,slug):
+    question = Form.objects.get(slug=slug)
     form_for_form = FormForForm(question, RequestContext(request),
                                     request.POST or None,
                                     request.FILES or None)
-    if request.user.is_anonymous :
-        return render(request,'app/view_surveyPublic.html',{'form_for_form':form_for_form,'question':question})
-    elif request.user.is_superuser:
-        return render(request,'app/view_surveyAdmin.html',{'form_for_form':form_for_form,'question':question})
-    else:
-        return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
+    return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
+
+
+def bla(request):
+    ma = Form.objects.all().values_list('slug',flat=True)
+    html = "<html><body>It is now %s.</body></html>" %ma
+    return HttpResponse(html)
 
 
 def list_survey(request):
     surveys = Form.objects.all().values_list('title',flat=True)
-    html = "<html><body>It is now %s.</body></html>" %surveys
-    return HttpResponse(html)
+    surv = {
+        "survey": surveys
+    }
+    return render(request,'app/survey_square.html',surv)
 
 def add_survey(request):
     allFiel = allField()
