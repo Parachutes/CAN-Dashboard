@@ -145,7 +145,14 @@ def list_charity(request):
     chars = {
     "charity": charity
 }
-    return render(request,'app/charities_list.html',chars)
+    user = request.user
+    if user.is_authenticated:
+        if user.is_superuser:
+            return render(request,'app/charities_listAdmin.html',chars)
+        else:
+            return render(request,'app/charities_listUser.html',chars)
+    else:
+        return render(request,'app/charities_list.html',chars)
 
 
 def loginAdmin(request):
@@ -213,7 +220,7 @@ def send_message(request):
             if user.is_superuser:
                 return render(request,'app/indexAdmin.html')
             else:
-                return render(request,'app/indexUser')
+                return render(request,'app/indexUser.html')
         else:
             if not user.is_superuser:
                 return render(request,'app/send_message.html')

@@ -1,0 +1,61 @@
+{% extends "app/base_siteAdmin.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h1> Charities List </h1>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <!-- spider chart -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th> Charity Name </th>
+                    <th> Country </th>
+                    <th> Email </th>
+                    <th> Overall Score </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for char in charity %}
+                  <tr>
+                    <th scope="row">1</th>
+                    <td> {{char.Name}} </td>
+                    <td> {{char.Country}} </td>
+                    <td> {{char.email}} </td>
+                    <td> 50 </td>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+{% endblock javascripts %}
