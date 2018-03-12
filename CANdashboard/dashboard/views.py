@@ -172,11 +172,17 @@ def loginAdmin(request):
 
 
 def survey_view(request,title):
+    user = request.user
     question = Form.objects.get(slug=title)
     form_for_form = FormForForm(question, RequestContext(request),
                                     request.POST or None,
                                     request.FILES or None)
-    return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
+    if request.user.is_anonymous :
+        return render(request,'app/view_surveyPublic.html',{'form_for_form':form_for_form,'question':question})
+    elif request.user.is_superuser:
+        return render(request,'app/view_surveyAdmin.html',{'form_for_form':form_for_form,'question':question})
+    else:
+        return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
 
 
 def list_survey(request):
