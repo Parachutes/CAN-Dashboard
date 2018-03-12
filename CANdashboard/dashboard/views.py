@@ -141,8 +141,9 @@ def list_messages(request):
 
 def list_charity(request):
     chairities = Charity.objects.all().values_list('Name',flat=True)
-    html = "<html><body>It is now %s.</body></html>" %chairities
-    return HttpResponse(html)
+    #html = "<html><body>It is now %s.</body></html>" %chairities
+    template = loader.get_template('app/charities_list.html')
+    return HttpResponse(template.render(request))
 
 
 def loginAdmin(request):
