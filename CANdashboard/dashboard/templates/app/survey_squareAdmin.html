@@ -1,0 +1,74 @@
+{% extends "app/base_siteAdmin.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+    <link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h1> Surveys Square </h1>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <!-- spider chart -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+                <table id="datatable-fixed-header" class="table table-striped table-bordered">
+                <thead>
+
+                <!-- TODO need to be changed to fit our need -->
+                  <tr>
+                    <th>Title</th>
+                    <th>Published From</th>
+                    <th>Expires on</th>
+                    <th>Login Required</th>
+                  </tr>
+                </thead>
+
+
+                <tbody>
+                  <tr>
+
+
+                      <!-- TODO add link like this! Shichao, 12th, March -->
+
+                    {% for sur in survey %}
+
+                    <td><a href="{% url 'survey_view' sur.slug}">{{sur.title}}</a></td>
+                    <td>{{sur.publish_date}}t</td>
+                    <td>{{sur.expiry_date}}</td>
+                    <td>{{sur.login_required}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+{% endblock javascripts %}

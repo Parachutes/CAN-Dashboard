@@ -140,6 +140,7 @@ def list_messages(request):
     else:
         return render(request,'app/inboxUser.html',mes)
 
+# TODO Adueince View
 def list_charity(request):
     charity = Charity.objects.all()
     chars = {
@@ -200,7 +201,14 @@ def list_survey(request):
     surv = {
         "survey": surveys
     }
-    return render(request,'app/survey_square.html',surv)
+    user = request.user
+    if user.is_authenticated:
+        if user.is_superuser:
+            return render(request,'app/survey_squareAdmin.html',surv)
+        else:
+            return render(request,'app/survey_squareUser.html',surv)
+    else:
+        return render(request,'app/survey_square.html',surv)
 
 def add_survey(request):
     allFiel = allField()
