@@ -204,6 +204,16 @@ def Manipulate_Entries(request):
     return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions})
 
 
+def DeleteEntry(request,id):
+    entry = FieldEntry.objects.filter(entry_id=id).delete()
+
+    html = "<html><body>It is now %s.</body></html>" %entry
+
+    return HttpResponse(html)
+
+
+
+
 def list_survey(request):
     surveys = Form.objects.all()
     surv = {
