@@ -1,4 +1,5 @@
 {% extends "app/base_siteUser.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %} Charity {% endblock title %}
 
@@ -12,7 +13,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3> {{ form.title }} </h3>
+          <h3> Hello </h3>
         </div>
       </div>
 
@@ -26,10 +27,7 @@
 
               <form method="post">
                 {%csrf_token%}
-                <!-- {{question}} -->
-                <!--{{form_for_form.as_p}}-->
-                {{form_for_form.as_p}}
-
+                {{form_for_form|crispy}}
                 <button type="submit">Submit</button>
               </form>
 
