@@ -7,13 +7,16 @@ from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, 
 from directmessages.models import Message
 
 class Charity(models.Model):
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
     Name = models.CharField(max_length=80)
     Country = models.CharField(max_length=20, blank=True)
     Website = models.URLField(blank=True,default = '')
     Email = models.EmailField(blank=True,default = '')
     slug = models.SlugField(max_length=200, unique=True)
     prepopulated_fields = { 'slug': ['Name']}
+
+    REQUIRED_FIELDS = ['Name','Email']
+    USERNAME_FIELD = 'user'
 
     class Meta:
         ordering = ('Name',)
@@ -28,10 +31,10 @@ class Charity(models.Model):
 
 class Charity_details(models.Model):
     Name = models.ForeignKey(Charity)
-    Delivery = models.IntegerField(blank=True, default = '0')   #1
-    Financial_health = models.IntegerField(blank=True, default = '0')   #2
-    Strength_of_system = models.IntegerField(blank=True, default = '0') #3
-    Progress = models.IntegerField(blank=True, default = '0')   #4
+    Delivery = models.IntegerField(blank=True, default = 0)   #1
+    Financial_health = models.IntegerField(blank=True, default = 0)   #2
+    Strength_of_system = models.IntegerField(blank=True, default = 0) #3
+    Progress = models.IntegerField(blank=True, default = 0)   #4
 
 def get_absolute_url(self):
     return reverse('Charity:Charity_details',args=[self.slug])
