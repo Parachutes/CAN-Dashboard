@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^send_message/', views.send_message, name="send_message"),
     # to be deleted just for testing
     #url(r'^test/', views.indexTest, name='indexTest'),
+    url(r'^(?P<Name>[-\w\d]+)/$', views.Charity_detail, name='char_det'),
 
     url(r'^survey_list(?P<slug>[-\w\d]+)/$', views.survey_view, name='survey_view'),
 

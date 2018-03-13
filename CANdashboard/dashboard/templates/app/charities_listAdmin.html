@@ -37,7 +37,7 @@
                     {% for char in charity %}
                   <tr>
                     <th scope="row">1</th>
-                    <td> {{char.Name}} </td>
+                    <td><a href="{% url 'char_det' char %}">{{char.Name}}</a></td>
                     <td> {{char.Country}} </td>
                     <td> {{char.email}} </td>
                     <td> 50 </td>

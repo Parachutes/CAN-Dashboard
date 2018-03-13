@@ -23,6 +23,9 @@ class Charity(models.Model):
     def __str__(self):
         return self.Name
 
+    def get_absolute_url(self):
+        return reverse('Charity:Charity',args=[self.slug])
+
 class Charity_details(models.Model):
     Name = models.ForeignKey(Charity)
     Delivery = models.IntegerField(blank=True, default = '0')   #1

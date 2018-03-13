@@ -118,14 +118,19 @@ def indexAdmin(request):
 
 
 
-#@login_required
-# def Charity_detail(request,*args,**kwargs):
-#     user = User.objects.filter(username='Evain')
-#     charity = Charity.objects.get(user=user)
-#     Charity_detail = Charity_details.objects.get(Name=charity)
-#     #return JsonResponse(data)
-#     #return JsonResponse(serializers.serialize('json', user),safe=False)
-#     return render(request,'app/chart.html',{'Charity_detail':Charity_detail})
+def Charity_detail(request,Name):
+    user = User.objects.get(username=Name)
+    charity = Charity.objects.get(user=user)
+    Charity_detail = Charity_details.objects.get(Name=charity)
+    #html = "<html><body>It is now %s.</body></html>" %Charity_detail
+    user = request.user
+    if user.is_authenticated:
+        if user.is_superuser:
+            return render(request,'app/indexAdmin.html',{'Charity_detail':Charity_detail})
+        else:
+            return render(request,'app/indexUser.html',{'Charity_detail':Charity_detail})
+    else:
+        return render(request,'app/index.html',{'Charity_detail':Charity_detail})
 
 
 @login_required
