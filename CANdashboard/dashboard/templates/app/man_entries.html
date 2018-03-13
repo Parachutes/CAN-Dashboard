@@ -16,8 +16,29 @@
       <div>
         {% csrf_token %}
         <table>
+          {{test}}
         {{ entry.as_table }}
       </table>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th> Question Title</th>
+            <th> Response </th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for s in form %}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{s.value}}</td>
+            <td>{{s.value}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+
       </div>
       <div>
       <button type="submit">Submit</button>

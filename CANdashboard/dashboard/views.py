@@ -18,7 +18,7 @@ from directmessages.signals import message_read, message_sent
 
 
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
-from forms_builder.forms.views import FormDetail
+import forms_builder.forms.views
 from forms_builder.forms.forms import EntriesForm,FormForForm
 
 
@@ -195,12 +195,12 @@ def survey_view(request,slug):
 
 
 def Manipulate_Entries(request):
-    formentry = FormEntry()
-    fieldEntry = FieldEntry()
-    ma = Form.objects.get(slug='shichaos-quiz')
-    entry = EntriesForm(ma,RequestContext(request),formentry,fieldEntry,request.POST or None)
-    #html = "<html><body>It is now %s.</body></html>" %entry
-    return render(request,'app/man_entries.html',{'entry':entry})
+    ma = Form.objects.get(slug='first')
+    formentry = FormEntry.objects.get(form = ma.id)
+    form = FieldEntry.objects.filter(entry=formentry)
+    entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
+    test = ma
+    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'test':test})
 
 
 def list_survey(request):
