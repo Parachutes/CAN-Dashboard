@@ -42,7 +42,10 @@ INSTALLED_APPS = (
     # $ install the app {Shichao Ma / 12 Feb}
     'dashboard',
     'directmessages',
+    'crispy_forms',
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
