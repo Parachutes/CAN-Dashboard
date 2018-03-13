@@ -36,7 +36,7 @@ urlpatterns = [
     #url(r'^test/', views.indexTest, name='indexTest'),
     url(r'^(?P<Name>[-\w\d]+)/$', views.Charity_detail, name='char_det'),
 
-    url(r'^survey_list(?P<slug>[-\w\d]+)/$', views.survey_view, name='survey_view'),
+    url(r'^survey_list/(?P<slug>[-\w\d]+)/$', views.survey_view, name='survey_view'),
 
 
 

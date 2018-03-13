@@ -123,7 +123,6 @@ def Charity_detail(request,Name):
     charity = Charity.objects.get(user=user)
     Charity_detail = Charity_details.objects.get(Name=charity)
     #html = "<html><body>It is now %s.</body></html>" %Charity_detail
-    user = request.user
     if user.is_authenticated:
         if user.is_superuser:
             return render(request,'app/indexAdmin.html',{'Charity_detail':Charity_detail})
