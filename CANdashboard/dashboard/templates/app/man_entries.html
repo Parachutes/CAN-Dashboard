@@ -16,26 +16,25 @@
       <div>
         {% csrf_token %}
         <table>
-          {{test}}
         {{ entry.as_table }}
       </table>
 
       <table class="table table-striped">
         <thead>
+                  {% for q in questions %}
           <tr>
             <th>#</th>
-            <th> Question Title</th>
-            <th> Response </th>
+            <th> {{questions}}</th>
           </tr>
         </thead>
+              {% endfor %}
         <tbody>
             {% for s in form %}
           <tr>
             <th scope="row">1</th>
             <td>{{s.value}}</td>
-            <td>{{s.value}}</td>
           </tr>
-          {%endfor%}
+          {% endfor %}
         </tbody>
       </table>
 

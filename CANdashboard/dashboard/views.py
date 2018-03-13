@@ -197,10 +197,11 @@ def survey_view(request,slug):
 def Manipulate_Entries(request):
     ma = Form.objects.get(slug='first')
     formentry = FormEntry.objects.get(form = ma.id)
+
     form = FieldEntry.objects.filter(entry=formentry)
     entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
-    test = ma
-    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'test':test})
+    questions = ma.fields.all()
+    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions})
 
 
 def list_survey(request):
