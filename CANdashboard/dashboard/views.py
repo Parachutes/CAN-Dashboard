@@ -194,10 +194,13 @@ def survey_view(request,slug):
     return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
 
 
-def bla(request):
-    ma = Form.objects.all().values_list('slug',flat=True)
-    html = "<html><body>It is now %s.</body></html>" %ma
-    return HttpResponse(html)
+def Manipulate_Entries(request):
+    formentry = FormEntry()
+    fieldEntry = FieldEntry()
+    ma = Form.objects.get(slug='shichaos-quiz')
+    entry = EntriesForm(ma,RequestContext(request),formentry,fieldEntry,request.POST or None)
+    #html = "<html><body>It is now %s.</body></html>" %entry
+    return render(request,'app/man_entries.html',{'entry':entry})
 
 
 def list_survey(request):
