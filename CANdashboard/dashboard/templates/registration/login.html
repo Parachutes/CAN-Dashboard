@@ -22,12 +22,12 @@
             <h1> User Login </h1>
             <div>
               {% csrf_token %}
-                  {{ form.as_p }}
+              {{ form.as_p }}
             </div>
             <div>
             </div>
             <div>
-              <button type="submit">Login</button>
+              <button type="submit" class="btn btn-primary">Login</button>
               <a class="reset_pass" href="#">Lost your password?</a>
             </div>
 
@@ -40,6 +40,10 @@
 
               <div class="clearfix"></div>
               <br />
+
+              <div>
+                Powered by <a href="https://can-invest.org.uk"><img src="/static/images/CANLogo.png" height="48" width="180"/></a>
+              </div>
 
 
             </div>

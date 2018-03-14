@@ -48,6 +48,13 @@
               {{ content }}
           {% endblock content %}
 
+          <!-- add footer -->
+          {% block footer %}
+            <footer>
+              {% include "app/footer.html" %}
+            </footer>
+          {% endblock footer %}
+
         </div>
       </div>
 
