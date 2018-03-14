@@ -31,6 +31,10 @@
 
                 <!-- TODO add search block -->
 
+                <table>
+                  {% csrf_token %}
+                  {{ entry.as_table }}
+                </table>
 
 
               </form>
@@ -60,6 +64,15 @@
 
 
                 <!-- TODO add Results block -->
+
+                <tbody>
+                {% for s in form %}
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{s.value}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
 
 
               </form>
