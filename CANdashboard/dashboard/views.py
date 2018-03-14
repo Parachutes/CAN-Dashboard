@@ -258,11 +258,11 @@ def send_message(request):
                 return render(request,'app/send_messageAdmin.html')
     else:
         form = SendMessage()
-        variables = RequestContext(request, {'form': form})
         if not user.is_superuser:
-            return render_to_response('app/send_message.html',variables)
+            return render(request,'app/send_message.html',{'form':form})
         else:
-            return render_to_response('app/send_messageAdmin.html',variables)
+            return render(request,'app/send_messageAdmin.html',{'form':form})
+
 
 
 
