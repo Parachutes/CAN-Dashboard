@@ -1,5 +1,5 @@
 {% extends "app/base_siteUser.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %} Dashboard {% endblock title %}
 
 {% block stylesheets %}
@@ -12,37 +12,56 @@
     <div class="page-title">
       <div class="title_left">
         <h1> Filter And Manipulate Entries </h1>
-        <form method="post" class="form">
-      <div>
-        {% csrf_token %}
-        <table>
-        {{ entry.as_table }}
-      </table>
+          <div class="x_panel">
+            <div class="x_content">
+              <form method="post" class="form">
 
-      <table class="table table-striped">
-        <thead>
-                  {% for q in questions %}
-          <tr>
-            <th>#</th>
-            <th> {{questions}}</th>
-          </tr>
-        </thead>
+
+
+
+
+              </form>
+            </div>
+          </div>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+
+
+<!--          <div>
+            {% csrf_token %}
+            <table>
+              {{ entry.as_table }}
+            </table>
+            <table class="table table-striped">
+              <thead>
+                {% for q in questions %}
+                <tr>
+                  <th>#</th>
+                  <th>{{questions}}</th>
+                </tr>
+              </thead>
               {% endfor %}
-        <tbody>
-            {% for s in form %}
-          <tr>
-            <th scope="row">1</th>
-            <td>{{s.value}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+              <tbody>
+                {% for s in form %}
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{s.value}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>-->
+
+
+
+
+
 
       </div>
-      <div>
-      <button type="submit">Submit</button>
-      </div>
-
+    </div>
+  </div>
+</div>
 
 
 

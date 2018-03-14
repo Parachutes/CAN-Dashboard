@@ -1,3 +1,5 @@
+<!-- DONE the template / Shichao-->
+
 {% extends "app/base_siteAdmin.html" %}
 {% load crispy_forms_tags %}
 {% block title %} CAN Charity{% endblock title %}
@@ -16,22 +18,41 @@
         </div>
       </div>
 
-      {% if form.has_errors %}
-      <p>Your username and password didn't match. Please try again.</p>
-      {% endif %}
 
-      <form method="post" action=".">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_content">
 
-<table>
-  {% csrf_token %}
-  {{form|crispy}}
-</table>
+              {% if form.has_errors %}
+              <p>Your username and password didn't match. Please try again.</p>
+              {% endif %}
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="/" />
-</form>
+              <form method="post" action=".">
+
+                <table>
+                  {% csrf_token %}
+                  {{form|crispy}}
+                </table>
+                <!--<input type="submit" value="login" />
+                <input type="hidden" name="next" value="/" />-->
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- the button -->
+      <div class="submit-row" style="margin-left: 45%">
+            <button type="button" class="btn btn-primary">Login</button>
+      </div>
 
 
+
+
+    </div>
+</div>
 
 
 
