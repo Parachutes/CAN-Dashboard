@@ -1,5 +1,6 @@
 
 {% extends "app/base_siteUser.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %} Charity A {% endblock title %}
 
@@ -22,10 +23,11 @@
 
 <form method="post">
 {%csrf_token%}
-{{form.as_p}}
-<button type="submit">Submit</body>
+{{form|crispy}}
+  <button type="submit">Submit</button>
 </form>
 
+</div>
 </div>
 
 {% endblock content %}

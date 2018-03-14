@@ -1,5 +1,5 @@
 {% extends "app/base_siteAdmin.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %} CAN Charity{% endblock title %}
 
 {% block stylesheets %}
@@ -24,7 +24,7 @@
 
 <table>
   {% csrf_token %}
-  {{form.as_table}}
+  {{form|crispy}}
 </table>
 
 <input type="submit" value="login" />
