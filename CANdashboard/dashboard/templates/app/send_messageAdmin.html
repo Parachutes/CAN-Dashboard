@@ -1,5 +1,5 @@
 {% extends "app/base_siteAdmin.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %} Dashboard {% endblock title %}
 
 {% block stylesheets %}
@@ -11,15 +11,20 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h1> Send A Message </h1>
+        <h3> Send A Message </h3>
         <form method="post" class="form" a>
       <div>
         {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy }}
       </div>
       <div>
       <button type="submit">Submit</button>
       </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
