@@ -195,18 +195,19 @@ def survey_view(request,slug):
 
 
 def Manipulate_Entries(request):
-    ma = Form.objects.get(slug='first')
-    formentry = FormEntry.objects.get(form = ma.id)
+    ma = Form.objects.get(slug='shichaos-quiz')
+    formentry = FormEntry.objects.get(form = ma)
 
-    form = FieldEntry.objects.filter(entry=formentry)
+    form = FieldEntry.objects.filter(entry_id = formentry)
     entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
     questions = ma.fields.all()
     return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions})
 
 
-def DeleteEntry(request,id):
-    entry = FieldEntry.objects.filter(entry_id=id).delete()
-
+def DeleteEntry(request):
+    ma = Form.objects.get(slug='shichaos-quiz')
+    entry = FormEntry.objects.filter(form = ma).values_list('id',flat=True)
+    #entry = FieldEntry.objects.filter(entry_id=id).delete()
     html = "<html><body>It is now %s.</body></html>" %entry
 
     return HttpResponse(html)
