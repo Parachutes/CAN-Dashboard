@@ -24,7 +24,7 @@ direct messaging between users: pip install django-directmessages
 
 * Summary table of quotes and questions :+1:
 
-* Ability to push the dashboard via email and Network Apps
+* Ability to push the dashboard via email and Network Apps :+1:
 
 * Attractive modern design :+1:
 
