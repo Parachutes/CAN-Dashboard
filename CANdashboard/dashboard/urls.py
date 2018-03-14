@@ -26,12 +26,12 @@ urlpatterns = [
     url(r'^accounts/update/change-pass/$', views.change_password, name='change_password'),
     url(r'^loginAdmin/$', views.loginAdmin, name='adminLogin'),
     url(r'^AdminProfile/$', views.indexAdmin, name='AdminProfile'),
-    url(r'^Entries/$', views.DeleteEntry, name='delete_entry'),
+    url(r'^delete/(?P<id>[-\w\d]+)/$', views.DeleteEntry, name='delete_entry'),
 
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
     url(r'^myUser/', views.indexUser, name='indexUser'),
-    url(r'^bla/$', views.Manipulate_Entries, name='manipulate_entries'),
+    url(r'^Entries/$', views.Manipulate_Entries, name='manipulate_entries'),
     url(r'^send_message/', views.send_message, name="send_message"),
     # to be deleted just for testing
     #url(r'^test/', views.indexTest, name='indexTest'),
