@@ -26,16 +26,19 @@ def register_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(username=form.cleaned_data['username'],password=form.cleaned_data['password1'],email=form.cleaned_data['email'])
+            user = User.objects.create_user(username=form.cleaned_data['username'],password=form.cleaned_data['password2'],email=form.cleaned_data['email'])
             #user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
-            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            #user.backend = 'django.contrib.auth.backends.ModelBackend'
             #login(request, user)
             charity = Charity.objects.create(user=user,Name= user.username, slug=user.username)
             charity_detail = Charity_details.objects.create(Name=charity)
             return render(request,'app/indexAdmin.html')
-    form = RegistrationForm()
-    variables = RequestContext(request, {'form': form})
-    return render_to_response('registration/signUp.html',variables)
+        else:
+            form = RegistrationForm(request.POST)
+            return render (request,'registration/signUp.html',{'form':form})
+    else :
+        form = RegistrationForm()
+        return render (request,'registration/signUp.html',{'form':form})
 
 @login_required
 def edit_profile(request):
@@ -204,7 +207,7 @@ def Manipulate_Entries(request):
     return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions})
 
 
-def DeleteEntry(request):
+def DeleteEntry(request, id):
     ma = Form.objects.get(slug='shichaos-quiz')
     entry = FormEntry.objects.filter(form = ma).values_list('id',flat=True)
     #entry = FieldEntry.objects.filter(entry_id=id).delete()
@@ -255,11 +258,11 @@ def send_message(request):
                 return render(request,'app/send_messageAdmin.html')
     else:
         form = SendMessage()
-        variables = RequestContext(request, {'form': form})
         if not user.is_superuser:
-            return render_to_response('app/send_message.html',variables)
+            return render(request,'app/send_message.html',{'form':form})
         else:
-            return render_to_response('app/send_messageAdmin.html',variables)
+            return render(request,'app/send_messageAdmin.html',{'form':form})
+
 
 
 

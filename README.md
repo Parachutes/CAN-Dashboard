@@ -8,23 +8,23 @@ django-forms-builder: pip install -U django-forms-builder
  
 direct messaging between users: pip install django-directmessages
 
+crispy forms : pip install django-crispy-forms
+
 ## Requirements
 
 * Allow CAN to Develop Surveys :+1:
 
-* Push the Surveys to the Dashboards of the Users
+* Push the Surveys to the Dashboards of the Users / Foward the surveys with the use of messages
 
 * Access the different Surveys if has permission :+1:
 
-* Foward the surveys with the use of messages
-
-* View the results of the surveys 
+* View the results of the surveys :+1:
 
 * An interactive diagrams showing data :+1:
 
-* Summary table of quotes and questions :+1:
+* Summary table of quotes and questions 
 
-* Ability to push the dashboard via email and Network Apps
+* Ability to push the dashboard via email and Network Apps :+1:
 
 * Attractive modern design :+1:
 
@@ -34,7 +34,7 @@ direct messaging between users: pip install django-directmessages
 
 ## Testing
 
-Tests are to be run in the Django Directory of the app (MORE SOON)
+Tests are to be run in the Django Directory of the app, with the use of Selenuim
 
 ## Deployment
 

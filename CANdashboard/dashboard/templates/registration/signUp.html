@@ -17,8 +17,6 @@
           <h3>Create a new Charity</h3>
         </div>
       </div>
-
-
       <div class="row">
         <div class="col-md-12">
           <div class="x_panel">
@@ -29,9 +27,8 @@
               {% endif %}
 
               <form method="post" action=".">
-
+                {% csrf_token %}
                 <table>
-                  {% csrf_token %}
                   {{form|crispy}}
                 </table>
                 <!--<input type="submit" value="login" />
@@ -45,7 +42,7 @@
 
       <!-- the button -->
       <div class="submit-row" style="margin-left: 45%">
-            <button type="button" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-primary"> add Charity </button>
       </div>
 
 
@@ -53,11 +50,6 @@
 
     </div>
 </div>
-
-
-
-
-
 
 {% endblock content %}
 
