@@ -29,12 +29,16 @@
               <form method="post">
                 {%csrf_token%}
                 {{form_for_form|crispy}}
-                <button type="submit">Submit</button>
               </form>
 
             </div>
           </div>
         </div>
+      </div>
+
+            <!-- the button -->
+      <div class="submit-row" style="margin-left: 45%">
+        <button type="button" class="btn btn-primary">Submit</button>
       </div>
 
 

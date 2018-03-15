@@ -42,7 +42,7 @@
     {% endblock head %}
   </head>
 
-  <body class="{% block body_class %}nav-md {% endblock body_class %}">
+  <body class="{% block body_class %}nav-md{% endblock body_class %}">
     {% block body %}
       <div class="container body">
         <div class="main_container">
@@ -53,9 +53,25 @@
             </div>
           {% endblock sidebar %}
 
+          <!-- add top nav -->
+          {% block top_navigation %}
+            <div class="top_nav">
+              {% include "app/top_navigation.html" %}
+            </div>
+          {% endblock top_navigation %}
+
           {% block content %}
               {{ content }}
           {% endblock content %}
+
+
+
+          <!-- add footer -->
+          {% block footer %}
+            <footer>
+              {% include "app/footer.html" %}
+            </footer>
+          {% endblock footer %}
 
         </div>
       </div>

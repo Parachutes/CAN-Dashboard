@@ -1,3 +1,5 @@
+<!-- DONE the template / Shichao-->
+
 {% extends "app/base_siteAdmin.html" %}
 {% load crispy_forms_tags %}
 {% block title %} Dashboard {% endblock title %}
@@ -7,34 +9,41 @@
 {% endblock stylesheets %}
 
 {% block content %}
+
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
       <div class="title_left">
         <h3> Send A Message </h3>
-        <form method="post" class="form" a>
-      <div>
-        {% csrf_token %}
-            {{ form|crispy }}
-      </div>
-      <div>
-      <button type="submit">Submit</button>
-      </div>
-        </form>
       </div>
     </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <form method="post" class="form" a>
+              <div>
+                {% csrf_token %}
+                {{ form|crispy }}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- the button -->
+    <div class="submit-row" style="margin-left: 45%">
+          <button type="button" class="btn btn-primary">Submit</button>
+    </div>
+
   </div>
 </div>
 
 
-
-
-
-
-
-</body>
-
-</html>
 {% endblock content %}
 
 {% block javascripts %}

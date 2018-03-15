@@ -1,5 +1,5 @@
 {% extends "app/base_siteUser.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %} Dashboard {% endblock title %}
 
 {% block stylesheets %}
@@ -12,36 +12,111 @@
     <div class="page-title">
       <div class="title_left">
         <h1> Filter And Manipulate Entries </h1>
-        <form method="post" class="form">
-      <div>
-        {% csrf_token %}
-        <table>
-        {{ entry.as_table }}
-      </table>
+      </div>
+    </div>
 
-      <table class="table table-striped">
-        <thead>
-                  {% for q in questions %}
-          <tr>
-            <th>#</th>
-            <th> {{questions}}</th>
-          </tr>
-        </thead>
+
+
+      <!-- Search Block -->
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h3> View Entries </h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <form method="post" class="form">
+
+                <!-- TODO add search block -->
+
+                <table>
+                  {% csrf_token %}
+                  {{ entry.as_table }}
+                </table>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="submit-row" style="margin-left: 45%">
+          <button type="button" class="btn btn-primary">View</button>
+      </div>
+      <br/>
+
+
+
+      <!-- Result Block -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h3> Entries Results </h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <form method="post" class="form">
+
+
+                <!-- TODO add Results block -->
+
+                <tbody>
+                {% for s in form %}
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{s.value}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="submit-row" style="margin-left: 45%">
+          <button type="button" class="btn btn-primary">Delete</button>
+      </div>
+
+  </div>
+</div>
+
+
+<!--          <div>
+            {% csrf_token %}
+            <table>
+              {{ entry.as_table }}
+            </table>
+            <table class="table table-striped">
+              <thead>
+                {% for q in questions %}
+                <tr>
+                  <th>#</th>
+                  <th>{{questions}}</th>
+                </tr>
+              </thead>
               {% endfor %}
-        <tbody>
-            {% for s in form %}
-          <tr>
-            <th scope="row">1</th>
-            <td>{{s.value}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
-      </div>
-      <div>
-      <button type="submit">Submit</button>
-      </div>
+              <tbody>
+                {% for s in form %}
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{s.value}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>-->
 
 
 
@@ -49,9 +124,6 @@
 
 
 
-</body>
-
-</html>
 {% endblock content %}
 
 {% block javascripts %}

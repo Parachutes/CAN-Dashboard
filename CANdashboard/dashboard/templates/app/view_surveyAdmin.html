@@ -12,20 +12,36 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Survey Questions</h3>
+          <!-- TODO need to be changed to the real survey title -->
+          <h3> Survey Title </h3>
         </div>
       </div>
 
       <!-- General Part [Shichao / 3rd March] -->
       <div class="clearfix"></div>
 
-<form method="post">
-{%csrf_token%}
-<!-- {{question}} -->
-{{form_for_form.as_p}}
-<button type="submit">Submit</body>
-</form>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_content">
 
+              <form method="post">
+                {%csrf_token%}
+                {{form_for_form|crispy}}
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+            <!-- the button -->
+      <div class="submit-row" style="margin-left: 45%">
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+
+
+  </div>
 </div>
 
 {% endblock content %}
