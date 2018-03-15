@@ -72,4 +72,4 @@ class Description(forms.ModelForm):
 class SendMessage(forms.ModelForm):
     class Meta:
         model = SurveyMessage
-        exclude = ('slug','sender')
+        exclude = ('slug','sender','sent_at','read_at')
