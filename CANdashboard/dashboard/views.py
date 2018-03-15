@@ -207,6 +207,15 @@ def Manipulate_Entries(request):
     return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions})
 
 
+def IndexCategory(request):
+    ma = Form.objects.get(slug='shichaos-quiz')
+    questions = ma.fields.all()
+    formentry = FormEntry.objects.get(form = ma)
+    form = FieldEntry.objects.filter(entry_id = formentry)
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
+    merged = [questions, form]
+    return render(request,'app/IndexCategory.html',{'questions':questions,'form':form,'survey':survey,'merged':merged})
+
 def DeleteEntry(request, id):
     ma = Form.objects.get(slug='shichaos-quiz')
     entry = FormEntry.objects.filter(form = ma).values_list('id',flat=True)
@@ -215,7 +224,13 @@ def DeleteEntry(request, id):
 
     return HttpResponse(html)
 
-
+def getsurv(request):
+    form = Form.objects.get(slug='first')
+    newQ = RelatedSurvey(question=form,category="Delivery")
+    newQ.save()
+    question = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
+    html = "<html><body>It is now %s.</body></html>" %question
+    return HttpResponse(html)
 
 
 def list_survey(request):

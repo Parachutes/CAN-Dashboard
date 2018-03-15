@@ -39,9 +39,19 @@ class Charity_details(models.Model):
 def get_absolute_url(self):
     return reverse('Charity:Charity_details',args=[self.slug])
 
-class RelatedQuestion(models.Model):
-    question = models.ForeignKey(Field)
-    category = models.ForeignKey(Charity_details)
+class RelatedSurvey(models.Model):
+    Delivery = 'Delivery'
+    Financial_Health = 'Financial_Health'
+    Strength_of_system = 'Strength_of_system'
+    Progress = 'Progress'
+    Charity_Categories = (
+        (Delivery, 'Delivery'),
+        (Financial_Health, 'Financial_Health'),
+        (Strength_of_system, 'Strength_of_system'),
+        (Progress, 'Progress'),
+    )
+    question = models.ForeignKey(Form)
+    category = models.CharField(max_length=1, choices=Charity_Categories)
 
 class SurveyMessage(Message):
     survey = models.ForeignKey(Form)

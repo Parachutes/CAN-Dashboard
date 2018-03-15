@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^loginAdmin/$', views.loginAdmin, name='adminLogin'),
     url(r'^AdminProfile/$', views.indexAdmin, name='AdminProfile'),
     url(r'^delete/(?P<id>[-\w\d]+)/$', views.DeleteEntry, name='delete_entry'),
+    url(r'^category/$', views.IndexCategory, name='categories'),
+    url(r'^bla/$', views.getsurv, name='getsurvey'),
 
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
