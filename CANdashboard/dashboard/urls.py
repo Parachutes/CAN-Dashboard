@@ -27,7 +27,10 @@ urlpatterns = [
     url(r'^loginAdmin/$', views.loginAdmin, name='adminLogin'),
     url(r'^AdminProfile/$', views.indexAdmin, name='AdminProfile'),
     url(r'^delete/(?P<id>[-\w\d]+)/$', views.DeleteEntry, name='delete_entry'),
-    url(r'^category/$', views.IndexCategory, name='categories'),
+    url(r'^Delivery/$', views.DeliveryCategory, name='Delivery'),
+    url(r'^Financial/$', views.FinancialCategory, name='finance'),
+    url(r'^Strength/$', views.StrengthCategory, name='Strength'),
+    url(r'^Progress/$', views.ProgressCategory, name='progress'),
     url(r'^bla/$', views.getsurv, name='getsurvey'),
     url(r'^Analysis/(?P<id>[-\w\d]+)/$',views.surveyAnalysis, name = 'analysis_survey'),
 

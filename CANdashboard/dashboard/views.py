@@ -207,14 +207,26 @@ def Manipulate_Entries(request):
     return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions})
 
 
-def IndexCategory(request):
+def DeliveryCategory(request):
     ma = Form.objects.get(slug='shichaos-quiz')
     questions = ma.fields.all()
     formentry = FormEntry.objects.get(form = ma)
     form = FieldEntry.objects.filter(entry_id = formentry)
     survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
-    return render(request,'app/IndexCategory.html',{'questions':questions,'form':form,'survey':survey})
+    return render(request,'app/DeliveryPage.html',{'questions':questions,'form':form,'survey':survey})
 
+
+def FinancialCategory(request):
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Financial_Health)
+    return render(request,'app/FinancialPage.html',{'survey':survey})
+
+def StrengthCategory(request):
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
+    return render(request,'app/StrengthPage.html',{'survey':survey})
+
+def ProgressCategory(request):
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Progress)
+    return render(request,'app/ProgressPage.html',{'survey':survey})
 
 def surveyAnalysis(request,id):
     survey = Form.objects.get(id=id)
