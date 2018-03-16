@@ -234,12 +234,11 @@ def DeleteEntry(request, id):
     return HttpResponse(html)
 
 def getsurv(request):
-    form = Form.objects.get(slug='first')
-    newQ = RelatedSurvey(question=form,category="Delivery")
-    newQ.save()
-    question = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
-    html = "<html><body>It is now %s.</body></html>" %question
-    return HttpResponse(html)
+    # form = Form.objects.get(slug='first')
+    # newQ = RelatedSurvey(question=form,category="Delivery")
+    # newQ.save()
+    question = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery).values_list('question',flat=True)
+    return render(request,'app/bla.html',{'question':question})
 
 
 def list_survey(request):
