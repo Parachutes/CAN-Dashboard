@@ -213,8 +213,17 @@ def IndexCategory(request):
     formentry = FormEntry.objects.get(form = ma)
     form = FieldEntry.objects.filter(entry_id = formentry)
     survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
-    merged = [questions, form]
-    return render(request,'app/IndexCategory.html',{'questions':questions,'form':form,'survey':survey,'merged':merged})
+    return render(request,'app/IndexCategory.html',{'questions':questions,'form':form,'survey':survey})
+
+
+def surveyAnalysis(request,id):
+    survey = Form.objects.get(id=id)
+    questions = survey.fields.all()
+    formentry = FormEntry.objects.filter(form = survey)
+    entries = FieldEntry.objects.filter(entry_id = formentry)
+    return render(request, 'app/surveyAnalysis.html',{'questions':questions,'entries':entries,'survey':survey})
+
+
 
 def DeleteEntry(request, id):
     ma = Form.objects.get(slug='shichaos-quiz')

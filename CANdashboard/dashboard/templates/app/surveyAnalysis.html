@@ -37,35 +37,12 @@
     <div class="clearfix"></div>
 
 
-    <div class="x_content">
-      <p class="text-muted font-13 m-b-30">
-      List of Surveys that belong to this module. To add a survey, press the + button
-      </p>
-      <table id="datatable" class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Survey</th>
-          </tr>
-        </thead>
-
-{% for s in survey %}
-        <tbody>
-          <tr>
-            <td><a href="{% url 'analysis_survey' s.id %}">{{s.question}}</a></td>
-          </tr>
-{% endfor %}
-
-        </tbody>
-      </table>
-
-    </div>
-
     <!-- spider chart -->
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Analysis of Delivery<small>based on ALL surveys</small></h2>
+            <h2>Analysis of {{survey}} Survey<small>based on received surveys</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -97,7 +74,7 @@
                   pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
                   pointHoverBackgroundColor: "#fff",
                   pointHoverBorderColor: "rgba(220,220,220,1)",
-                  data: [ {% for e in form %} "{{e}}", {% endfor %}]
+                  data: [ {% for e in entries %} "{{e}}", {% endfor %}]
                 }]
               };
             </script>
@@ -206,7 +183,7 @@
                   </tr>
                 </thead>
 
-                {% for e in form %}
+                {% for e in entries %}
                 <tbody>
                   <tr>
                     <td>{{e.value}}</td>

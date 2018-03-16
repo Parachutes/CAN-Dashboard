@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^delete/(?P<id>[-\w\d]+)/$', views.DeleteEntry, name='delete_entry'),
     url(r'^category/$', views.IndexCategory, name='categories'),
     url(r'^bla/$', views.getsurv, name='getsurvey'),
+    url(r'^Analysis/(?P<id>[-\w\d]+)/$',views.surveyAnalysis, name = 'analysis_survey'),
 
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
