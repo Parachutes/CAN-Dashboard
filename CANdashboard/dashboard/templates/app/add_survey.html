@@ -1,5 +1,5 @@
 {% extends "app/base_siteAdmin.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %} Charity A {% endblock title %}
 
 {% block stylesheets %}
@@ -81,152 +81,9 @@
               <form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
                 <!-- Title -->
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="title" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
+                  {{form|crispy}}
                 </div>
 
-                <!-- Status -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Status: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p style="margin-top: 10px">
-                      Draft:
-                      <input type="radio" class="flat" name="Status" id="StatusDraft" value="Draft" checked="" required />
-                      Published:
-                      <input type="radio" class="flat" name="Status" id="StatusPublished" value="Published" />
-                      &nbsp&nbsp&nbsp
-                      <input type="checkbox" name="loginRequired" id="loginRequired" value="loginRequired" class="flat" /> Login required*
-                      <br/>
-                      <small>(*If checked, only logged in users can view the form)</small>
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Published From -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Published from: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <fieldset>
-                      <div class="control-group">
-                        <div class="controls">
-                          <div class="input-prepend input-group">
-                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                            <input type="text" name="reservation-time" id="reservation-time" class="form-control" value="01/01/2016 - 01/25/2016" />
-                          </div>
-                        </div>
-                      </div>
-                    </fieldset>
-                  </div>
-                </div>
-
-                <!-- Intro -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Intro: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div>
-                      <textarea class="resizable_textarea form-control" placeholder="Please write down the Introduction for the survey here..."></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Button text  -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="buttonText">Button text: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="buttonText" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-                <!-- Intro -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Response: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div>
-                      <textarea class="resizable_textarea form-control" placeholder="Please write down the Response after submitting here..."></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Redirect url  -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="redirectURL">Redirect URL: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="redirectURL" required="required" class="form-control col-md-7 col-xs-12" placeholder="An alternate URL to redirect to after form submission">
-                  </div>
-                </div>
-
-              </form>
-
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Email Part [Shichao / 3rd March] TODO -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Email</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <fieldset class="module aligned ">
-
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""></label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p style="margin-top: 10px">
-                      <input type="checkbox" name="" id="" value="" class="flat" /> Send email*
-                      <br/>
-                      <small>(*If checked, the person entering the form will be sent an email)</small>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">From address: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12" placeholder="The address the email will be sent from">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Send copies to: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12" placeholder="One or more email addresses, separated by commas">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Subject: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12" placeholder="">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Message: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div>
-                      <textarea class="resizable_textarea form-control" placeholder=""></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                </form>
-              </fieldset>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
 
@@ -281,45 +138,28 @@
                                 <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
                               </td>
                               <td class="field-label">
-                                <input class="vTextField" id="id_fields-0-label" maxlength="200" name="fields-0-label" type="text" />
+                                {{fields.label}}
                               </td>
-                              <td class="field-field_type">
-                                <select id="id_fields-0-field_type" name="fields-0-field_type">
-                                  <option value="" selected="selected">---------</option>
-                                  <option value="1">Single line text</option>
-                                  <option value="2">Multi line text</option>
-                                  <option value="3">Email</option>
-                                  <option value="13">Number</option>
-                                  <option value="14">URL</option>
-                                  <option value="4">Check box</option>
-                                  <option value="5">Check boxes</option>
-                                  <option value="6">Drop down</option>
-                                  <option value="7">Multi select</option>
-                                  <option value="8">Radio buttons</option>
-                                  <option value="9">File upload</option>
-                                  <option value="10">Date</option>
-                                  <option value="11">Date/time</option>
-                                  <option value="15">Date of birth</option>
-                                  <option value="12">Hidden</option>
-                                </select>
+                              <td>
+                                {{fields.field_type}}
                               </td>
                               <td class="field-required">
-                                <input checked="checked" id="id_fields-0-required" name="fields-0-required" type="checkbox" />
+                                {{fields.required}}
                               </td>
                               <td class="field-visible">
-                                <input checked="checked" id="id_fields-0-visible" name="fields-0-visible" type="checkbox" />
+                                {{fields.visible}}
                               </td>
                               <td class="field-choices">
-                                <input class="vTextField" id="id_fields-0-choices" maxlength="1000" name="fields-0-choices" type="text" />
+                                {{fields.choices}}
                               </td>
                               <td class="field-default">
-                                <input class="vTextField" id="id_fields-0-default" maxlength="2000" name="fields-0-default" type="text" />
+                                {{fields.default}}
                               </td>
                               <td class="field-placeholder_text">
-                                <input class="vTextField" id="id_fields-0-placeholder_text" maxlength="100" name="fields-0-placeholder_text" type="text" />
+                                {{fields.placeholder_text}}
                               </td>
                               <td class="field-help_text">
-                                <input class="vTextField" id="id_fields-0-help_text" maxlength="100" name="fields-0-help_text" type="text" />
+                                {{fields.help_text}}
                               </td>
                               <td class="field-order">
                                 <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
@@ -331,52 +171,35 @@
 
                             <tr class="form-row row2 " id="fields-1">
                               <td class="original">
-                                <input id="id_fields-1-id" name="fields-1-id" type="hidden" />
-                                <input id="id_fields-1-form" name="fields-1-form" type="hidden" />
+                                <input id="id_fields-0-id" name="fields-0-id" type="hidden" />
+                                <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
                               </td>
                               <td class="field-label">
-                                <input class="vTextField" id="id_fields-1-label" maxlength="200" name="fields-1-label" type="text" />
+                                {{fields.label}}
                               </td>
-                              <td class="field-field_type">
-                                <select id="id_fields-1-field_type" name="fields-1-field_type">
-                                  <option value="" selected="selected">---------</option>
-                                  <option value="1">Single line text</option>
-                                  <option value="2">Multi line text</option>
-                                  <option value="3">Email</option>
-                                  <option value="13">Number</option>
-                                  <option value="14">URL</option>
-                                  <option value="4">Check box</option>
-                                  <option value="5">Check boxes</option>
-                                  <option value="6">Drop down</option>
-                                  <option value="7">Multi select</option>
-                                  <option value="8">Radio buttons</option>
-                                  <option value="9">File upload</option>
-                                  <option value="10">Date</option>
-                                  <option value="11">Date/time</option>
-                                  <option value="15">Date of birth</option>
-                                  <option value="12">Hidden</option>
-                                </select>
+                              <td>
+                                {{fields.field_type}}
                               </td>
                               <td class="field-required">
-                                <input checked="checked" id="id_fields-1-required" name="fields-1-required" type="checkbox" />
+                                {{fields.required}}
                               </td>
                               <td class="field-visible">
-                                <input checked="checked" id="id_fields-1-visible" name="fields-1-visible" type="checkbox" />
+                                {{fields.visible}}
                               </td>
                               <td class="field-choices">
-                                <input class="vTextField" id="id_fields-1-choices" maxlength="1000" name="fields-1-choices" type="text" />
+                                {{fields.choices}}
                               </td>
                               <td class="field-default">
-                                <input class="vTextField" id="id_fields-1-default" maxlength="2000" name="fields-1-default" type="text" />
+                                {{fields.default}}
                               </td>
                               <td class="field-placeholder_text">
-                                <input class="vTextField" id="id_fields-1-placeholder_text" maxlength="100" name="fields-1-placeholder_text" type="text" />
+                                {{fields.placeholder_text}}
                               </td>
                               <td class="field-help_text">
-                                <input class="vTextField" id="id_fields-1-help_text" maxlength="100" name="fields-1-help_text" type="text" />
+                                {{fields.help_text}}
                               </td>
                               <td class="field-order">
-                                <input class="vIntegerField" id="id_fields-1-order" name="fields-1-order" type="text" />
+                                <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
                               </td>
                               <td class="delete"></td>
                             </tr>
@@ -386,52 +209,35 @@
 
                             <tr class="form-row row1 " id="fields-2">
                               <td class="original">
-                                <input id="id_fields-2-id" name="fields-2-id" type="hidden" />
-                                <input id="id_fields-2-form" name="fields-2-form" type="hidden" />
+                                <input id="id_fields-0-id" name="fields-0-id" type="hidden" />
+                                <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
                               </td>
                               <td class="field-label">
-                                <input class="vTextField" id="id_fields-2-label" maxlength="200" name="fields-2-label" type="text" />
+                                {{fields.label}}
                               </td>
-                              <td class="field-field_type">
-                                <select id="id_fields-2-field_type" name="fields-2-field_type">
-                                  <option value="" selected="selected">---------</option>
-                                  <option value="1">Single line text</option>
-                                  <option value="2">Multi line text</option>
-                                  <option value="3">Email</option>
-                                  <option value="13">Number</option>
-                                  <option value="14">URL</option>
-                                  <option value="4">Check box</option>
-                                  <option value="5">Check boxes</option>
-                                  <option value="6">Drop down</option>
-                                  <option value="7">Multi select</option>
-                                  <option value="8">Radio buttons</option>
-                                  <option value="9">File upload</option>
-                                  <option value="10">Date</option>
-                                  <option value="11">Date/time</option>
-                                  <option value="15">Date of birth</option>
-                                  <option value="12">Hidden</option>
-                                </select>
+                              <td>
+                                {{fields.field_type}}
                               </td>
                               <td class="field-required">
-                                <input checked="checked" id="id_fields-2-required" name="fields-2-required" type="checkbox" />
+                                {{fields.required}}
                               </td>
                               <td class="field-visible">
-                                <input checked="checked" id="id_fields-2-visible" name="fields-2-visible" type="checkbox" />
+                                {{fields.visible}}
                               </td>
                               <td class="field-choices">
-                                <input class="vTextField" id="id_fields-2-choices" maxlength="1000" name="fields-2-choices" type="text" />
+                                {{fields.choices}}
                               </td>
                               <td class="field-default">
-                                <input class="vTextField" id="id_fields-2-default" maxlength="2000" name="fields-2-default" type="text" />
+                                {{fields.default}}
                               </td>
                               <td class="field-placeholder_text">
-                                <input class="vTextField" id="id_fields-2-placeholder_text" maxlength="100" name="fields-2-placeholder_text" type="text" />
+                                {{fields.placeholder_text}}
                               </td>
                               <td class="field-help_text">
-                                <input class="vTextField" id="id_fields-2-help_text" maxlength="100" name="fields-2-help_text" type="text" />
+                                {{fields.help_text}}
                               </td>
                               <td class="field-order">
-                                <input class="vIntegerField" id="id_fields-2-order" name="fields-2-order" type="text" />
+                                <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
                               </td>
                               <td class="delete"></td>
                             </tr>
@@ -440,52 +246,35 @@
 
                             <tr class="form-row row2  empty-form " id="fields-empty">
                               <td class="original">
-                                <input id="id_fields-__prefix__-id" name="fields-__prefix__-id" type="hidden" />
-                                <input id="id_fields-__prefix__-form" name="fields-__prefix__-form" type="hidden" />
+                                <input id="id_fields-0-id" name="fields-0-id" type="hidden" />
+                                <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
                               </td>
                               <td class="field-label">
-                                <input class="vTextField" id="id_fields-__prefix__-label" maxlength="200" name="fields-__prefix__-label" type="text" />
+                                {{fields.label}}
                               </td>
-                              <td class="field-field_type">
-                                <select id="id_fields-__prefix__-field_type" name="fields-__prefix__-field_type">
-                                  <option value="" selected="selected">---------</option>
-                                  <option value="1">Single line text</option>
-                                  <option value="2">Multi line text</option>
-                                  <option value="3">Email</option>
-                                  <option value="13">Number</option>
-                                  <option value="14">URL</option>
-                                  <option value="4">Check box</option>
-                                  <option value="5">Check boxes</option>
-                                  <option value="6">Drop down</option>
-                                  <option value="7">Multi select</option>
-                                  <option value="8">Radio buttons</option>
-                                  <option value="9">File upload</option>
-                                  <option value="10">Date</option>
-                                  <option value="11">Date/time</option>
-                                  <option value="15">Date of birth</option>
-                                  <option value="12">Hidden</option>
-                                </select>
+                              <td>
+                                {{fields.field_type}}
                               </td>
                               <td class="field-required">
-                                <input checked="checked" id="id_fields-__prefix__-required" name="fields-__prefix__-required" type="checkbox" />
+                                {{fields.required}}
                               </td>
                               <td class="field-visible">
-                                <input checked="checked" id="id_fields-__prefix__-visible" name="fields-__prefix__-visible" type="checkbox" />
+                                {{fields.visible}}
                               </td>
                               <td class="field-choices">
-                                <input class="vTextField" id="id_fields-__prefix__-choices" maxlength="1000" name="fields-__prefix__-choices" type="text" />
+                                {{fields.choices}}
                               </td>
                               <td class="field-default">
-                                <input class="vTextField" id="id_fields-__prefix__-default" maxlength="2000" name="fields-__prefix__-default" type="text" />
+                                {{fields.default}}
                               </td>
                               <td class="field-placeholder_text">
-                                <input class="vTextField" id="id_fields-__prefix__-placeholder_text" maxlength="100" name="fields-__prefix__-placeholder_text" type="text" />
+                                {{fields.placeholder_text}}
                               </td>
                               <td class="field-help_text">
-                                <input class="vTextField" id="id_fields-__prefix__-help_text" maxlength="100" name="fields-__prefix__-help_text" type="text" />
+                                {{fields.help_text}}
                               </td>
                               <td class="field-order">
-                                <input class="vIntegerField" id="id_fields-__prefix__-order" name="fields-__prefix__-order" type="text" />
+                                <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
                               </td>
                               <td class="delete"></td>
                             </tr>

@@ -262,20 +262,8 @@ def getsurv(request):
     # form = Form.objects.get(slug='first')
     # newQ = RelatedSurvey(question=form,category="Delivery")
     # newQ.save()
-    ma = Form.objects.get(slug='shichaos-quiz')
-    #questions = ma.fields.all()
-    formentry = FormEntry.objects.get(id = ma.id)
-    form = FieldEntry.objects.filter(entry_id = formentry)
-    entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
 
-    entries = FormEntry.objects.filter(form = ma)
-    entryAnswers = entries.all()
-    answers = [list()]
-
-    for a in entryAnswers:
-        answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
-
-    return render(request,'app/bla.html',{'ma':ma,'formentry':formentry,'form':form,'entry':entry,'entries':entries,'entryAnswers':entryAnswers,'answers':answers})
+    return render(request,'app/bla.html')
 
 
 def list_survey(request):
@@ -293,10 +281,9 @@ def list_survey(request):
         return render(request,'app/survey_square.html',surv)
 
 def add_survey(request):
-    allFiel = allField()
-    fields = addSurvey() ## UNNESSECARYY
     form = Description()
-    return render(request,'app/add_survey.html',{'form': form,'fields':fields,'allFiel':allFiel})
+    fields = allField()
+    return render(request,'app/add_survey.html',{'form': form,'fields':fields})
 
 @login_required
 def send_message(request):
