@@ -286,19 +286,27 @@ def add_survey(request):
         fields = allField(request.POST)
         category = relatedSurvey(request.POST)
         if form.is_valid():
+
+            linkedForm = form.save()
+            linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
+            linkedSurvey.save()
+            #asd = Field.objects.all().values_list('',flat=True)
+            field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
+            field.save()
+            #category.save()
             # create Form
             # Craete Fields For Form
             # link Form to category
             # save Survey
-            pass
+            return render (request,'app/indexUser.html')
         else:
             # re enter add survey page
-            pass
+            return render (request,'app/index.html')
     else:
         form = Description()
         fields = allField()
         category = relatedSurvey()
-    return render(request,'app/add_survey.html',{'form': form,'fields':fields,'category':category})
+        return render(request,'app/add_survey.html',{'form': form,'fields':fields,'category':category})
 
 @login_required
 def send_message(request):

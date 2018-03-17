@@ -55,7 +55,6 @@
 <meta name="robots" content="NONE,NOARCHIVE" />
 </head>
 
-
 <div class="right_col" role="main">
     <div class="">
       <div class="page-title">
@@ -78,17 +77,15 @@
               <br/>
 
               <!-- General -->
-              <form id="demo-form1" method="post" class="form-horizontal form-label-left">
-                {% csrf_token %}
-                <!-- Title -->
+
+    <form method="post">
+      {% csrf_token %}
+       <!-- Title -->
                 <div class="form-group">
                   {{form|crispy}}
                   {{category|crispy}}
                 </div>
               </div>
-
-
-
 
 
 
@@ -110,7 +107,7 @@
 
                 <div class="js-inline-admin-formset inline-group" id="fields-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#fields&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;fields&quot;, &quot;addText&quot;: &quot;Add another Field&quot;, &quot;deleteText&quot;: &quot;Remove&quot;}}">
                   <div class="tabular inline-related last-related">
-                    <input id="id_fields-TOTAL_FORMS" name="fields-TOTAL_FORMS" type="hidden" value="3" /><input id="id_fields-INITIAL_FORMS" name="fields-INITIAL_FORMS" type="hidden" value="0" /><input id="id_fields-MIN_NUM_FORMS" name="fields-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_fields-MAX_NUM_FORMS" name="fields-MAX_NUM_FORMS" type="hidden" value="1000" />
+                    <!-- <input id="id_fields-TOTAL_FORMS" name="fields-TOTAL_FORMS" type="hidden" value="3" /><input id="id_fields-INITIAL_FORMS" name="fields-INITIAL_FORMS" type="hidden" value="0" /><input id="id_fields-MIN_NUM_FORMS" name="fields-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_fields-MAX_NUM_FORMS" name="fields-MAX_NUM_FORMS" type="hidden" value="1000" /> -->
                       <fieldset class="module ">
 
                         <table class="table table-striped">
@@ -137,8 +134,8 @@
 
                             <tr class="form-row row1 " id="fields-0">
                               <td class="original">
-                                <input id="id_fields-0-id" name="fields-0-id" type="hidden" />
-                                <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
+                                <!-- <input id="id_fields-0-id" name="fields-0-id" type="hidden" /> -->
+                                <!-- <input id="id_fields-0-form" name="fields-0-form" type="hidden" /> -->
                               </td>
                               <td class="field-label">
                                 {{fields.label}}
@@ -165,130 +162,17 @@
                                 {{fields.help_text}}
                               </td>
                               <td class="field-order">
-                                <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
+                                <!-- <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" /> -->
                               </td>
                               <td class="delete"></td>
                             </tr>
-
-
-
-                            <tr class="form-row row2 " id="fields-1">
-                              <td class="original">
-                                <input id="id_fields-0-id" name="fields-0-id" type="hidden" />
-                                <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
-                              </td>
-                              <td class="field-label">
-                                {{fields.label}}
-                              </td>
-                              <td>
-                                {{fields.field_type}}
-                              </td>
-                              <td class="field-required">
-                                {{fields.required}}
-                              </td>
-                              <td class="field-visible">
-                                {{fields.visible}}
-                              </td>
-                              <td class="field-choices">
-                                {{fields.choices}}
-                              </td>
-                              <td class="field-default">
-                                {{fields.default}}
-                              </td>
-                              <td class="field-placeholder_text">
-                                {{fields.placeholder_text}}
-                              </td>
-                              <td class="field-help_text">
-                                {{fields.help_text}}
-                              </td>
-                              <td class="field-order">
-                                <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
-                              </td>
-                              <td class="delete"></td>
-                            </tr>
-
-
-
-
-                            <tr class="form-row row1 " id="fields-2">
-                              <td class="original">
-                                <input id="id_fields-0-id" name="fields-0-id" type="hidden" />
-                                <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
-                              </td>
-                              <td class="field-label">
-                                {{fields.label}}
-                              </td>
-                              <td>
-                                {{fields.field_type}}
-                              </td>
-                              <td class="field-required">
-                                {{fields.required}}
-                              </td>
-                              <td class="field-visible">
-                                {{fields.visible}}
-                              </td>
-                              <td class="field-choices">
-                                {{fields.choices}}
-                              </td>
-                              <td class="field-default">
-                                {{fields.default}}
-                              </td>
-                              <td class="field-placeholder_text">
-                                {{fields.placeholder_text}}
-                              </td>
-                              <td class="field-help_text">
-                                {{fields.help_text}}
-                              </td>
-                              <td class="field-order">
-                                <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
-                              </td>
-                              <td class="delete"></td>
-                            </tr>
-
-
-
-                            <tr class="form-row row2  empty-form " id="fields-empty">
-                              <td class="original">
-                                <input id="id_fields-0-id" name="fields-0-id" type="hidden" />
-                                <input id="id_fields-0-form" name="fields-0-form" type="hidden" />
-                              </td>
-                              <td class="field-label">
-                                {{fields.label}}
-                              </td>
-                              <td>
-                                {{fields.field_type}}
-                              </td>
-                              <td class="field-required">
-                                {{fields.required}}
-                              </td>
-                              <td class="field-visible">
-                                {{fields.visible}}
-                              </td>
-                              <td class="field-choices">
-                                {{fields.choices}}
-                              </td>
-                              <td class="field-default">
-                                {{fields.default}}
-                              </td>
-                              <td class="field-placeholder_text">
-                                {{fields.placeholder_text}}
-                              </td>
-                              <td class="field-help_text">
-                                {{fields.help_text}}
-                              </td>
-                              <td class="field-order">
-                                <input class="vIntegerField" id="id_fields-0-order" name="fields-0-order" type="text" />
-                              </td>
-                              <td class="delete"></td>
-                            </tr>
-
-
 
                           </tbody>
                         </table>
 
                       </fieldset>
                   </div>
+
                 </div>
 
               </div>
@@ -306,11 +190,11 @@
             <button type="button" class="btn btn-info">Save and continue editing</button>
       </div>
       <br/>
-</form>
     </div>
 </div>
 
 
+</form>
 
 
 
