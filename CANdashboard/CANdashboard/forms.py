@@ -61,7 +61,10 @@ class addSurvey(forms.ModelForm):
         model = FormEntry
         exclude = ('slug',)
 
-
+class relatedSurvey(forms.ModelForm):
+    class Meta:
+        model = RelatedSurvey
+        exclude = ('question',)
 
 class Description(forms.ModelForm):
     class Meta:

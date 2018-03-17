@@ -281,9 +281,24 @@ def list_survey(request):
         return render(request,'app/survey_square.html',surv)
 
 def add_survey(request):
-    form = Description()
-    fields = allField()
-    return render(request,'app/add_survey.html',{'form': form,'fields':fields})
+    if request.method == 'POST':
+        form = Description(request.POST)
+        fields = allField(request.POST)
+        category = relatedSurvey(request.POST)
+        if form.is_valid():
+            # create Form
+            # Craete Fields For Form
+            # link Form to category
+            # save Survey
+            pass
+        else:
+            # re enter add survey page
+            pass
+    else:
+        form = Description()
+        fields = allField()
+        category = relatedSurvey()
+    return render(request,'app/add_survey.html',{'form': form,'fields':fields,'category':category})
 
 @login_required
 def send_message(request):
