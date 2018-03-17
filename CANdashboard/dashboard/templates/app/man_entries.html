@@ -68,7 +68,7 @@
                 <tbody>
                 {% for s in answers %}
                   <tr>
-                    <td>{{s}}</td> <span class="fa fa-trash-o pull-right"></span> <br/>
+                    <td>{{s}}</td> <a href="{% url 'delete_entry' s.id %}" <span class="fa fa-trash-o pull-right"></span></a> <br/>
                   </tr>
                 {% endfor %}
               </tbody>

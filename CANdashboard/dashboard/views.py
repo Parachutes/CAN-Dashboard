@@ -325,6 +325,11 @@ def list_survey(request):
 #
 #           return render(request,self.template_name,context)
 
+def deleteSurvey(request,slug):
+    form = Form.objects.get(slug=slug).delete()
+    return render(request,'app/indexUser.html')
+
+
 def add_survey(request):
     Survey_FormSet = formset_factory(allField)
     if request.method == 'POST':

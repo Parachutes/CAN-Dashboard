@@ -52,7 +52,7 @@
         <tbody>
    {% for s in survey %}
           <tr>
-            <td><a href="{% url 'analysis_survey' s.question_id %}">{{s.question}}</a> <span class="fa fa-trash-o pull-right"></span></td>
+            <td><a href="{% url 'analysis_survey' s.question_id %}">{{s.question}}</a><a href="{% url 'deleteSurvey' s.slug%}" <span class="fa fa-trash-o pull-right"></span></a></td>
           </tr>
 {% endfor %}
 
