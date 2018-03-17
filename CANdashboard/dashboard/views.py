@@ -325,8 +325,8 @@ def list_survey(request):
 #
 #           return render(request,self.template_name,context)
 
-def deleteSurvey(request,slug):
-    form = Form.objects.get(slug=slug).delete()
+def deleteSurvey(request,id):
+    Relatedform = RelatedSurvey.objects.filter(question_id=id).delete()
     return render(request,'app/indexUser.html')
 
 
