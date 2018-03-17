@@ -56,6 +56,7 @@ class allField(forms.ModelForm):
         exclude = ('slug',)
 
 
+
 class addSurvey(forms.ModelForm):
     class Meta:
         model = FormEntry

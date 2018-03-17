@@ -14,6 +14,8 @@ from django.views.generic import UpdateView
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.core import serializers
 from directmessages.signals import message_read, message_sent
+from django.forms import formset_factory
+from django.views import View
 
 
 
@@ -280,33 +282,77 @@ def list_survey(request):
     else:
         return render(request,'app/survey_square.html',surv)
 
-def add_survey(request):
-    if request.method == 'POST':
-        form = Description(request.POST)
-        fields = allField(request.POST)
-        category = relatedSurvey(request.POST)
-        if form.is_valid():
 
-            linkedForm = form.save()
-            linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
-            linkedSurvey.save()
-            #asd = Field.objects.all().values_list('',flat=True)
-            field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
-            field.save()
-            #category.save()
-            # create Form
-            # Craete Fields For Form
-            # link Form to category
-            # save Survey
-            return render (request,'app/indexUser.html')
-        else:
-            # re enter add survey page
-            return render (request,'app/index.html')
-    else:
-        form = Description()
-        fields = allField()
-        category = relatedSurvey()
-        return render(request,'app/add_survey.html',{'form': form,'fields':fields,'category':category})
+class SurveyFormView(View):
+
+    Survey_FormSet = formset_factory(allField)
+    form = Description()
+    category = relatedSurvey()
+    template_name = "app/add_survey.html"
+
+    def get(self,request,*args,**kwargs):
+        context = {
+        'fields_form':self.Survey_FormSet(),
+        'form':self.form,
+        'category':self.category,
+        }
+        return render (request,self.template_name,context)
+
+    def post(self,request,*args,**kwargs):
+         survey_formset=self.Survey_FormSet(self.request.POST)
+         form = Description(request.POST)
+         category = relatedSurvey(request.POST)
+
+         if form.is_valid():
+             linkedForm = form.save()
+             linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
+             linkedSurvey.save()
+
+         if survey_formset.is_valid():
+          #To save we have loop through the formset
+            for fields in survey_formset:
+              #Saving in the contacts models
+              #field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
+              #field.save()
+                fields.save()
+
+            return render(request,'app/indexUser.html')
+
+         else:
+          context={
+                  'fields_form':self.Contact_FormSet(),
+                  'form':self.form,
+                  'category':self.category,
+                  }
+
+          return render(request,self.template_name,context)
+
+# def add_survey(request):
+#     if request.method == 'POST':
+#         form = Description(request.POST)
+#         #fields = allField(request.POST)
+#         category = relatedSurvey(request.POST)
+#         if form.is_valid():
+#             linkedForm = form.save()
+#             linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
+#             linkedSurvey.save()
+#             #field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
+#             #field.save()
+#
+#             #category.save()
+#             # create Form
+#             # Craete Fields For Form
+#             # link Form to category
+#             # save Survey
+#             return render (request,'app/indexUser.html')
+#         else:
+#             # re enter add survey page
+#             return render (request,'app/index.html')
+#     else:
+#         form = Description()
+#         #fields = allField()
+#         category = relatedSurvey()
+#         return render(request,'app/add_survey.html',{'form': form,'category':category})
 
 @login_required
 def send_message(request):

@@ -1,6 +1,7 @@
 {% extends "app/base_siteAdmin.html" %}
 {% load crispy_forms_tags %}
 {% block title %} Charity A {% endblock title %}
+{% load static from staticfiles %}
 
 {% block stylesheets %}
   {{ block.super }}
@@ -53,6 +54,8 @@
 <script type="text/javascript" src="/static/admin/js/collapse.js"></script>
 <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
 <meta name="robots" content="NONE,NOARCHIVE" />
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
 </head>
 
 <div class="right_col" role="main">
@@ -130,8 +133,9 @@
 
                           <tbody>
 
-
-
+{{fields_form.management_form}}
+{% for fields in fields_form%}
+<div class = "link-formset">
                             <tr class="form-row row1 " id="fields-0">
                               <td class="original">
                                 <!-- <input id="id_fields-0-id" name="fields-0-id" type="hidden" /> -->
@@ -166,6 +170,8 @@
                               </td>
                               <td class="delete"></td>
                             </tr>
+</div>
+{% endfor %}
 
                           </tbody>
                         </table>
@@ -203,4 +209,10 @@
 
 {% block javascripts %}
   {{ block.super}}
+  <script>
+    $('.link-formset').formset({
+        addText: 'Add Another Field',
+        deleteText: 'Remove Contact'
+    });
+</script>
 {% endblock javascripts %}
