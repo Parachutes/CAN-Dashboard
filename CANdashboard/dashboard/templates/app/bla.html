@@ -56,16 +56,29 @@
                 <!-- TODO add Results block -->
 
                 <tbody>
-                {% for s in question %}
+                  {% for f in answers %}
+
+
                   <tr>
-                    <th scope="row">1</th>
-                    <td>{{s}}</td>
+                    <!-- <td>{{formentry}}</td> -->
+                      <td>{{f}}</td>
                   </tr>
-                {% endfor %}
+
               </tbody>
-
-
+  {% endfor %}
               </form>
+
+
+<!-- {{entry}} -->
+
+
+{{entryAnswers}}
+
+{{answers}}
+
+
+              <!-- {{form}} -->
+
             </div>
           </div>
         </div>

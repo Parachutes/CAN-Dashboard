@@ -66,10 +66,9 @@
                 <!-- TODO add Results block -->
 
                 <tbody>
-                {% for s in form %}
+                {% for s in answers %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>{{s.value}}</td>
+                    <td>{{s}}</td>
                   </tr>
                 {% endfor %}
               </tbody>

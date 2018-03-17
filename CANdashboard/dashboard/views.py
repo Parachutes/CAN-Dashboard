@@ -197,23 +197,36 @@ def survey_view(request,slug):
     return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
 
 
-def Manipulate_Entries(request):
-    ma = Form.objects.get(slug='shichaos-quiz')
-    formentry = FormEntry.objects.get(form = ma)
+def Manipulate_Entries(request,slug):
+    # ma = Form.objects.get(slug=slug)
+    # #formentry = FormEntry.objects.get(form_id = ma.id)
+    # form = FieldEntry.objects.filter(entry_id = formentry)
+    # entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
+    #questions = ma.fields.all()
 
+    ma = Form.objects.get(slug=slug)
+    questions = ma.fields.all()
+    formentry = FormEntry.objects.get(id = ma.id)
     form = FieldEntry.objects.filter(entry_id = formentry)
     entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
-    questions = ma.fields.all()
-    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions})
+
+    entries = FormEntry.objects.filter(form = ma)
+    entryAnswers = entries.all()
+    answers = [list()]
+
+    for a in entryAnswers:
+        answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
+
+    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions,'entries':entries,'entryAnswers':entryAnswers,'answers':answers})
 
 
 def DeliveryCategory(request):
-    ma = Form.objects.get(slug='shichaos-quiz')
-    questions = ma.fields.all()
-    formentry = FormEntry.objects.get(form = ma)
-    form = FieldEntry.objects.filter(entry_id = formentry)
+    # ma = Form.objects.get(slug='shichaos-quiz')
+    # questions = ma.fields.all()
+    # formentry = FormEntry.objects.get(form = ma)
+    # form = FieldEntry.objects.filter(entry_id = formentry)
     survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
-    return render(request,'app/DeliveryPage.html',{'questions':questions,'form':form,'survey':survey})
+    return render(request,'app/DeliveryPage.html',{'survey':survey})
 
 
 def FinancialCategory(request):
@@ -249,8 +262,20 @@ def getsurv(request):
     # form = Form.objects.get(slug='first')
     # newQ = RelatedSurvey(question=form,category="Delivery")
     # newQ.save()
-    question = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery).values_list('question',flat=True)
-    return render(request,'app/bla.html',{'question':question})
+    ma = Form.objects.get(slug='shichaos-quiz')
+    #questions = ma.fields.all()
+    formentry = FormEntry.objects.get(id = ma.id)
+    form = FieldEntry.objects.filter(entry_id = formentry)
+    entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
+
+    entries = FormEntry.objects.filter(form = ma)
+    entryAnswers = entries.all()
+    answers = [list()]
+
+    for a in entryAnswers:
+        answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
+
+    return render(request,'app/bla.html',{'ma':ma,'formentry':formentry,'form':form,'entry':entry,'entries':entries,'entryAnswers':entryAnswers,'answers':answers})
 
 
 def list_survey(request):
