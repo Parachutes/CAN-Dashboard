@@ -78,7 +78,8 @@
               <br/>
 
               <!-- General -->
-              <form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
+              <form id="demo-form1" method="post" class="form-horizontal form-label-left">
+                {% csrf_token %}
                 <!-- Title -->
                 <div class="form-group">
                   {{form|crispy}}
@@ -300,12 +301,12 @@
       <!-- buttons row -->
       <div class="ln_solid"></div>
       <div class="submit-row" style="margin-left: 25%">
-            <button type="button" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-success">Save and add another</button>
             <button type="button" class="btn btn-info">Save and continue editing</button>
       </div>
       <br/>
-
+</form>
     </div>
 </div>
 
