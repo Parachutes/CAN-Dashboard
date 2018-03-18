@@ -67,8 +67,9 @@
 
                 <tbody>
                 {% for s in answers %}
+
                   <tr>
-                    <td>{{s}}</td> <a href="{% url 'delete_entry' s.id %}" <span class="fa fa-trash-o pull-right"></span></a> <br/>
+                    <td>{{s}}</td> <a href="{% url 'delete_entry' slug=ma.slug entry_id=forloop.counter %}" <span class="fa fa-trash-o pull-right"></span></a> <br/>
                   </tr>
                 {% endfor %}
               </tbody>

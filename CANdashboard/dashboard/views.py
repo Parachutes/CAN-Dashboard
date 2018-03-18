@@ -200,26 +200,20 @@ def survey_view(request,slug):
 
 
 def Manipulate_Entries(request,slug):
-    # ma = Form.objects.get(slug=slug)
-    # #formentry = FormEntry.objects.get(form_id = ma.id)
-    # form = FieldEntry.objects.filter(entry_id = formentry)
-    # entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
-    #questions = ma.fields.all()
-
     ma = Form.objects.get(slug=slug)
     questions = ma.fields.all()
-    formentry = FormEntry.objects.get(id = ma.id)
+    formentry = FormEntry.objects.filter(form = ma)[:1].get()
     form = FieldEntry.objects.filter(entry_id = formentry)
     entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
 
     entries = FormEntry.objects.filter(form = ma)
     entryAnswers = entries.all()
-    answers = [list()]
+    answers = []
 
     for a in entryAnswers:
-        answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
+        answers.append(list(FieldEntry.objects.filter(entry = a)))
 
-    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions,'entries':entries,'entryAnswers':entryAnswers,'answers':answers})
+    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions,'entries':entries,'entryAnswers':entryAnswers,'answers':answers,'ma':ma})
 
 
 def DeliveryCategory(request):
@@ -252,20 +246,22 @@ def surveyAnalysis(request,id):
 
 
 
-def DeleteEntry(request, id):
-    ma = Form.objects.get(slug='shichaos-quiz')
-    entry = FormEntry.objects.filter(form = ma).values_list('id',flat=True)
-    #entry = FieldEntry.objects.filter(entry_id=id).delete()
-    html = "<html><body>It is now %s.</body></html>" %entry
-
-    return HttpResponse(html)
+def DeleteEntry(request, slug,entry_id):
+    ma = Form.objects.get(slug=slug)
+    entry = FormEntry.objects.filter(form = ma)
+    delentry = entry.all()
+    lis = []
+    for e in entry:
+        lis.append(list(FieldEntry.objects.filter(entry_id=e).values_list('value',flat=True)))
+    return render(request,'app/bla.html',{'entry':entry,'delentry':delentry,'lis':lis})
 
 def getsurv(request):
     # form = Form.objects.get(slug='first')
     # newQ = RelatedSurvey(question=form,category="Delivery")
     # newQ.save()
+    pass
 
-    return render(request,'app/bla.html')
+
 
 
 def list_survey(request):
