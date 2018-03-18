@@ -5,6 +5,7 @@ from django.contrib import admin
 import forms_builder.forms.urls
 from directmessages.apps import Inbox
 from django.contrib.auth.decorators import login_required
+from forms_builder.forms import forms
 
 urlpatterns = [
     # Matches any html file - to be used for gentella
@@ -14,7 +15,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url('accounts/', include('django.contrib.auth.urls')),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'}),
-
+    url(r'^(?P<slug>.*)/sent/$', views.redirectAfterSubmit, name="form_sent"),
     url(r'^forms/', include(forms_builder.forms.urls)),
     url(r'^profile/$', views.indexUser, name='indexUser'),
     url(r'^messages/$',views.list_messages,name='messages'),
@@ -31,7 +32,7 @@ urlpatterns = [
     url(r'^Financial/$', views.FinancialCategory, name='finance'),
     url(r'^Strength/$', views.StrengthCategory, name='Strength'),
     url(r'^Progress/$', views.ProgressCategory, name='progress'),
-    url(r'^bla/$', views.getsurv, name='getsurvey'),
+    #url(r'^bla/(?P<slug>[-\w\d]+)/$', views.FormDetail.as_view(), name='getsurvey'),
     url(r'^Analysis/(?P<id>[-\w\d]+)/$',views.surveyAnalysis, name = 'analysis_survey'),
     url(r'^deleteSurvey/(?P<id>[-\w\d]+)/$', views.deleteSurvey, name='deleteSurvey'),
 
@@ -44,8 +45,9 @@ urlpatterns = [
     #url(r'^test/', views.indexTest, name='indexTest'),
     url(r'^(?P<Name>[-\w\d]+)/$', views.Charity_detail, name='char_det'),
 
-    url(r'^survey_list/(?P<slug>[-\w\d]+)/$', views.survey_view, name='survey_view'),
 
+
+    url(r'^survey_list/(?P<slug>[-\w\d]+)/$', views.SurveyDetail.as_view(), name='survey_view'),
 
 
 

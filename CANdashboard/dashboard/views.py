@@ -16,7 +16,8 @@ from django.core import serializers
 from directmessages.signals import message_read, message_sent
 from django.forms import formset_factory
 from django.views import View
-
+from forms_builder.forms.signals import form_invalid, form_valid
+from forms_builder.forms.utils import now, split_choices
 
 
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
@@ -190,13 +191,32 @@ def loginAdmin(request):
         template = loader.get_template('registration/loginAdmin.html')
         return HttpResponse(template.render(context, request))
 
+class SurveyDetail(FormDetail):
+    template_name = "app/view_survey.html"
 
 def survey_view(request,slug):
     question = Form.objects.get(slug=slug)
-    form_for_form = FormForForm(question, RequestContext(request),
-                                    request.POST or None,
-                                    request.FILES or None)
-    return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
+    # form_for_form = FormForForm(question,RequestContext(request))
+    # if request.method == "POST":
+    #     form_for_form = FormForForm(question, RequestContext(request),request.POST or None)
+    #     for f in request.POST:
+    #         print(f)
+    #     print(form_for_form)
+    #     if form_for_form.is_valid():
+    #         print(form_for_form)
+    #         return render(request,'app/survey_list.html')
+    #     else:
+    #         return render(request,'app/view_survey.html',{'form_for_form':form_for_form})
+    # else:
+    #     return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
+    if request.method == "POST":
+        entry = FormEntry(question,request.POST)
+        entry.save()
+        return render (request,'app/bla.html',{'entry':entry})
+    else:
+        entry = Field(question,request.POST)
+        print(entry)
+        return render (request,'app/bla.html',{'entry':entry})
 
 
 def Manipulate_Entries(request,slug):
@@ -262,10 +282,11 @@ def DeleteEntry(request, slug,entry_id):
     return render(request,'app/surveyAnalysis.html')
 
 def getsurv(request):
-    # form = Form.objects.get(slug='first')
-    # newQ = RelatedSurvey(question=form,category="Delivery")
-    # newQ.save()
-    pass
+    form = Form.objects.get(slug='first')
+    entry = FormEntry(form = form)
+    bla = FieldEntry(entry)
+    ten = FormEntry.objects.all().values_list('fields',flat=True)
+    return render (request,'app/bla.html',{'entry':entry,'bla':bla,'ten':ten})
 
 
 
@@ -335,7 +356,7 @@ def deleteSurvey(request,id):
 def add_survey(request):
     Survey_FormSet = formset_factory(allField,extra=2)
     if request.method == 'POST':
-        form = Description(request.POST)
+        form = Description(request.POST,initial={'redirect_url': "app/survey_square.html"})
         fields = Survey_FormSet(request.POST)
 
         category = relatedSurvey(request.POST)
@@ -364,10 +385,14 @@ def add_survey(request):
             # re enter add survey page
             return render (request,'app/index.html')
     else:
-        form = Description()
+        form = Description(initial={'redirect_url': "app/survey_square.html"})
         fields = Survey_FormSet()
         category = relatedSurvey()
         return render(request,'app/add_survey.html',{'form': form,'category':category,'fields':fields})
+
+def redirectAfterSubmit(request,slug):
+    return redirect('/')
+
 
 @login_required
 def send_message(request):

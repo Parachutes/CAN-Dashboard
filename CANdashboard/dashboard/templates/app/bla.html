@@ -20,40 +20,16 @@
       <!-- Result Block -->
       <div class="row">
         <div class="col-md-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h3> Entries Results </h3>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <form method="post" class="form">
-
-
-              <!-- {{entry}} -->
-              {{delentry}}
-
-<!-- {% for l in lis %}
-{{l}}
-{% endfor %} -->
-
-
-
-
-            </div>
-          </div>
+          <form method="post">
+            {% csrf_token%}
+          {{entry}}
+  </form>
         </div>
       </div>
 
 
 
 
-
-      <div class="submit-row" style="margin-left: 45%">
-          <button type="button" class="btn btn-primary">Delete</button>
-      </div>
-
-  </div>
-</div>
 
 
 <!--          <div>
