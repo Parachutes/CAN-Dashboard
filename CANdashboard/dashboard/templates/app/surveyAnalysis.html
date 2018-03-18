@@ -208,7 +208,9 @@
                 {% for e in entries %}
                 <tbody>
                   <tr>
-                    <td>{{e}}</td>
+                    {% for s in e %}
+                    <td>{{s}}</td>
+                    {% endfor %}
                   </tr>
                   {% endfor %}
 
