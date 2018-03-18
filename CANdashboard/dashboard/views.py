@@ -211,7 +211,7 @@ def Manipulate_Entries(request,slug):
     answers = []
 
     for a in entryAnswers:
-        answers.append(list(FieldEntry.objects.filter(entry = a)))
+        answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
 
     return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions,'entries':entries,'entryAnswers':entryAnswers,'answers':answers,'ma':ma})
 
@@ -237,11 +237,15 @@ def ProgressCategory(request):
     survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Progress)
     return render(request,'app/ProgressPage.html',{'survey':survey})
 
+
 def surveyAnalysis(request,id):
     survey = Form.objects.get(id=id)
     questions = survey.fields.all()
     formentry = FormEntry.objects.filter(form = survey)
-    entries = FieldEntry.objects.filter(entry_id = formentry)
+    entries = []
+    for entry in formentry:
+        entries.append(FieldEntry.objects.get(entry_id = entry))
+    #entries = FieldEntry.objects.filter(entry_id = formentry)
     return render(request, 'app/surveyAnalysis.html',{'questions':questions,'entries':entries,'survey':survey})
 
 
@@ -249,11 +253,12 @@ def surveyAnalysis(request,id):
 def DeleteEntry(request, slug,entry_id):
     ma = Form.objects.get(slug=slug)
     entry = FormEntry.objects.filter(form = ma)
-    delentry = entry.all()
     lis = []
     for e in entry:
         lis.append(list(FieldEntry.objects.filter(entry_id=e).values_list('value',flat=True)))
-    return render(request,'app/bla.html',{'entry':entry,'delentry':delentry,'lis':lis})
+
+    delentry = entry[int(entry_id)-1].delete()
+    return render(request,'app/surveyAnalysis.html')
 
 def getsurv(request):
     # form = Form.objects.get(slug='first')
