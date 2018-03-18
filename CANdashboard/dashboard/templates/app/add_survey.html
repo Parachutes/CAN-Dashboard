@@ -55,113 +55,120 @@
 <meta name="robots" content="NONE,NOARCHIVE" />
 </head>
 
-<div class="right_col" role="main">
-    <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Create a Survey</h3>
-        </div>
-      </div>
 
-      <!-- General Part [Shichao / 3rd March] -->
-      <div class="clearfix"></div>
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>General</h2>
-              <div class="clearfix"></div>
+<form method="post">
+
+      {% csrf_token %}
+      <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Create a Survey</h3>
+              </div>
             </div>
 
-            <div class="x_content">
-              <br/>
+            <!-- General Part [Shichao / 3rd March] -->
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>General</h2>
+                    <div class="clearfix"></div>
+                  </div>
 
-              <!-- General -->
+                  <div class="x_content">
+                    <br/>
 
-    <form method="post">
-      {% csrf_token %}
-       <!-- Title -->
-                <div class="form-group">
-                  {{form|crispy}}
-                  {{category|crispy}}
+                    <!-- General -->
+
+          <!--<form method="post">-->
+            <!--{% csrf_token %}-->
+             <!-- Title -->
+                      <div class="form-group">
+                        {{form|crispy}}
+                        {{category|crispy}}
+                      </div>
+                    </div>
                 </div>
               </div>
-
-
-
-      <!-- Fields Part [Shichao / 3rd March] TODO -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Fields</h2>
-              <div class="clearfix"></div>
             </div>
 
-            <div class="x_content">
+            <br/>
 
-              <!-- horizontally scrolling panel -->
-              <div class="scrollblock">
+            <!-- Fields Part [Shichao / 3rd March] TODO -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Fields</h2>
+                    <div class="clearfix"></div>
+                  </div>
 
-                <!-- TODO -->
+                  <div class="x_content">
 
-                <div class="js-inline-admin-formset inline-group" id="fields-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#fields&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;fields&quot;, &quot;addText&quot;: &quot;Add another Field&quot;, &quot;deleteText&quot;: &quot;Remove&quot;}}">
-                  <div class="tabular inline-related last-related">
-                    <!-- <input id="id_fields-TOTAL_FORMS" name="fields-TOTAL_FORMS" type="hidden" value="3" /><input id="id_fields-INITIAL_FORMS" name="fields-INITIAL_FORMS" type="hidden" value="0" /><input id="id_fields-MIN_NUM_FORMS" name="fields-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_fields-MAX_NUM_FORMS" name="fields-MAX_NUM_FORMS" type="hidden" value="1000" /> -->
-                      <fieldset class="module ">
+                    <!-- horizontally scrolling panel -->
+                    <div class="scrollblock">
 
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th class="original"></th>
-                              <th class="required">Label</th>
-                              <th class="required">Type</th>
-                              <th>Required</th>
-                              <th>Visible</th>
-                              {% load static %}
-                              <th>Choices&nbsp;<img src= "{% static "static/admin/img/icon-unknown.svg" %}" class="help help-tooltip" width="10" height="10" alt="(Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character.)" title="Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character." /></th>
-                              <th>Default value</th>
-                              <th>Placeholder Text</th>
-                              <th>Help text</th>
-                              <th>Order</th>
-                              <th>Delete?</th>
-                            </tr>
-                          </thead>
+                      <!-- TODO -->
 
-                          <tbody>
+                      <div class="js-inline-admin-formset inline-group" id="fields-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#fields&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;fields&quot;, &quot;addText&quot;: &quot;Add another Field&quot;, &quot;deleteText&quot;: &quot;Remove&quot;}}">
+                        <div class="tabular inline-related last-related">
+                          <!-- <input id="id_fields-TOTAL_FORMS" name="fields-TOTAL_FORMS" type="hidden" value="3" /><input id="id_fields-INITIAL_FORMS" name="fields-INITIAL_FORMS" type="hidden" value="0" /><input id="id_fields-MIN_NUM_FORMS" name="fields-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_fields-MAX_NUM_FORMS" name="fields-MAX_NUM_FORMS" type="hidden" value="1000" /> -->
+                            <fieldset class="module ">
+
+                              <table class="table table-striped">
+            <!--                    <thead>
+                                  <tr>
+                                    <th class="original"></th>
+                                    <th class="required">Label</th>
+                                    <th class="required">Type</th>
+                                    <th>Required</th>
+                                    <th>Visible</th>
+                                    {% load static %}
+                                    <th>Choices&nbsp;<img src= "{% static "static/admin/img/icon-unknown.svg" %}" class="help help-tooltip" width="10" height="10" alt="(Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character.)" title="Comma separated options where applicable. If an option itself contains commas, surround the option starting with the `character and ending with the ` character." /></th>
+                                    <th>Default value</th>
+                                    <th>Placeholder Text</th>
+                                    <th>Help text</th>
+                                    <th>Order</th>
+                                    <th>Delete?</th>
+                                  </tr>
+                                </thead>-->
+
+                                <tbody>
 
 
 
-{{fields_form.management_form}}
-{{fields}}
+                                  {{fields_form.management_form}}
+                                  {{fields}}
 
 
 
-                          </tbody>
-                        </table>
+                                </tbody>
+                              </table>
 
-                      </fieldset>
+                            </fieldset>
+                        </div>
+
+                      </div>
+
+                    </div>
                   </div>
 
                 </div>
-
               </div>
             </div>
 
+            <!-- buttons row -->
+            <div class="ln_solid"></div>
+            <div class="submit-row" style="margin-left: 25%">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="button" class="btn btn-success">Save and add another</button>
+                  <button type="button" class="btn btn-info">Save and continue editing</button>
+            </div>
+            <br/>
           </div>
-        </div>
       </div>
-
-      <!-- buttons row -->
-      <div class="ln_solid"></div>
-      <div class="submit-row" style="margin-left: 25%">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-success">Save and add another</button>
-            <button type="button" class="btn btn-info">Save and continue editing</button>
-      </div>
-      <br/>
-    </div>
-</div>
 
 
 </form>
