@@ -212,35 +212,22 @@
             <table id="datatable" class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th>Question</th>
-                  <th>Answer</th>
+                  <th>Survey Name</th>
+                  <th>Number of Entries</th>
                 </tr>
               </thead>
 
-
+{% for s in surveys %}
               <tbody>
                 <tr>
-                  <td>Question1</td>
-                  <td>Answer1</td>
-                </tr>
-                <tr>
-                  <td>Question2</td>
-                  <td>Answer2</td>
-                </tr>
-                <tr>
-                  <td>Question2</td>
-                  <td>Answer2</td>
-                </tr>
-                <tr>
-                  <td>Another Question</td>
-                  <td>Another answer</td>
-                </tr>
-                <tr>
-                  <td>Another Question</td>
-                  <td>Another answer</td>
+                  {% for q in s %}
+                  <td>{{q}}</td>
+                  {% endfor %}
+                  <!-- <td>{{s}}</td> -->
                 </tr>
 
               </tbody>
+{% endfor %}
             </table>
           </div>
 

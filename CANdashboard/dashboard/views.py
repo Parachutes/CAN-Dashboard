@@ -111,7 +111,13 @@ def indexUser(request):
     user = User.objects.filter(username='Evain')
     charity = Charity.objects.get(user=user)
     Charity_detail = Charity_details.objects.get(Name=charity)
-    return render(request,'app/indexUser.html',{'Charity_detail':Charity_detail})
+    #surveys = Form.objects.all()
+    sur = Form.objects.all()
+    surveys =[]
+    for s in sur:
+        surveys.append((s,len(FormEntry.objects.filter(form = s))))
+
+    return render(request,'app/indexUser.html',{'Charity_detail':Charity_detail,'surveys':surveys})
 
 
 @login_required
