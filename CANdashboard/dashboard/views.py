@@ -242,9 +242,10 @@ def surveyAnalysis(request,id):
     survey = Form.objects.get(id=id)
     questions = survey.fields.all()
     formentry = FormEntry.objects.filter(form = survey)
+    # w = FieldEntry.objects.all().values_list('',flat=True)
     entries = []
     for entry in formentry:
-        entries.append(FieldEntry.objects.get(entry_id = entry))
+        entries.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
     #entries = FieldEntry.objects.filter(entry_id = formentry)
     return render(request, 'app/surveyAnalysis.html',{'questions':questions,'entries':entries,'survey':survey})
 
@@ -332,7 +333,7 @@ def deleteSurvey(request,id):
 
 
 def add_survey(request):
-    Survey_FormSet = formset_factory(allField)
+    Survey_FormSet = formset_factory(allField,extra=2)
     if request.method == 'POST':
         form = Description(request.POST)
         fields = Survey_FormSet(request.POST)
