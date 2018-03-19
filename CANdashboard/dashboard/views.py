@@ -200,30 +200,6 @@ def loginAdmin(request):
 class SurveyDetail(FormDetail):
     template_name = "app/view_survey.html"
 
-def survey_view(request,slug):
-    question = Form.objects.get(slug=slug)
-    # form_for_form = FormForForm(question,RequestContext(request))
-    # if request.method == "POST":
-    #     form_for_form = FormForForm(question, RequestContext(request),request.POST or None)
-    #     for f in request.POST:
-    #         print(f)
-    #     print(form_for_form)
-    #     if form_for_form.is_valid():
-    #         print(form_for_form)
-    #         return render(request,'app/survey_list.html')
-    #     else:
-    #         return render(request,'app/view_survey.html',{'form_for_form':form_for_form})
-    # else:
-    #     return render(request,'app/view_survey.html',{'form_for_form':form_for_form,'question':question})
-    if request.method == "POST":
-        entry = FormEntry(question,request.POST)
-        entry.save()
-        return render (request,'app/bla.html',{'entry':entry})
-    else:
-        entry = Field(question,request.POST)
-        print(entry)
-        return render (request,'app/bla.html',{'entry':entry})
-
 
 def Manipulate_Entries(request,slug):
     ma = Form.objects.get(slug=slug)
@@ -311,48 +287,6 @@ def list_survey(request):
     else:
         return render(request,'app/survey_square.html',surv)
 
-
-# class SurveyFormView(View):
-#
-#     Survey_FormSet = formset_factory(allField)
-#     form = Description()
-#     category = relatedSurvey()
-#     template_name = "app/add_survey.html"
-#
-#     def get(self,request,*args,**kwargs):
-#         context = {
-#         'fields_form':self.Survey_FormSet(),
-#         'form':self.form,
-#         'category':self.category,
-#         }
-#         return render (request,self.template_name,context)
-#
-#     def post(self,request,*args,**kwargs):
-#          survey_formset=self.Survey_FormSet(self.request.POST)
-#          form = Description(request.POST)
-#          category = relatedSurvey(request.POST)
-#
-#          if form.is_valid():
-#              linkedForm = form.save()
-#              linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
-#              linkedSurvey.save()
-#           #To save we have loop through the formset
-#              for fields in survey_formset:
-#               #Saving in the contacts models
-#               #field = Field(form = linkedForm, label=fields.get('label'),field_type = self.request.POST.get('field_type'),choices=self.request.POST.get('choices'))
-#               field = Field.objects.create(form=linkedForm,label = fields,field_type=fields)
-#               field.save()
-#
-#               return render(request,'app/indexUser.html')
-#
-#          else:
-#           context={
-#                   'fields_form':self.Survey_FormSet(),
-#                   'form':self.form,
-#                   'category':self.category,
-#                   }
-#
-#           return render(request,self.template_name,context)
 
 def deleteSurvey(request,id):
     Relatedform = RelatedSurvey.objects.filter(question_id=id).delete()
