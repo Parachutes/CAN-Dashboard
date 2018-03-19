@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url('accounts/', include('django.contrib.auth.urls')),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'}),
+    url(r'^bla/$', views.CalculateMarking, name="calculate_marks"),
     url(r'^(?P<slug>.*)/sent/$', views.redirectAfterSubmit, name="form_sent"),
     url(r'^forms/', include(forms_builder.forms.urls)),
     url(r'^profile/$', views.indexUser, name='indexUser'),

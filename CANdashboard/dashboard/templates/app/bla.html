@@ -11,7 +11,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h1> What  </h1>
+        <h1> Marks  </h1>
       </div>
     </div>
 
@@ -20,42 +20,31 @@
       <!-- Result Block -->
       <div class="row">
         <div class="col-md-12">
-          <form method="post">
-            {% csrf_token%}
-          {{entry}}
-  </form>
+
+{{form}}
+<br>
+{{entries}}
+<br>
+{{entryFields}}
+<br>
+{{fields}}
+<br>
+{{marks}}
+<br>
+marking
+{{marking}}
+<br>
+{{choices}}
+<br>
+{{indexs}}
+
         </div>
       </div>
+    </div>
+  </div>
 
 
 
-
-
-
-<!--          <div>
-            {% csrf_token %}
-            <table>
-              {{ entry.as_table }}
-            </table>
-            <table class="table table-striped">
-              <thead>
-                {% for q in questions %}
-                <tr>
-                  <th>#</th>
-                  <th>{{questions}}</th>
-                </tr>
-              </thead>
-              {% endfor %}
-              <tbody>
-                {% for s in form %}
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>{{s.value}}</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>-->
 
 
 

@@ -59,5 +59,44 @@ class SurveyMessage(Message):
     def __str__(self):
         return self.content
 
+
 class QuestionMarks(Field):
     marks = models.CharField(blank=True,help_text="Enter marks depending on Field Type, seperate with commas",max_length=1000)
+
+    def get_marks(self):
+        marks = ""
+        quoted = False
+        for char in self.marks:
+            if not quoted and char == "'":
+                quoted = True
+            elif quoted and char == "'":
+                quoted = False
+            if char == ",":
+                marks = marks.strip()
+                if marks:
+                    yield marks
+                marks = ""
+            else:
+                marks += char
+        marks = marks.strip()
+        if marks:
+            yield marks
+
+    def get_choices(self):
+        choice = ""
+        quoted = False
+        for char in self.choices:
+            if not quoted and char == "'":
+                quoted = True
+            elif quoted and char == "'":
+                quoted = False
+            elif char == "," and not quoted:
+                choice = choice.strip()
+                if choice:
+                    yield choice
+                choice = ""
+            else:
+                choice += char
+        choice = choice.strip()
+        if choice:
+            yield choice

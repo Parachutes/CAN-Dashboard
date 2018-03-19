@@ -201,6 +201,9 @@ class SurveyDetail(FormDetail):
     template_name = "app/view_survey.html"
 
 
+
+
+
 def Manipulate_Entries(request,slug):
     ma = Form.objects.get(slug=slug)
     questions = ma.fields.all()
@@ -216,6 +219,40 @@ def Manipulate_Entries(request,slug):
         answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
 
     return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions,'entries':entries,'entryAnswers':entryAnswers,'answers':answers,'ma':ma})
+
+
+# TODO GET FIELD ENTRY MARK
+def CalculateMarking(request):
+    form = Form.objects.get(slug='second')
+    entries = form.entries.all()
+    fields = QuestionMarks.objects.filter(form=form)
+    choices = []
+    entryFields = []
+    marks = []
+    marking = []
+    indexs = []
+
+    for entry in entries:
+        entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
+
+    for mark in fields:
+        marks.append((list(mark.get_marks())))
+        choices.append(list(mark.get_choices()))
+
+    for e in entryFields:
+        for entry in e:
+            for choice in choices:
+                if entry in choice:
+                    indexs.append(choice.index(entry))
+                else:
+                    print(None)
+
+    counter = 0
+    for mark in marks:
+            marking.append(mark[indexs[counter]])
+            counter += 1
+
+    return render(request,'app/bla.html',locals())
 
 
 def DeliveryCategory(request):
@@ -263,14 +300,6 @@ def DeleteEntry(request, slug,entry_id):
     delentry = entry[int(entry_id)-1].delete()
     return render(request,'app/surveyAnalysis.html')
 
-def getsurv(request):
-    form = Form.objects.get(slug='first')
-    entry = FormEntry(form = form)
-    bla = FieldEntry(entry)
-    ten = FormEntry.objects.all().values_list('fields',flat=True)
-    return render (request,'app/bla.html',{'entry':entry,'bla':bla,'ten':ten})
-
-
 
 
 def list_survey(request):
@@ -296,7 +325,7 @@ def deleteSurvey(request,id):
 def add_survey(request):
     Survey_FormSet = formset_factory(allField,extra=2)
     if request.method == 'POST':
-        form = Description(request.POST,initial={'redirect_url': "app/survey_square.html"})
+        form = Description(request.POST)
         fields = Survey_FormSet(request.POST)
 
         category = relatedSurvey(request.POST)
@@ -306,11 +335,13 @@ def add_survey(request):
             linkedSurvey.save()
             # field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
             # field.save()
+            marks = []
             for field in fields:
                 f = field.save(commit=False)
                 f.form = linkedForm
+                #marks.append(list(f.get_marks()))
                 f.save()
-
+                #print(marks)
 
                 # field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
                 # field.save()
@@ -325,7 +356,7 @@ def add_survey(request):
             # re enter add survey page
             return render (request,'app/index.html')
     else:
-        form = Description(initial={'redirect_url': "app/survey_square.html"})
+        form = Description()
         fields = Survey_FormSet()
         category = relatedSurvey()
         return render(request,'app/add_survey.html',{'form': form,'category':category,'fields':fields})
