@@ -19,6 +19,7 @@ from django.views import View
 from forms_builder.forms.signals import form_invalid, form_valid
 from forms_builder.forms.utils import now, split_choices
 from more_itertools import chunked
+from statistics import mean
 
 
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
@@ -319,6 +320,14 @@ def surveyAnalysis(request,id):
 
     cele = list(chunked(marking, 2))
     totalEntryMark = map(sum,cele)
+
+    print(cele)
+    MarkedQuestion = zip(*cele)
+
+    SummedQuestion = (map(mean,MarkedQuestion))
+
+    weightedQuestion = zip(questions,SummedQuestion)
+
 
     weightedEntry = zip(entries,totalEntryMark)
 
