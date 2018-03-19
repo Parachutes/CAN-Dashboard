@@ -52,7 +52,7 @@ class EditProfile(UserChangeForm):
 class allField(forms.ModelForm):
 
     class Meta:
-        model = Field
+        model = QuestionMarks
         exclude = ('slug','form')
 
 class addSurvey(forms.ModelForm):

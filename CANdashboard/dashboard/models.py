@@ -58,3 +58,6 @@ class SurveyMessage(Message):
 
     def __str__(self):
         return self.content
+
+class QuestionMarks(Field):
+    marks = models.CharField(blank=True,help_text="Enter marks depending on Field Type, seperate with commas",max_length=1000)
