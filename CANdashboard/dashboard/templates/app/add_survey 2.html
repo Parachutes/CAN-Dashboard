@@ -117,50 +117,54 @@
                           <!-- <input id="id_fields-TOTAL_FORMS" name="fields-TOTAL_FORMS" type="hidden" value="3" /><input id="id_fields-INITIAL_FORMS" name="fields-INITIAL_FORMS" type="hidden" value="0" /><input id="id_fields-MIN_NUM_FORMS" name="fields-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_fields-MAX_NUM_FORMS" name="fields-MAX_NUM_FORMS" type="hidden" value="1000" /> -->
 
 
-                          <script id="theForm" type="x-tmpl-mustache">
-                            <div class="x_panel">
-                                    <div class="x_title">
-                                      <h4>New Question</h4>
-                                    </div>
-                                    <div class="x_content">
-                                       {{fields | crispy}}
-                                    </div>
-                                 </div>
-                                 <div class="ln_solid"></div>
-                          </script>
-
-                          <script type="text/javascript">
+                          <!--<script type="text/javascript">
                               var counter = 1;
                               var limit = 20;
-                              var theform = document.getElementById('theForm').innerHTML;
                               function addInput(divName){
                                    if (counter == limit)  {
                                         alert("You have reached the limit of adding " + counter + " questions");
                                    }
                                    else {
                                         var newdiv = document.createElement('div');
-                                        newdiv.innerHTML = theform;
+                                        newdiv.innerHTML = "Entry " + (counter + 1) + " <br><input type='text' name='myInputs[]'>";
                                         document.getElementById(divName).appendChild(newdiv);
                                         counter++;
                                    }
                               }
-                          </script>
+                          </script>-->
 
+                          <script type='text/javascript'>
+                            function addFields(){
+                                // Number of inputs to create
+                                var number = document.getElementById("member").value;
+                                // Container <div> where dynamic content will be placed
+                                var container = document.getElementById("container");
+                                // Clear previous contents of the container
+                                while (container.hasChildNodes()) {
+                                    container.removeChild(container.lastChild);
+                                }
+                                for (i=0;i<number;i++){
+                                    // Append a node with a random text
+                                    container.appendChild(document.createTextNode("Member " + (i+1)));
+                                    // Create an <input> element, set its type and name attributes
+                                    var input = document.createElement("input");
+                                    input.type = "text";
+                                    input.name = "member" + i;
+                                    container.appendChild(input);
+                                    // Append a line break
+                                    container.appendChild(document.createElement("br"));
+                                }
+                            }
+                        </script>
 
-                          <form method="POST">
+                          <!--<form method="POST">
                                <div id="dynamicInput">
-                                 <div class="x_panel">
-                                    <div class="x_title">
-                                      <h4>Question 1</h4>
-                                    </div>
-                                    <div class="x_content">
-                                       {{fields | crispy}}
-                                    </div>
-                                 </div>
-                                 <div class="ln_solid"></div>
+                                    Entry 1<br><input type="text" name="myInputs[]">
                                </div>
-                               <input type="button" value="Add another question" onClick="addInput('dynamicInput');" class="btn btn-primary">
-                          </form>
+                               <input type="button" value="Add another text input" onClick="addInput('dynamicInput');">
+                          </form>-->
+
+                          
 
 
                             <!--<div class="form-group">
