@@ -18,6 +18,7 @@ from django.forms import formset_factory
 from django.views import View
 from forms_builder.forms.signals import form_invalid, form_valid
 from forms_builder.forms.utils import now, split_choices
+from more_itertools import chunked
 
 
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
@@ -244,13 +245,15 @@ def CalculateMarking(request):
             for choice in choices:
                 if entry in choice:
                     indexs.append(choice.index(entry))
-                else:
-                    print(None)
 
-    counter = 0
-    for mark in marks:
-            marking.append(mark[indexs[counter]])
-            counter += 1
+
+
+    for i in indexs:
+        for mark in marks:
+            marking.append(int(mark[i]))
+
+    cele = list(chunked(marking, 2))
+    totalEntryMark = map(sum,cele)
 
     return render(request,'app/bla.html',locals())
 
@@ -285,8 +288,42 @@ def surveyAnalysis(request,id):
     entries = []
     for entry in formentry:
         entries.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
+
+    form = Form.objects.get(id=id)
+    entrie = form.entries.all()
+    fields = QuestionMarks.objects.filter(form=form)
+    choices = []
+    entryFields = []
+    marks = []
+    marking = []
+    indexs = []
+
+    for entry in entrie:
+        entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
+
+    for mark in fields:
+        marks.append((list(mark.get_marks())))
+        choices.append(list(mark.get_choices()))
+
+    for e in entryFields:
+        for entry in e:
+            for choice in choices:
+                if entry in choice:
+                    indexs.append(choice.index(entry))
+
+
+
+    for i in indexs:
+        for mark in marks:
+            marking.append(int(mark[i]))
+
+    cele = list(chunked(marking, 2))
+    totalEntryMark = map(sum,cele)
+
+    weightedEntry = zip(entries,totalEntryMark)
+
     #entries = FieldEntry.objects.filter(entry_id = formentry)
-    return render(request, 'app/surveyAnalysis.html',{'questions':questions,'entries':entries,'survey':survey})
+    return render(request, 'app/surveyAnalysis.html',locals())
 
 
 

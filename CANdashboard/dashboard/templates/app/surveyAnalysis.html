@@ -205,12 +205,13 @@
                   </tr>
                 </thead>
 
-                {% for e in entries %}
+                {% for e in weightedEntry %}
                 <tbody>
                   <tr>
-                    {% for s in e %}
+                    {% for s in e.0 %}
                     <td>{{s}}</td>
                     {% endfor %}
+                    <td>{{e.1}}</td>
                   </tr>
                   {% endfor %}
 

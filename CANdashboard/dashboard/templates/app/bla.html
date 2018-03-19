@@ -21,13 +21,7 @@
       <div class="row">
         <div class="col-md-12">
 
-{{form}}
-<br>
-{{entries}}
-<br>
 {{entryFields}}
-<br>
-{{fields}}
 <br>
 {{marks}}
 <br>
@@ -37,6 +31,12 @@ marking
 {{choices}}
 <br>
 {{indexs}}
+<br>
+{% for i in totalEntryMark %}
+{{i}}
+{% endfor %}
+<br>
+{{cele}}
 
         </div>
       </div>
