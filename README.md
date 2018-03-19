@@ -10,6 +10,8 @@ direct messaging between users: pip install django-directmessages
 
 crispy forms : pip install django-crispy-forms
 
+more-itertools: pip install more_itertools
+
 ## Requirements
 
 * Allow CAN to Develop Surveys :+1:
