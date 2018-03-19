@@ -369,7 +369,7 @@ def deleteSurvey(request,id):
 
 
 def add_survey(request):
-    Survey_FormSet = formset_factory(allField,extra=2)
+    Survey_FormSet = formset_factory(allField,extra=1)
     if request.method == 'POST':
         form = Description(request.POST)
         fields = Survey_FormSet(request.POST)
