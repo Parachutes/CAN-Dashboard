@@ -118,7 +118,15 @@
 
 
                           <script id="theForm" type="x-tmpl-mustache">
-                            <div>{{fields | crispy}}</div>
+                            <div class="x_panel">
+                                    <div class="x_title">
+                                      <h4>Question 1</h4>
+                                    </div>
+                                    <div class="x_content">
+                                       {{fields | crispy}}
+                                    </div>
+                                 </div>
+                                 <div class="ln_solid"></div>
                           </script>
 
                           <script type="text/javascript">
@@ -141,9 +149,17 @@
 
                           <form method="POST">
                                <div id="dynamicInput">
-                                 {{fields | crispy}}
+                                 <div class="x_panel">
+                                    <div class="x_title">
+                                      <h4>Question 1</h4>
+                                    </div>
+                                    <div class="x_content">
+                                       {{fields | crispy}}
+                                    </div>
+                                 </div>
+                                 <div class="ln_solid"></div>
                                </div>
-                               <input type="button" value="Add another question" onClick="addInput('dynamicInput');">
+                               <input type="button" value="Add another question" onClick="addInput('dynamicInput');" class="btn btn-primary">
                           </form>
 
 
