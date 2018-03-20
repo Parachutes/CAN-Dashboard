@@ -80,13 +80,9 @@
                   <div class="x_content">
                     <br/>
 
-                    <!-- General -->
 
-          <!--<form method="post">-->
-            <!--{% csrf_token %}-->
-             <!-- Title -->
                       <div class="form-group">
-                        {{form|crispy}}
+                        {{forms|crispy}}
                         {{category|crispy}}
                       </div>
                     </div>
@@ -112,18 +108,12 @@
 
                       <!-- TODO -->
 
-                      <div class="js-inline-admin-formset inline-group" id="fields-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#fields&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;fields&quot;, &quot;addText&quot;: &quot;Add another Field&quot;, &quot;deleteText&quot;: &quot;Remove&quot;}}">
-                        <div class="tabular inline-related last-related">
-                          <!-- <input id="id_fields-TOTAL_FORMS" name="fields-TOTAL_FORMS" type="hidden" value="3" /><input id="id_fields-INITIAL_FORMS" name="fields-INITIAL_FORMS" type="hidden" value="0" /><input id="id_fields-MIN_NUM_FORMS" name="fields-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_fields-MAX_NUM_FORMS" name="fields-MAX_NUM_FORMS" type="hidden" value="1000" /> -->
-
-
                           <script id="theForm" type="x-tmpl-mustache">
                             <div class="x_panel">
                                     <div class="x_title">
                                       <h4>New Question</h4>
                                     </div>
                                     <div class="x_content">
-                                       {{fields_form.management_form}}
                                        {{fields | crispy}}
                                     </div>
                                  </div>
@@ -147,26 +137,20 @@
                               }
                           </script>
 
-{{fields.management_form}}
 
-                          <!-- <form method="post"> -->
                                <div id="dynamicInput">
                                  <div class="x_panel">
                                     <div class="x_title">
                                       <h4>Question 1</h4>
                                     </div>
-                                    {% for field in fields %}
                                     <div class="x_content">
-
-                                       {{field | crispy}}
-
+                                       {{fields | crispy}}
                                     </div>
-                                    {% endfor %}
                                  </div>
                                  <div class="ln_solid"></div>
                                </div>
                                <input type="button" value="Add another question" onClick="addInput('dynamicInput');" class="btn btn-primary">
-                          <!-- </form> -->
+
 
 
                         </div>

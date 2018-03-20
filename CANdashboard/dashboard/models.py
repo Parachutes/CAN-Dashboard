@@ -100,3 +100,4 @@ class QuestionMarks(Field):
         choice = choice.strip()
         if choice:
             yield choice
+    

@@ -22,6 +22,7 @@ from more_itertools import chunked
 from statistics import mean
 
 
+
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm
 import forms_builder.forms.views
 from forms_builder.forms.forms import EntriesForm,FormForForm
@@ -419,44 +420,30 @@ def deleteSurvey(request,id):
 
 
 def add_survey(request):
-    Survey_FormSet = formset_factory(allField,extra=1)
     if request.method == 'POST':
-        form = Description(request.POST)
-        fields = Survey_FormSet(request.POST)
-
+        forms = Description(request.POST)
+        fields = FieldFormSet(request.POST)
         category = relatedSurvey(request.POST)
-        if form.is_valid():
-            linkedForm = form.save()
+        if forms.is_valid():
+            linkedForm = forms.save()
             linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
             linkedSurvey.save()
-            # field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
-            # field.save()
             marks = []
-            for field in fields:
-                print(field)
-                f = field.save(commit=False)
-                f.form = linkedForm
-                #marks.append(list(f.get_marks()))
-                f.save()
-                #print(marks)
-
-                # field = Field(form = linkedForm, label=request.POST.get('label'),field_type = request.POST.get('field_type'),choices=request.POST.get('choices'))
-                # field.save()
-
-            #category.save()
-            # create Form
-            # Craete Fields For Form
-            # link Form to category
-            # save Survey
+            if fields.is_valid():
+                for field in fields:
+                        print(field)
+                        f = field.save(commit = False)
+                        f.form = linkedForm
+                        f.save()
+                # forms.fields = fields.save()
             return render (request,'app/indexUser.html')
         else:
-            # re enter add survey page
             return render (request,'app/index.html')
     else:
-        form = Description()
-        fields = Survey_FormSet()
+        forms = Description()
+        fields = FieldFormSet(None)
         category = relatedSurvey()
-        return render(request,'app/add_survey.html',{'form': form,'category':category,'fields':fields})
+        return render(request,'app/add_survey.html',{'forms':forms,'fields':fields,'category':category})
 
 def redirectAfterSubmit(request,slug):
     return redirect('/')
