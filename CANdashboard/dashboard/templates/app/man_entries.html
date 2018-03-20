@@ -1,5 +1,4 @@
 {% extends "app/base_siteUser.html" %}
-{% load crispy_forms_tags %}
 {% block title %} Dashboard {% endblock title %}
 
 {% block stylesheets %}
@@ -31,10 +30,10 @@
 
                 <!-- TODO add search block -->
 
-                <table>
+<table>
                   {% csrf_token %}
-                  {{ entry.as_table }}
-                </table>
+                 {{entryTable.as_table}}
+</table>
 
 
               </form>
@@ -63,15 +62,16 @@
               <form method="post" class="form">
 
 
-                <!-- TODO add Results block -->
+                <!-- TODO LOOP OVER EACH ONE ONCE AGAIN TO GET INDIVIDUAL ENTRIES -->
 
                 <tbody>
-                {% for s in answers %}
-
+                  {% for s in weightedEntry %}
+                  <br>
                   <tr>
-                    <td>{{s}}</td> <a href="{% url 'delete_entry' slug=ma.slug entry_id=forloop.counter %}" <span class="fa fa-trash-o pull-right"></span></a> <br/>
+                    <td>{{s.0}}</td> <a href="{% url 'delete_entry' slug=ma.slug entry_id=forloop.counter %}" <span class="fa fa-trash-o pull-right"></span></a>
+                    <td>{{s.1}}</td>
                   </tr>
-                {% endfor %}
+                  {% endfor %}
               </tbody>
 
 
@@ -89,35 +89,6 @@
 
   </div>
 </div>
-
-
-<!--          <div>
-            {% csrf_token %}
-            <table>
-              {{ entry.as_table }}
-            </table>
-            <table class="table table-striped">
-              <thead>
-                {% for q in questions %}
-                <tr>
-                  <th>#</th>
-                  <th>{{questions}}</th>
-                </tr>
-              </thead>
-              {% endfor %}
-              <tbody>
-                {% for s in form %}
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>{{s.value}}</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>-->
-
-
-
 
 
 

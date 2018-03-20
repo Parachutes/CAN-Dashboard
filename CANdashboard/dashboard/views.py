@@ -211,7 +211,7 @@ def Manipulate_Entries(request,slug):
     questions = ma.fields.all()
     formentry = FormEntry.objects.filter(form = ma)[:1].get()
     form = FieldEntry.objects.filter(entry_id = formentry)
-    entry = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
+    entryTable = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
 
     entries = FormEntry.objects.filter(form = ma)
     entryAnswers = entries.all()
@@ -220,12 +220,53 @@ def Manipulate_Entries(request,slug):
     for a in entryAnswers:
         answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
 
-    return render(request,'app/man_entries.html',{'entry':entry,'form':form,'questions':questions,'entries':entries,'entryAnswers':entryAnswers,'answers':answers,'ma':ma})
+    forms = Form.objects.get(slug=slug)
+    questions = forms.fields.all()
+    entrie = forms.entries.all()
+    fields = QuestionMarks.objects.filter(form=forms)
+    choices = []
+    entryFields = []
+    marks = []
+    marking = []
+    indexs = []
+
+    for entry in entrie:
+        entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
+
+    for mark in fields:
+        marks.append((list(mark.get_marks())))
+        choices.append(list(mark.get_choices()))
+
+    for e in entryFields:
+        for entry in e:
+            for choice in choices:
+                if entry in choice:
+                    indexs.append(choice.index(entry))
+
+
+
+    for i in indexs:
+        for mark in marks:
+            marking.append(int(mark[i]))
+
+    cele = list(chunked(marking, 2))
+    totalEntryMark = map(sum,cele)
+
+    for i in indexs:
+        for mark in marks:
+            marking.append(int(mark[i]))
+
+    individualQMark = list(chunked(marking, 2))
+    weightedEntry = zip(entryFields,individualQMark)
+
+
+    return render(request,'app/man_entries.html',locals())
 
 
 # TODO GET FIELD ENTRY MARK
 def CalculateMarking(request):
     form = Form.objects.get(slug='second')
+    questions = form.fields.all()
     entries = form.entries.all()
     fields = QuestionMarks.objects.filter(form=form)
     choices = []
@@ -255,6 +296,14 @@ def CalculateMarking(request):
 
     cele = list(chunked(marking, 2))
     totalEntryMark = map(sum,cele)
+
+    for i in indexs:
+        for mark in marks:
+            marking.append(int(mark[i]))
+
+    individualQMark = list(chunked(marking, 2))
+    weightedEntry = zip(entryFields,individualQMark)
+
 
     return render(request,'app/bla.html',locals())
 
@@ -318,11 +367,11 @@ def surveyAnalysis(request,id):
         for mark in marks:
             marking.append(int(mark[i]))
 
-    cele = list(chunked(marking, 2))
-    totalEntryMark = map(sum,cele)
+    individualQMark = list(chunked(marking, 2))
+    totalEntryMark = map(sum,individualQMark)
 
     print(cele)
-    MarkedQuestion = zip(*cele)
+    MarkedQuestion = zip(*individualQMark)
 
     SummedQuestion = (map(mean,MarkedQuestion))
 
