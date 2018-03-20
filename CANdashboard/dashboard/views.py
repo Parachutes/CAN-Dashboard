@@ -370,12 +370,15 @@ def surveyAnalysis(request,id):
     individualQMark = list(chunked(marking, 2))
     totalEntryMark = map(sum,individualQMark)
 
-    print(cele)
+    print(individualQMark)
+
     MarkedQuestion = zip(*individualQMark)
 
     SummedQuestion = (map(mean,MarkedQuestion))
 
     weightedQuestion = zip(questions,SummedQuestion)
+
+    Qmark = zip(questions,individualQMark)
 
 
     weightedEntry = zip(entries,totalEntryMark)

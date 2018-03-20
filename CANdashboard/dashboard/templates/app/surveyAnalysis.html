@@ -61,21 +61,25 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
+
             <script type="text/javascript">
+
               var myData = {
-                labels: [{% for q in questions %} "{{q}}", {% endfor %}],
+                labels: [{% for m in Qmark %} "{{m.0}}",{% endfor %}],
                 datasets: [{
-                  label: "Charity",
+                  label: "{{survey}}",
                   backgroundColor: "rgba(3, 88, 106, 0.2)",
                   borderColor: "rgba(3, 88, 106, 0.80)",
                   pointBorderColor: "rgba(3, 88, 106, 0.80)",
                   pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
                   pointHoverBackgroundColor: "#fff",
                   pointHoverBorderColor: "rgba(220,220,220,1)",
-                  data: [ {% for e in entries %} "{{e}}", {% endfor %}]
+                  data: [ {% for x in individualQMark %} {% for i in x %} "{{i}}", {% endfor %}{% endfor %}]
                 }]
               };
+
             </script>
+
             <canvas id="canvasRadar"></canvas>
           </div>
         </div>
@@ -213,14 +217,6 @@
                     <td>{{e.1}}</td>
                   </tr>
                   {% endfor %}
-
-{% for i in daddy %}
-                  <tr>
-
-                    <td>{{i}}</td>
-
-{% endfor %}
-                  </tr>
 
                 </tbody>
               </table>
