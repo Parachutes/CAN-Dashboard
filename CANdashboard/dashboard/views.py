@@ -370,8 +370,6 @@ def surveyAnalysis(request,id):
     individualQMark = list(chunked(marking, 2))
     totalEntryMark = map(sum,individualQMark)
 
-    print(individualQMark)
-
     MarkedQuestion = zip(*individualQMark)
 
     SummedQuestion = (map(mean,MarkedQuestion))
@@ -435,6 +433,7 @@ def add_survey(request):
             # field.save()
             marks = []
             for field in fields:
+                print(field)
                 f = field.save(commit=False)
                 f.form = linkedForm
                 #marks.append(list(f.get_marks()))
