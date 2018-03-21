@@ -431,11 +431,12 @@ def add_survey(request):
             marks = []
             if fields.is_valid():
                 for field in fields:
-                        print(field)
                         f = field.save(commit = False)
                         f.form = linkedForm
                         f.save()
-                # forms.fields = fields.save()
+                forms.fields = fields.save()
+                print(forms.fields)
+
             return render (request,'app/indexUser.html')
         else:
             return render (request,'app/index.html')
