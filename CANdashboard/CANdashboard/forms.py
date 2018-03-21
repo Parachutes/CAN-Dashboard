@@ -6,8 +6,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from dashboard.models import *
 from dashboard.views import *
 from django.contrib.auth.forms import UserChangeForm
-from django.forms.models import modelformset_factory
-
+from django.forms.models import modelformset_factory, formset_factory
+from django.forms import BaseFormSet
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm, Field
 from forms_builder.forms.views import FormDetail
 from forms_builder.forms.forms import EntriesForm,FormForForm
@@ -49,14 +49,11 @@ class EditProfile(UserChangeForm):
         fields = ('username','first_name','last_name','email','password')
 
 
-
 class allField(forms.ModelForm):
 
     class Meta:
         model = QuestionMarks
         exclude = ('slug','form')
-
-FieldFormSet = modelformset_factory(QuestionMarks,form=allField)
 
 class addSurvey(forms.ModelForm):
     class Meta:

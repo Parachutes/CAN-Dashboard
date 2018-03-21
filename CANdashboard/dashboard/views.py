@@ -14,12 +14,13 @@ from django.views.generic import UpdateView
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.core import serializers
 from directmessages.signals import message_read, message_sent
-from django.forms import formset_factory
+from django.forms import formset_factory, modelformset_factory
 from django.views import View
 from forms_builder.forms.signals import form_invalid, form_valid
 from forms_builder.forms.utils import now, split_choices
 from more_itertools import chunked
 from statistics import mean
+
 
 
 
@@ -420,29 +421,29 @@ def deleteSurvey(request,id):
 
 
 def add_survey(request):
+    FieldFormSet = formset_factory(form=allField)
     if request.method == 'POST':
         forms = Description(request.POST)
         fields = FieldFormSet(request.POST)
         category = relatedSurvey(request.POST)
+        print(fields)
         if forms.is_valid():
             linkedForm = forms.save()
             linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
             linkedSurvey.save()
-            marks = []
+
             if fields.is_valid():
                 for field in fields:
-                        f = field.save(commit = False)
-                        f.form = linkedForm
-                        f.save()
-                forms.fields = fields.save()
-                print(forms.fields)
+                    f = field.save(commit=False)
+                    f.form = linkedForm
+                    f.save()
 
             return render (request,'app/indexUser.html')
         else:
             return render (request,'app/index.html')
     else:
         forms = Description()
-        fields = FieldFormSet(None)
+        fields = FieldFormSet()
         category = relatedSurvey()
         return render(request,'app/add_survey.html',{'forms':forms,'fields':fields,'category':category})
 

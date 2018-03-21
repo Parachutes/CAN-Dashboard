@@ -68,8 +68,8 @@
                   {% for s in weightedEntry %}
                   <br>
                   <tr>
-                    <td>{{s.0}}</td> <a href="{% url 'delete_entry' slug=ma.slug entry_id=forloop.counter %}" <span class="fa fa-trash-o pull-right"></span></a>
-                    <td>{{s.1}}</td>
+                    <td>{{s}}</td> <a href="{% url 'delete_entry' slug=ma.slug entry_id=forloop.counter %}" <span class="fa fa-trash-o pull-right"></span></a>
+                    <!-- <td>{{s.1}}</td> -->
                   </tr>
                   {% endfor %}
               </tbody>
