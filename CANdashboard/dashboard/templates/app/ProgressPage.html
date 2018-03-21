@@ -41,20 +41,20 @@
       <p class="text-muted font-13 m-b-30">
       List of Surveys that belong to this module. To add a survey, press the + button
       </p>
-      <table id="datatable" class="table table-striped table-bordered">
+      <table id="datatable-fixed-header" class="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Survey</th>
           </tr>
         </thead>
 
-{% for s in survey %}
+
         <tbody>
+       {% for s in survey %}
           <tr>
             <td><a href="{% url 'analysis_survey' s.question_id %}">{{s.question}}</a><a href="{% url 'deleteSurvey' s.question_id%}"><span class="fa fa-trash-o pull-right"></span></a></td>
           </tr>
-{% endfor %}
-
+        {% endfor %}
         </tbody>
       </table>
 
