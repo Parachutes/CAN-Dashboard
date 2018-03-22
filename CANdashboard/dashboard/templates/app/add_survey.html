@@ -1,44 +1,12 @@
 {% extends "app/base_siteAdmin.html" %}
 {% load crispy_forms_tags %}
 {% block title %} Charity A {% endblock title %}
-
 {% block stylesheets %}
   {{ block.super }}
-
-<style>
-  div.scrollblock {
-    overflow: auto;
-    white-space: nowrap;
-  }
-  div.scrollmenu a {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
-  }
-  .empty-form {
-    display: none;
-  }
-  /* RELATED FIELD ADD ONE / LOOKUP */
-  form .related-widget-wrapper ul {
-    display: inline-block;
-    margin-left: 0;
-    padding-left: 0;
-  }
-  .clearable-file-input input {
-    margin-top: 0;
-  }
-</style>
-
 {% endblock stylesheets %}
-
 {% block content %}
-
 <head>
-
 <script type="text/javascript" src="/admin/jsi18n/"></script>
-<!--<script type="text/javascript" src="/CANdashboard/dashboard/static/admin/js/core.js"></script>-->
 <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
 <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
@@ -54,10 +22,7 @@
 <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
 <meta name="robots" content="NONE,NOARCHIVE" />
 </head>
-
-
 <form method="post">
-
       {% csrf_token %}
       <div class="right_col" role="main">
           <div class="">
@@ -66,8 +31,6 @@
                 <h3>Create a Survey</h3>
               </div>
             </div>
-
-            <!-- General Part [Shichao / 3rd March] -->
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -76,23 +39,16 @@
                     <h2>General</h2>
                     <div class="clearfix"></div>
                   </div>
-
                   <div class="x_content">
-
                       <div class="form-group">
                         {{forms|crispy}}
                         {{category|crispy}}
-
-
                       </div>
                     </div>
                 </div>
               </div>
             </div>
-
             <div class="ln_solid"></div>
-
-            <!-- Fields Part [Shichao / 3rd March] TODO -->
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -100,13 +56,7 @@
                     <h2>Fields</h2>
                     <div class="clearfix"></div>
                   </div>
-
                   <div class="x_content">
-
-
-                    <!--<input type="number" value="" name="counter">-->
-
-
                     <div class="form-group">
                       <label>Hey! How many questions do you want to generate?</label>
                       <select class="form-control" name="counter">
@@ -132,66 +82,7 @@
                         <option value="20">Max: 20</option>
                       </select>
                     </div>
-
-                    <!-- horizontally scrolling panel -->
-                    <!--<div class="scrollblock">-->
-
-                      <!-- TODO -->
-
-
-                          <!-- <script id="theForm" type="x-tmpl-mustache">
-                            <div class="x_panel">
-                                    <div class="x_title">
-                                      <h4>New Question</h4>
-                                    </div>
-                                    <div class="x_content">
-                                       {{fields | crispy}}
-                                       {{fields.g}}
-                                    </div>
-                                 </div>
-                                 <div class="ln_solid"></div>
-                          </script> -->
-
-
-
-                          <!-- <script type="text/javascript">
-                              var counter = {{fields.total_form_counter}};
-                              var limit = 20;
-                              var theform = document.getElementById('theForm').innerHTML;
-                              function addInput(divName){
-                                   if (counter == limit)  {
-                                        alert("You have reached the limit of adding " + counter + " questions");
-                                   }
-                                   else {
-
-                                        var newdiv = document.createElement('div');
-                                        newdiv.innerHTML = theform;
-                                        document.getElementById(divName).appendChild(newdiv);
-                                        counter++;
-                                        var form = '{{fields.empty_form|escapejs}}'.replace(/__prefix__/g, counter);
-                                        $('#fields.forms').append(form)
-                                        $('#id_form-TOTAL_FORMS').val(form_count);
-                                   }
-
-                              }
-                          </script> -->
-<!--
-                          <script type="text/javascript"
-                          src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
-                          </script>
-
-                               <div id="dynamicInput">
-                                 <div class="x_panel">
-                                    <div class="x_title">
-                                      <h4>Question 1</h4>
-                                    </div>
-                                    <div class="x_content">
-                                       {{fields | crispy}}
-                                    </div>
-                                 </div>
-                                 <div class="ln_solid"></div>
-                               </div> -->
-                               <input type="submit" value="Generate Questions" class="btn btn-primary">
+                    <input type="submit" value="Generate Questions" class="btn btn-primary">
                   </div>
                 </div>
               </div>
@@ -199,11 +90,7 @@
           </div>
       </div>
 </form>
-
-
 {% endblock content %}
-
-
 {% block javascripts %}
   {{ block.super}}
 {% endblock javascripts %}
