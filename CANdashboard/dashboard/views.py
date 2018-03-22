@@ -20,6 +20,8 @@ from forms_builder.forms.signals import form_invalid, form_valid
 from forms_builder.forms.utils import now, split_choices
 from more_itertools import chunked
 from statistics import mean
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 
@@ -419,64 +421,45 @@ def deleteSurvey(request,id):
     Relatedform = RelatedSurvey.objects.filter(question_id=id).delete()
     return render(request,'app/indexUser.html')
 
-def add_book_info(request):
-    template_name = 'app/bla.html'
-    formset_obj = formset_factory(allField)
-    if request.method == 'GET':
-        formset = formset_obj(request.GET or None)
-        return render(request, template_name, {'formset': formset})
-    elif request.method == 'POST':
-        formset = formset_obj(request.POST or None)
-        if formset.is_valid():
-            for form in formset:
-                name = form.cleaned_data.get('name')
-                # do necessary action here
-                # redirect from here or return success message
-        # in case the form is not valid, return as it is
-        return render(request, template_name, {
-            'formset': formset,
-            'last_form_counter': len(formset),
-        })
+
+def Generate_Questions(request,id,num):
+    form = RelatedSurvey.objects.get(question_id=id)
+    FieldFormSet = formset_factory(form=allField,extra=int(num))
+
+    if request.method == 'POST':
+        fields = FieldFormSet(request.POST)
+        if fields.is_valid():
+            for field in fields:
+                f = field.save(commit=False)
+                f.form = form
+                f.save()
+        else:
+            return render (request,'app/Gen_Q')
+    else:
+        fields = FieldFormSet()
+    return render(request,'app/Gen_Q.html',{'fields':fields})
 
 
 def add_survey(request):
-
-    class RequiredFormSet(BaseFormSet):
-        def __init__(self, *args, **kwargs):
-            super(RequiredFormSet, self).__init__(*args, **kwargs)
-            for form in self.forms:
-                form.empty_permitted = False
-
-    FieldFormSet = formset_factory(form=allField,formset=RequiredFormSet)
-
     if request.method == 'POST':
+        print(request.POST)
         forms = Description(request.POST)
-        fields = FieldFormSet(request.POST)
         category = relatedSurvey(request.POST)
-        print(fields)
         if forms.is_valid():
+            q = int(request.POST.get('counter'))
             linkedForm = forms.save()
             linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
             linkedSurvey.save()
-
-            if fields.is_valid():
-                for field in fields:
-                    f = field.save(commit=False)
-                    f.form = linkedForm
-                    f.save()
-
-            return render (request,'app/indexUser.html')
+            return HttpResponseRedirect(reverse('gen_q', args=(linkedForm,q)))
         else:
-            return render (request,'app/index.html')
+            return render (request,'app/add_survey.html')
     else:
         forms = Description()
-        fields = FieldFormSet()
         category = relatedSurvey()
-        return render(request,'app/add_survey.html',{'forms':forms,'fields':fields,'category':category})
+        return render(request,'app/add_survey.html',{'forms':forms,'category':category})
 
 def redirectAfterSubmit(request,slug):
     return redirect('/')
-
 
 @login_required
 def send_message(request):

@@ -1,0 +1,115 @@
+{% extends "app/base_siteAdmin.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Charity A {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+
+<style>
+  div.scrollblock {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  .empty-form {
+    display: none;
+  }
+  /* RELATED FIELD ADD ONE / LOOKUP */
+  form .related-widget-wrapper ul {
+    display: inline-block;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .clearable-file-input input {
+    margin-top: 0;
+  }
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<head>
+
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<!--<script type="text/javascript" src="/CANdashboard/dashboard/static/admin/js/core.js"></script>-->
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+<script type="text/javascript" src="/static/admin/js/SelectBox.js"></script>
+<script type="text/javascript" src="/static/admin/js/SelectFilter2.js"></script>
+<script type="text/javascript" src="/static/admin/js/collapse.js"></script>
+<script type="text/javascript" src="/static/admin/js/inlines.js"></script>
+<meta name="robots" content="NONE,NOARCHIVE" />
+</head>
+
+
+<form method="post">
+
+      {% csrf_token %}
+      <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Create a Survey</h3>
+              </div>
+            </div>
+
+            <!-- General Part [Shichao / 3rd March] -->
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+                  <div class="x_content">
+                    <br/>
+                    {{fields.management_form}}
+                      <div class="form-group">
+                        {{fields}}
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+
+            <div class="ln_solid"></div>
+
+            <!-- Fields Part [Shichao / 3rd March] TODO -->
+
+
+                      <!-- TODO -->
+
+            <!-- buttons row -->
+            <div class="ln_solid"></div>
+            <div class="submit-row" style="margin-left: 25%">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="button" class="btn btn-success">Save and add another</button>
+                  <button type="button" class="btn btn-info">Save and continue editing</button>
+            </div>
+            <br/>
+          </div>
+      </div>
+
+
+</form>
+
+
+
+{% endblock content %}
+
+
+{% block javascripts %}
+  {{ block.super}}
+{% endblock javascripts %}

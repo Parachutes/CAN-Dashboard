@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url('accounts/', include('django.contrib.auth.urls')),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'}),
-    url(r'^bla/$', views.CalculateMarking, name="calculate_marks"),
+    url(r'^bla/(?P<id>[-\w\d]+)/(?P<num>[-\w\d]+)/$', views.Generate_Questions, name="gen_q"),
+
     url(r'^(?P<slug>.*)/sent/$', views.redirectAfterSubmit, name="form_sent"),
     url(r'^forms/', include(forms_builder.forms.urls)),
     url(r'^profile/$', views.indexUser, name='indexUser'),
