@@ -269,7 +269,7 @@ def Manipulate_Entries(request,slug):
 
 # TODO GET FIELD ENTRY MARK
 def CalculateMarking(request):
-    form = Form.objects.get(slug='second')
+    form = Form.objects.get(slug='real-survey')
     questions = form.fields.all()
     entries = form.entries.all()
     fields = QuestionMarks.objects.filter(form=form)
@@ -280,17 +280,22 @@ def CalculateMarking(request):
     indexs = []
 
     for entry in entries:
-        entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
+        entryFields.append(list(FieldEntry.objects.filter(entry=entry)))
 
     for mark in fields:
         marks.append((list(mark.get_marks())))
         choices.append(list(mark.get_choices()))
 
+
     for e in entryFields:
         for entry in e:
-            for choice in choices:
-                if entry in choice:
-                    indexs.append(choice.index(entry))
+             if (len(choices) != 1):
+                for choice in choices:
+                    if entry in choice:
+                        indexs.append(choice.index(entry))
+             else:
+                indexs.append(choice.index(entry))
+
 
 
 
