@@ -71,25 +71,24 @@
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Question Fields</h2>
+                    <div class="clearfix"></div>
+                  </div>
 
 
                   <div class="x_content">
-                    <br/>
                     {{fields.management_form}}
                       <div class="form-group">
-                        {{fields}}
+                        {{fields|crispy}}
                       </div>
                     </div>
                 </div>
               </div>
+            </div>
+          </div>
 
-
-            <div class="ln_solid"></div>
-
-            <!-- Fields Part [Shichao / 3rd March] TODO -->
-
-
-                      <!-- TODO -->
 
             <!-- buttons row -->
             <div class="ln_solid"></div>
