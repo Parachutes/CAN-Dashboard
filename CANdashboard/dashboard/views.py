@@ -433,7 +433,7 @@ def Generate_Questions(request,id,num):
                 f = field.save(commit=False)
                 f.form = form.question
                 f.save()
-                return render (request,'app/indexAdmin.html')
+            return render (request,'app/indexAdmin.html')
         else:
             return render (request,'app/Gen_Q')
     else:
