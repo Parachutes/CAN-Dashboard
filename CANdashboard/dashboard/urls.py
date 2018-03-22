@@ -6,6 +6,8 @@ import forms_builder.forms.urls
 from directmessages.apps import Inbox
 from django.contrib.auth.decorators import login_required
 from forms_builder.forms import forms
+from CANdashboard import forms
+
 
 urlpatterns = [
     # Matches any html file - to be used for gentella

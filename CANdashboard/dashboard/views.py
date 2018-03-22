@@ -419,9 +419,36 @@ def deleteSurvey(request,id):
     Relatedform = RelatedSurvey.objects.filter(question_id=id).delete()
     return render(request,'app/indexUser.html')
 
+def add_book_info(request):
+    template_name = 'app/bla.html'
+    formset_obj = formset_factory(allField)
+    if request.method == 'GET':
+        formset = formset_obj(request.GET or None)
+        return render(request, template_name, {'formset': formset})
+    elif request.method == 'POST':
+        formset = formset_obj(request.POST or None)
+        if formset.is_valid():
+            for form in formset:
+                name = form.cleaned_data.get('name')
+                # do necessary action here
+                # redirect from here or return success message
+        # in case the form is not valid, return as it is
+        return render(request, template_name, {
+            'formset': formset,
+            'last_form_counter': len(formset),
+        })
+
 
 def add_survey(request):
-    FieldFormSet = formset_factory(form=allField)
+
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    FieldFormSet = formset_factory(form=allField,formset=RequiredFormSet)
+
     if request.method == 'POST':
         forms = Description(request.POST)
         fields = FieldFormSet(request.POST)
@@ -475,7 +502,6 @@ def send_message(request):
             return render(request,'app/send_message.html',{'form':form})
         else:
             return render(request,'app/send_messageAdmin.html',{'form':form})
-
 
 
 

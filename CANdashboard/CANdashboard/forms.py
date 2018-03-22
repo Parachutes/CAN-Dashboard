@@ -11,6 +11,7 @@ from django.forms import BaseFormSet
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm, Field
 from forms_builder.forms.views import FormDetail
 from forms_builder.forms.forms import EntriesForm,FormForForm
+from django.forms import fields, models, formsets, widgets
 
 
 # class UpdateUser(forms.Form):
@@ -54,6 +55,7 @@ class allField(forms.ModelForm):
     class Meta:
         model = QuestionMarks
         exclude = ('slug','form')
+
 
 class addSurvey(forms.ModelForm):
     class Meta:
