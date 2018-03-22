@@ -450,7 +450,7 @@ def add_survey(request):
             linkedForm = forms.save()
             linkedSurvey = RelatedSurvey(question=linkedForm,category=request.POST.get('category'))
             linkedSurvey.save()
-            return HttpResponseRedirect(reverse('gen_q', args=(linkedForm,q)))
+            return HttpResponseRedirect(reverse('gen_q', args=(linkedForm.id,q)))
         else:
             return render (request,'app/add_survey.html')
     else:
