@@ -431,8 +431,9 @@ def Generate_Questions(request,id,num):
         if fields.is_valid():
             for field in fields:
                 f = field.save(commit=False)
-                f.form = form
+                f.form = form.question
                 f.save()
+                return render (request,'app/indexAdmin.html')
         else:
             return render (request,'app/Gen_Q')
     else:
