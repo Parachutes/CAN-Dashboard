@@ -211,14 +211,17 @@
               Most Used Words in Recent Surveys
               </p>
               <table id="datatable" class="table table-striped table-bordered">
+
                 <thead>
                   <tr>
-                    <th>Surveys for Delivery</th>
+                    <th>Answer</th>
+                    <th> Marks </th>
                   </tr>
                 </thead>
 
-                {% for e in weightedEntry %}
+
                 <tbody>
+                  {% for e in weightedEntry %}
                   <tr>
                     {% for s in e.0 %}
                     <td>{{s}}</td>
