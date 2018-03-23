@@ -106,11 +106,131 @@ class UpdateCharity(UpdateView):
     fields = ['Name','Country','Website','Email']
     template_name = 'app/charity_form.html'
 
+
+
+def calculteTotalMark(forms):
+        entries = FormEntry.objects.filter(form = forms)
+        entryAnswers = entries.all()
+        answers = []
+        Total = 0
+        avgCategory = 0
+
+        for a in entryAnswers:
+            answers.append(list(FieldEntry.objects.filter(entry = a).values_list('value',flat=True)))
+
+        forms = Form.objects.get(id=forms.id)
+        questions = forms.fields.all()
+        entrie = forms.entries.all()
+        fields = QuestionMarks.objects.filter(form=forms)
+        choices = []
+        entryFields = []
+        marks = []
+        marking = []
+        indexs = []
+
+        for entry in entrie:
+            entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
+
+        for mark in fields:
+            marks.append((list(mark.get_marks())))
+            choices.append(list(mark.get_choices()))
+
+        for e in entryFields:
+            for entry in e:
+                for choice in choices:
+                    if entry in choice:
+                        indexs.append(choice.index(entry))
+
+
+
+        for i in indexs:
+            for mark in marks:
+                marking.append(int(mark[i]))
+
+        cele = list(chunked(marking, 2))
+        totalEntryMark = map(sum,cele)
+
+        for i in indexs:
+            for mark in marks:
+                marking.append(int(mark[i]))
+
+        individualQMark = list(chunked(marking, 2))
+        weightedEntry = zip(entryFields,individualQMark)
+
+        for ex in totalEntryMark:
+            Total += ex
+
+
+        return Total
+
 def index(request):
     user = User.objects.filter(username='Evain')
     charity = Charity.objects.get(user=user)
-    char = Charity_details.objects.get(Name=charity)
-    return render(request,'app/index.html',{'char':char})
+
+    ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
+    DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
+    StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
+    FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
+
+    Progressmarks = []
+    totalProgressMark = 0
+    avgProgress = 0
+    Deliverymarks = []
+    totalDeliverymarks = 0
+    avgDelivery = 0
+    Strengthmarks = []
+    totalStrengthmarks = 0
+    avgStrength = 0
+    Healthmarks = []
+    totalHealthmarks = 0
+    avgHealth = 0
+
+
+    for p in ProgressSurveys:
+        Progressmarks.append(calculteTotalMark(p.question))
+
+    for d in DeliverySurveys:
+        Deliverymarks.append(calculteTotalMark(d.question))
+
+    for s in StrengthSurveys:
+        Strengthmarks.append(calculteTotalMark(s.question))
+
+    for h in FinancialSurveys:
+        Healthmarks.append(calculteTotalMark(h.question))
+
+
+    for Pmark in Progressmarks:
+        if Pmark  == None:
+            pass
+        else:
+            totalProgressMark += Pmark
+    avgProgress = totalProgressMark / len(ProgressSurveys)
+
+    for Dmark in Deliverymarks:
+        if Dmark == None:
+            pass
+        else:
+            totalDeliverymarks += Dmark
+    avgDelivery = totalDeliverymarks / len(Deliverymarks)
+
+    for Smark in Strengthmarks:
+        if Smark == None:
+            pass
+        else:
+            totalStrengthmarks += Smark
+    avgStrength = totalDeliverymarks / len(Strengthmarks)
+
+    for Hmark in Healthmarks:
+        if Hmark == None:
+            pass
+        else:
+            totalHealthmarks += Hmark
+    avgHealth = totalDeliverymarks / len(Healthmarks)
+
+
+    print(avgProgress,avgDelivery,avgStrength,avgHealth)
+
+    return render(request,'app/index.html',locals())
 
 @login_required
 def indexUser(request):
@@ -491,17 +611,3 @@ def send_message(request):
             return render(request,'app/send_message.html',{'form':form})
         else:
             return render(request,'app/send_messageAdmin.html',{'form':form})
-
-
-
-
-# TODO request other charity name and obtain from_user from login
-#def send_message(request):
-    #user =User.objects.get(username ='zaki')
-    #user.username = user
-    #touser =User.objects.get(username ='ALS')
-    #touser.username = touser
-    #message = 'Hello'
-    #Inbox.send_message(user, touser, message)
-    #html = "<html><body>It is now %s.</body></html>" %message
-    #return HttpResponse(html)
