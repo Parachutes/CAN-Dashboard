@@ -305,68 +305,99 @@ def indexUser(request):
 
 @login_required
 def indexAdmin(request):
-    if request.method == 'GET':
-        ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
-        DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
-        StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
-        FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
+    ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
+    DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
+    StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
+    FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
 
-        print(request)
-
-        Progressmarks = []
-        totalProgressMark = 0
-        avgProgress = 0
-        Deliverymarks = []
-        totalDeliverymarks = 0
-        avgDelivery = 0
-        Strengthmarks = []
-        totalStrengthmarks = 0
-        avgStrength = 0
-        Healthmarks = []
-        totalHealthmarks = 0
-        avgHealth = 0
-
-
-        for p in ProgressSurveys:
-            Progressmarks.append(calculteTotalMark(p.question))
-
-        for d in DeliverySurveys:
-            Deliverymarks.append(calculteTotalMark(d.question))
-
-        for s in StrengthSurveys:
-            Strengthmarks.append(calculteTotalMark(s.question))
-
-        for h in FinancialSurveys:
-            Healthmarks.append(calculteTotalMark(h.question))
+    Progressmarks = []
+    totalProgressMark = 0
+    avgProgress = 0
+    ProgressEntries = []
+    Deliverymarks = []
+    totalDeliverymarks = 0
+    avgDelivery = 0
+    DeliveryEntries = []
+    Strengthmarks = []
+    totalStrengthmarks = 0
+    avgStrength = 0
+    StrengthEntries = []
+    Healthmarks = []
+    totalHealthmarks = 0
+    avgHealth = 0
+    HealthEntries = []
+    totalDeliveryEntry = 0
+    totalStrengthEntry = 0
+    totalProgressEntry = 0
+    totalHealthEntry = 0
 
 
-        for Pmark in Progressmarks:
-            if Pmark  == None:
-                pass
-            else:
-                totalProgressMark += Pmark
-        avgProgress = totalProgressMark / len(ProgressSurveys)
+    for p in ProgressSurveys:
+        Progressmarks.append(calculteTotalMark(p.question))
+        ProgressEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
-        for Dmark in Deliverymarks:
-            if Dmark == None:
-                pass
-            else:
-                totalDeliverymarks += Dmark
-        avgDelivery = totalDeliverymarks / len(Deliverymarks)
 
-        for Smark in Strengthmarks:
-            if Smark == None:
-                pass
-            else:
-                totalStrengthmarks += Smark
-        avgStrength = totalDeliverymarks / len(Strengthmarks)
+    for d in DeliverySurveys:
+        Deliverymarks.append(calculteTotalMark(d.question))
+        DeliveryEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
-        for Hmark in Healthmarks:
-            if Hmark == None:
-                pass
-            else:
-                totalHealthmarks += Hmark
-        avgHealth = totalDeliverymarks / len(Healthmarks)
+    for s in StrengthSurveys:
+        Strengthmarks.append(calculteTotalMark(s.question))
+        StrengthEntries.append(len(FormEntry.objects.filter(form=p.question)))
+
+    for h in FinancialSurveys:
+        Healthmarks.append(calculteTotalMark(h.question))
+        HealthEntries.append(len(FormEntry.objects.filter(form=p.question)))
+
+
+    for Pmark in Progressmarks:
+        if Pmark  == None:
+            pass
+        else:
+            totalProgressMark += Pmark
+    avgProgress = totalProgressMark / len(ProgressSurveys)
+
+    for Dmark in Deliverymarks:
+        if Dmark == None:
+            pass
+        else:
+            totalDeliverymarks += Dmark
+    avgDelivery = totalDeliverymarks / len(Deliverymarks)
+
+    for Smark in Strengthmarks:
+        if Smark == None:
+            pass
+        else:
+            totalStrengthmarks += Smark
+    avgStrength = totalDeliverymarks / len(Strengthmarks)
+
+    for Hmark in Healthmarks:
+        if Hmark == None:
+            pass
+        else:
+            totalHealthmarks += Hmark
+    avgHealth = totalDeliverymarks / len(Healthmarks)
+
+    for delivery in DeliveryEntries:
+        totalDeliveryEntry += delivery
+
+    for health in HealthEntries:
+        totalHealthEntry += health
+
+    for strength in StrengthEntries:
+        totalStrengthEntry += strength
+
+    for progress in ProgressEntries:
+        totalProgressEntry += progress
+
+
+    CategorisedEntries = []
+
+    CategorisedEntries.append((RelatedSurvey.Progress,totalProgressEntry))
+    CategorisedEntries.append((RelatedSurvey.Strength_of_system,totalStrengthEntry))
+    CategorisedEntries.append((RelatedSurvey.Financial_Health,totalHealthEntry))
+    CategorisedEntries.append((RelatedSurvey.Delivery,totalDeliveryEntry))
+
 
     return render(request,'app/indexAdmin.html',locals())
 
