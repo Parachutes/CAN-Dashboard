@@ -564,15 +564,18 @@ def DeliveryCategory(request):
 
     Deliverymarks = []
     surveyQuestions = []
+    DeliveryEntries = []
 
 
     for d in DeliverySurveys:
         Deliverymarks.append(calculteTotalMark(d.question))
+        DeliveryEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
         surveyQuestions.append(question.question.title)
 
     weightedSurvey = zip(surveyQuestions,Deliverymarks)
+    numberOfEntries =  zip(surveyQuestions,DeliveryEntries)
 
 
     return render(request,'app/DeliveryPage.html',locals())
@@ -584,15 +587,18 @@ def FinancialCategory(request):
 
     Financialmarks = []
     surveyQuestions = []
+    FinancialEntries = []
 
 
     for d in FinancialSurveys:
         Financialmarks.append(calculteTotalMark(d.question))
+        FinancialEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
         surveyQuestions.append(question.question.title)
 
     FinancialSurveys = zip(surveyQuestions,Financialmarks)
+    numberOfEntries = zip(surveyQuestions,FinancialEntries)
 
     return render(request,'app/FinancialPage.html',locals())
 
@@ -602,12 +608,18 @@ def StrengthCategory(request):
 
     Strengthmarks = []
     surveyQuestions = []
+    StrengthEntries = []
 
     for d in StrengthSurveys:
         Strengthmarks.append(calculteTotalMark(d.question))
+        StrengthEntries.append(len(FormEntry.objects.filter(form=d.question)))
+
     for question in survey:
         surveyQuestions.append(question.question.title)
+
     StrengthSurveys = zip(surveyQuestions,Strengthmarks)
+    numberOfEntries = zip(surveyQuestions,StrengthEntries)
+
     return render(request,'app/StrengthPage.html',locals())
 
 def ProgressCategory(request):
@@ -616,17 +628,20 @@ def ProgressCategory(request):
 
     Progressmarks = []
     surveyQuestions = []
+    ProgressEntries = []
 
 
     for d in ProgressSurveys:
         Progressmarks.append(calculteTotalMark(d.question))
-        print(calculteTotalMark(d.question))
+        ProgressEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
 
     for question in survey:
         surveyQuestions.append(question.question.title)
 
     ProgressSurveys = zip(surveyQuestions,Progressmarks)
+    numberOfEntries = zip(surveyQuestions,ProgressEntries)
+    
     return render(request,'app/ProgressPage.html',locals())
 
 

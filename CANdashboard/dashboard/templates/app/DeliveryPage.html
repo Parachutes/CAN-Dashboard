@@ -192,13 +192,15 @@
                 <thead>
                   <tr>
                     <th>Surveys for Delivery</th>
+                    <th>Number of Entries</th>
                   </tr>
                 </thead>
 
-                {% for e in form %}
+                {% for e in numberOfEntries %}
                 <tbody>
                   <tr>
-                    <td>{{e.value}}</td>
+                    <td>{{e.0}}</td>
+                    <td>{{e.1}} </td>
                   </tr>
                   {% endfor %}
 
