@@ -491,25 +491,20 @@ def CalculateMarking(request):
 
 
 def DeliveryCategory(request):
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
     DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
 
     Deliverymarks = []
-    totalDeliverymarks = 0
-    avgDelivery = 0
+    surveyQuestions = []
 
 
     for d in DeliverySurveys:
         Deliverymarks.append(calculteTotalMark(d.question))
 
+    for question in survey:
+        surveyQuestions.append(question.question.title)
 
-    for Dmark in Deliverymarks:
-        if Dmark == None:
-            pass
-        else:
-            totalDeliverymarks += Dmark
-    avgDelivery = totalDeliverymarks / len(Deliverymarks)
-
-    print(Deliverymarks)
+    weightedSurvey = zip(surveyQuestions,Deliverymarks)
 
 
     return render(request,'app/DeliveryPage.html',locals())
