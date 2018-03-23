@@ -195,15 +195,13 @@
                     <th>Number of Entries</th>
                   </tr>
                 </thead>
-
-                {% for e in numberOfEntries %}
                 <tbody>
+                {% for e in numberOfEntries %}
                   <tr>
                     <td>{{e.0}}</td>
                     <td>{{e.1}} </td>
                   </tr>
-                  {% endfor %}
-
+                {% endfor %}
                 </tbody>
               </table>
 
