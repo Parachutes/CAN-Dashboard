@@ -64,18 +64,27 @@
 
             <script type="text/javascript">
 
+            var randomColorGenerator = function () {
+            return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+            };
+
+
               var myData = {
                 labels: [{% for m in Qmark %} "{{m.0}}",{% endfor %}],
-                datasets: [{
+                datasets: [
+                  {% for x in individualQMark  %}
+                  {
                   label: "{{survey}}",
-                  backgroundColor: "rgba(3, 88, 106, 0.2)",
-                  borderColor: "rgba(3, 88, 106, 0.80)",
-                  pointBorderColor: "rgba(3, 88, 106, 0.80)",
-                  pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
+                  backgroundColor: randomColorGenerator(),
+                  borderColor: randomColorGenerator(),
+                  pointBorderColor: randomColorGenerator(),
+                  pointBackgroundColor: randomColorGenerator(),
                   pointHoverBackgroundColor: "#fff",
                   pointHoverBorderColor: "rgba(220,220,220,1)",
-                  data: [ {% for x in individualQMark %} {% for i in x %} "{{i}}", {% endfor %}{% endfor %}]
-                }]
+                  data: [ {% for i in x %} "{{i}}", {% endfor %}]
+                },
+                {% endfor %}
+              ]
               };
 
             </script>

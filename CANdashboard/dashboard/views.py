@@ -227,9 +227,6 @@ def index(request):
             totalHealthmarks += Hmark
     avgHealth = totalDeliverymarks / len(Healthmarks)
 
-
-    print(avgProgress,avgDelivery,avgStrength,avgHealth)
-
     return render(request,'app/index.html',locals())
 
 @login_required
@@ -248,11 +245,67 @@ def indexUser(request):
 
 @login_required
 def indexAdmin(request):
-    user = User.objects.filter(username='Evain')
-    charity = Charity.objects.get(user=user)
-    Charity_detail = Charity_details.objects.get(Name=charity)
+    ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
+    DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
+    StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
+    FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
 
-    return render(request,'app/indexAdmin.html',{'Charity_detail':Charity_detail})
+    Progressmarks = []
+    totalProgressMark = 0
+    avgProgress = 0
+    Deliverymarks = []
+    totalDeliverymarks = 0
+    avgDelivery = 0
+    Strengthmarks = []
+    totalStrengthmarks = 0
+    avgStrength = 0
+    Healthmarks = []
+    totalHealthmarks = 0
+    avgHealth = 0
+
+
+    for p in ProgressSurveys:
+        Progressmarks.append(calculteTotalMark(p.question))
+
+    for d in DeliverySurveys:
+        Deliverymarks.append(calculteTotalMark(d.question))
+
+    for s in StrengthSurveys:
+        Strengthmarks.append(calculteTotalMark(s.question))
+
+    for h in FinancialSurveys:
+        Healthmarks.append(calculteTotalMark(h.question))
+
+
+    for Pmark in Progressmarks:
+        if Pmark  == None:
+            pass
+        else:
+            totalProgressMark += Pmark
+    avgProgress = totalProgressMark / len(ProgressSurveys)
+
+    for Dmark in Deliverymarks:
+        if Dmark == None:
+            pass
+        else:
+            totalDeliverymarks += Dmark
+    avgDelivery = totalDeliverymarks / len(Deliverymarks)
+
+    for Smark in Strengthmarks:
+        if Smark == None:
+            pass
+        else:
+            totalStrengthmarks += Smark
+    avgStrength = totalDeliverymarks / len(Strengthmarks)
+
+    for Hmark in Healthmarks:
+        if Hmark == None:
+            pass
+        else:
+            totalHealthmarks += Hmark
+    avgHealth = totalDeliverymarks / len(Healthmarks)
+
+    return render(request,'app/indexAdmin.html',locals())
 
 
 
@@ -438,12 +491,28 @@ def CalculateMarking(request):
 
 
 def DeliveryCategory(request):
-    # ma = Form.objects.get(slug='shichaos-quiz')
-    # questions = ma.fields.all()
-    # formentry = FormEntry.objects.get(form = ma)
-    # form = FieldEntry.objects.filter(entry_id = formentry)
-    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
-    return render(request,'app/DeliveryPage.html',{'survey':survey})
+    DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
+
+    Deliverymarks = []
+    totalDeliverymarks = 0
+    avgDelivery = 0
+
+
+    for d in DeliverySurveys:
+        Deliverymarks.append(calculteTotalMark(d.question))
+
+
+    for Dmark in Deliverymarks:
+        if Dmark == None:
+            pass
+        else:
+            totalDeliverymarks += Dmark
+    avgDelivery = totalDeliverymarks / len(Deliverymarks)
+
+    print(Deliverymarks)
+
+
+    return render(request,'app/DeliveryPage.html',locals())
 
 
 def FinancialCategory(request):
