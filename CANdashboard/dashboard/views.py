@@ -576,6 +576,7 @@ def DeliveryCategory(request):
 
     weightedSurvey = zip(surveyQuestions,Deliverymarks)
     numberOfEntries =  zip(surveyQuestions,DeliveryEntries)
+    Surveys = zip(survey,DeliveryEntries)
 
 
     return render(request,'app/DeliveryPage.html',locals())
@@ -599,6 +600,7 @@ def FinancialCategory(request):
 
     FinancialSurveys = zip(surveyQuestions,Financialmarks)
     numberOfEntries = zip(surveyQuestions,FinancialEntries)
+    Surveys = zip(survey,FinancialEntries)
 
     return render(request,'app/FinancialPage.html',locals())
 
@@ -619,6 +621,7 @@ def StrengthCategory(request):
 
     StrengthSurveys = zip(surveyQuestions,Strengthmarks)
     numberOfEntries = zip(surveyQuestions,StrengthEntries)
+    Surveys = zip(survey,StrengthEntries)
 
     return render(request,'app/StrengthPage.html',locals())
 
@@ -641,7 +644,8 @@ def ProgressCategory(request):
 
     ProgressSurveys = zip(surveyQuestions,Progressmarks)
     numberOfEntries = zip(surveyQuestions,ProgressEntries)
-    
+    Surveys = zip(survey,ProgressEntries)
+
     return render(request,'app/ProgressPage.html',locals())
 
 
