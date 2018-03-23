@@ -240,11 +240,6 @@ def indexUser(request):
     for s in sur:
         surveys.append((s,len(FormEntry.objects.filter(form = s))))
 
-    return render(request,'app/indexUser.html',{'Charity_detail':Charity_detail,'surveys':surveys})
-
-
-@login_required
-def indexAdmin(request):
     ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
     DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
     StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
@@ -305,6 +300,74 @@ def indexAdmin(request):
             totalHealthmarks += Hmark
     avgHealth = totalDeliverymarks / len(Healthmarks)
 
+    return render(request,'app/indexUser.html',locals())
+
+
+@login_required
+def indexAdmin(request):
+    if request.method == 'GET':
+        ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
+        DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
+        StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
+        FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
+
+        print(request)
+
+        Progressmarks = []
+        totalProgressMark = 0
+        avgProgress = 0
+        Deliverymarks = []
+        totalDeliverymarks = 0
+        avgDelivery = 0
+        Strengthmarks = []
+        totalStrengthmarks = 0
+        avgStrength = 0
+        Healthmarks = []
+        totalHealthmarks = 0
+        avgHealth = 0
+
+
+        for p in ProgressSurveys:
+            Progressmarks.append(calculteTotalMark(p.question))
+
+        for d in DeliverySurveys:
+            Deliverymarks.append(calculteTotalMark(d.question))
+
+        for s in StrengthSurveys:
+            Strengthmarks.append(calculteTotalMark(s.question))
+
+        for h in FinancialSurveys:
+            Healthmarks.append(calculteTotalMark(h.question))
+
+
+        for Pmark in Progressmarks:
+            if Pmark  == None:
+                pass
+            else:
+                totalProgressMark += Pmark
+        avgProgress = totalProgressMark / len(ProgressSurveys)
+
+        for Dmark in Deliverymarks:
+            if Dmark == None:
+                pass
+            else:
+                totalDeliverymarks += Dmark
+        avgDelivery = totalDeliverymarks / len(Deliverymarks)
+
+        for Smark in Strengthmarks:
+            if Smark == None:
+                pass
+            else:
+                totalStrengthmarks += Smark
+        avgStrength = totalDeliverymarks / len(Strengthmarks)
+
+        for Hmark in Healthmarks:
+            if Hmark == None:
+                pass
+            else:
+                totalHealthmarks += Hmark
+        avgHealth = totalDeliverymarks / len(Healthmarks)
+
     return render(request,'app/indexAdmin.html',locals())
 
 
@@ -361,26 +424,25 @@ def loginAdmin(request):
                 if user.is_active:
                     if user.is_superuser:
                         login(request, user)
-                        template = loader.get_template('app/indexAdmin.html')
-                        return HttpResponse(template.render(context, request))
+                        template = 'app/indexAdmin.html'
+                        return HttpResponseRedirect(reverse('AdminProfile'))
                     else:
-                        template = loader.get_template('registration/loginAdmin.html')
-                        return HttpResponse(template.render(context, request))
+                        template = 'registration/loginAdmin.html'
+                        return render(request,template)
                 else:
-                    template = loader.get_template('registration/loginAdmin.html')
-                    return HttpResponse(template.render(context, request))
+                    template = 'registration/loginAdmin.html'
+                    return render(request,template)
             else:
-                template = loader.get_template('registration/loginAdmin.html')
-                return HttpResponse(template.render(context, request))
+                template = 'registration/loginAdmin.html'
+                return render(request,template)
     else:
-        template = loader.get_template('registration/loginAdmin.html')
-        return HttpResponse(template.render(context, request))
+        template = 'registration/loginAdmin.html'
+        return render(request,template)
+
+
 
 class SurveyDetail(FormDetail):
     template_name = "app/view_survey.html"
-
-
-
 
 
 def Manipulate_Entries(request,slug):
@@ -512,15 +574,52 @@ def DeliveryCategory(request):
 
 def FinancialCategory(request):
     survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Financial_Health)
-    return render(request,'app/FinancialPage.html',{'survey':survey})
+    FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
+
+    Financialmarks = []
+    surveyQuestions = []
+
+
+    for d in FinancialSurveys:
+        Financialmarks.append(calculteTotalMark(d.question))
+
+    for question in survey:
+        surveyQuestions.append(question.question.title)
+
+    FinancialSurveys = zip(surveyQuestions,Financialmarks)
+
+    return render(request,'app/FinancialPage.html',locals())
 
 def StrengthCategory(request):
     survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
-    return render(request,'app/StrengthPage.html',{'survey':survey})
+    StrengthSurveys = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
+
+    Strengthmarks = []
+    surveyQuestions = []
+
+    for d in StrengthSurveys:
+        Strengthmarks.append(calculteTotalMark(d.question))
+    for question in survey:
+        surveyQuestions.append(question.question.title)
+    StrengthSurveys = zip(surveyQuestions,Strengthmarks)
+    return render(request,'app/StrengthPage.html',locals())
 
 def ProgressCategory(request):
     survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Progress)
-    return render(request,'app/ProgressPage.html',{'survey':survey})
+    ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
+
+    Progressmarks = []
+    surveyQuestions = []
+
+
+    for d in ProgressSurveys:
+        Progressmarks.append(calculteTotalMark(d.question))
+
+    for question in survey:
+        surveyQuestions.append(question.question.title)
+
+    ProgressSurveys = zip(surveyQuestions,Progressmarks)
+    return render(request,'app/ProgressPage.html',locals())
 
 
 def surveyAnalysis(request,id):
