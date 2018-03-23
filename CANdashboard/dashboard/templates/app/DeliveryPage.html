@@ -33,12 +33,16 @@
               <thead>
                 <tr>
                   <th>Survey</th>
+                  <th> Date Published </th>
+                  <th> Number Of Entries</th>
                 </tr>
               </thead>
               <tbody>
-                {% for s in survey %}
+                {% for s in Surveys %}
                 <tr>
-                  <td><a href="{% url 'analysis_survey' s.question_id %}">{{s.question}}</a><a href="{% url 'deleteSurvey' s.question_id%}" <span class="fa fa-trash-o pull-right"></span></a></td>
+                  <td><a href="{% url 'analysis_survey' s.0.question_id %}">{{s.0.question}}</a></td>
+                  <td> {{s.0.question.publish_date}} </td>
+                  <td> {{s.1}} <a href="{% url 'deleteSurvey' s.0.question_id%}" <span class="fa fa-trash-o pull-right"></span></a> </td>
                 </tr>
                 {% endfor %}
               </tbody>
