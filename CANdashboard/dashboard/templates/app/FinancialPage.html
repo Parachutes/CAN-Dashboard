@@ -48,7 +48,7 @@
     <!-- spider chart -->
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="x_panel">
+        <div class="x_panel tile fixed_height_390">
           <div class="x_title">
             <h2>Analysis of Financial<small>based on recieved surveys</small></h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -90,9 +90,7 @@
               ]
               };
             </script>
-
-
-
+            <br/>
             <canvas id="canvasRadar"></canvas>
           </div>
         </div>
@@ -101,7 +99,7 @@
 
       <!-- bar chart -->
       <div class="col-md-6 col-sm-6 col-xs-6">
-      <div class="x_panel">
+      <div class="x_panel tile" style="height: 390px">
         <div class="x_title">
           <h2>Key Categories Scoring</h2>
           <ul class="nav navbar-right panel_toolbox">
@@ -123,7 +121,7 @@
         </div>
 
 
-        <div class="x_content">
+        <div class="x_content pre-scrollable">
 
           {% for q in FinancialSurveys %}
           <div class="widget_summary">
