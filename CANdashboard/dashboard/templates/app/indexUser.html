@@ -213,17 +213,17 @@
 
               <thead>
                 <tr>
-                  <th>Survey Name</th>
+                  <th>Category</th>
                   <th>Number of Entries</th>
                 </tr>
               </thead>
 
 
               <tbody>
-              {% for s in surveys %}
+              {% for cmark in CategorisedEntries %}
                   <tr>
-                    <td>{{s.0}}</td>
-                    <td>{{s.1}}</td>
+                    <td>{{cmark.0}}</td>
+                    <td>{{cmark.1}}</td>
                   </tr>
               {% endfor %}
               </tbody>

@@ -231,15 +231,6 @@ def index(request):
 
 @login_required
 def indexUser(request):
-    user = User.objects.filter(username='Evain')
-    charity = Charity.objects.get(user=user)
-    Charity_detail = Charity_details.objects.get(Name=charity)
-    #surveys = Form.objects.all()
-    sur = Form.objects.all()
-    surveys =[]
-    for s in sur:
-        surveys.append((s,len(FormEntry.objects.filter(form = s))))
-
     ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
     DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
     StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
@@ -248,28 +239,41 @@ def indexUser(request):
     Progressmarks = []
     totalProgressMark = 0
     avgProgress = 0
+    ProgressEntries = []
     Deliverymarks = []
     totalDeliverymarks = 0
     avgDelivery = 0
+    DeliveryEntries = []
     Strengthmarks = []
     totalStrengthmarks = 0
     avgStrength = 0
+    StrengthEntries = []
     Healthmarks = []
     totalHealthmarks = 0
     avgHealth = 0
+    HealthEntries = []
+    totalDeliveryEntry = 0
+    totalStrengthEntry = 0
+    totalProgressEntry = 0
+    totalHealthEntry = 0
 
 
     for p in ProgressSurveys:
         Progressmarks.append(calculteTotalMark(p.question))
+        ProgressEntries.append(len(FormEntry.objects.filter(form=p.question)))
+
 
     for d in DeliverySurveys:
         Deliverymarks.append(calculteTotalMark(d.question))
+        DeliveryEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
     for s in StrengthSurveys:
         Strengthmarks.append(calculteTotalMark(s.question))
+        StrengthEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
     for h in FinancialSurveys:
         Healthmarks.append(calculteTotalMark(h.question))
+        HealthEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
 
     for Pmark in Progressmarks:
@@ -299,6 +303,28 @@ def indexUser(request):
         else:
             totalHealthmarks += Hmark
     avgHealth = totalDeliverymarks / len(Healthmarks)
+
+
+    for delivery in DeliveryEntries:
+        totalDeliveryEntry += delivery
+
+    for health in HealthEntries:
+        totalHealthEntry += health
+
+    for strength in StrengthEntries:
+        totalStrengthEntry += strength
+
+    for progress in ProgressEntries:
+        totalProgressEntry += progress
+
+
+    CategorisedEntries = []
+
+    CategorisedEntries.append((RelatedSurvey.Progress,totalProgressEntry))
+    CategorisedEntries.append((RelatedSurvey.Strength_of_system,totalStrengthEntry))
+    CategorisedEntries.append((RelatedSurvey.Financial_Health,totalHealthEntry))
+    CategorisedEntries.append((RelatedSurvey.Delivery,totalDeliveryEntry))
+
 
     return render(request,'app/indexUser.html',locals())
 
