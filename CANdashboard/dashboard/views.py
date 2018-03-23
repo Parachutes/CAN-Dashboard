@@ -147,15 +147,17 @@ def calculteTotalMark(forms):
             for mark in marks:
                 marking.append(int(mark[i]))
 
-        cele = list(chunked(marking, 2))
+        cele = list(chunked(marking, len(questions)))
         totalEntryMark = map(sum,cele)
 
         for i in indexs:
             for mark in marks:
                 marking.append(int(mark[i]))
 
-        individualQMark = list(chunked(marking, 2))
+        individualQMark = list(chunked(marking, len(questions)))
         weightedEntry = zip(entryFields,individualQMark)
+
+        #print(marking)
 
         for ex in totalEntryMark:
             Total += ex
@@ -164,9 +166,6 @@ def calculteTotalMark(forms):
         return Total
 
 def index(request):
-    user = User.objects.filter(username='Evain')
-    charity = Charity.objects.get(user=user)
-
     ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
     DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
     StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
@@ -204,28 +203,28 @@ def index(request):
             pass
         else:
             totalProgressMark += Pmark
-    avgProgress = totalProgressMark / len(ProgressSurveys)
+    avgProgress = int(totalProgressMark / len(ProgressSurveys))
 
     for Dmark in Deliverymarks:
         if Dmark == None:
             pass
         else:
             totalDeliverymarks += Dmark
-    avgDelivery = totalDeliverymarks / len(Deliverymarks)
+    avgDelivery = int(totalDeliverymarks / len(Deliverymarks))
 
     for Smark in Strengthmarks:
         if Smark == None:
             pass
         else:
             totalStrengthmarks += Smark
-    avgStrength = totalDeliverymarks / len(Strengthmarks)
+    avgStrength = int(totalDeliverymarks / len(Strengthmarks))
 
     for Hmark in Healthmarks:
         if Hmark == None:
             pass
         else:
             totalHealthmarks += Hmark
-    avgHealth = totalDeliverymarks / len(Healthmarks)
+    avgHealth = int(totalDeliverymarks / len(Healthmarks))
 
     return render(request,'app/index.html',locals())
 
@@ -281,28 +280,28 @@ def indexUser(request):
             pass
         else:
             totalProgressMark += Pmark
-    avgProgress = totalProgressMark / len(ProgressSurveys)
+    avgProgress = int(totalProgressMark / len(ProgressSurveys))
 
     for Dmark in Deliverymarks:
         if Dmark == None:
             pass
         else:
             totalDeliverymarks += Dmark
-    avgDelivery = totalDeliverymarks / len(Deliverymarks)
+    avgDelivery = int(totalDeliverymarks / len(Deliverymarks))
 
     for Smark in Strengthmarks:
         if Smark == None:
             pass
         else:
             totalStrengthmarks += Smark
-    avgStrength = totalDeliverymarks / len(Strengthmarks)
+    avgStrength = int(totalDeliverymarks / len(Strengthmarks))
 
     for Hmark in Healthmarks:
         if Hmark == None:
             pass
         else:
             totalHealthmarks += Hmark
-    avgHealth = totalDeliverymarks / len(Healthmarks)
+    avgHealth = int(totalDeliverymarks / len(Healthmarks))
 
 
     for delivery in DeliveryEntries:
@@ -381,28 +380,28 @@ def indexAdmin(request):
             pass
         else:
             totalProgressMark += Pmark
-    avgProgress = totalProgressMark / len(ProgressSurveys)
+    avgProgress = int(totalProgressMark / len(ProgressSurveys))
 
     for Dmark in Deliverymarks:
         if Dmark == None:
             pass
         else:
             totalDeliverymarks += Dmark
-    avgDelivery = totalDeliverymarks / len(Deliverymarks)
+    avgDelivery = int(totalDeliverymarks / len(Deliverymarks))
 
     for Smark in Strengthmarks:
         if Smark == None:
             pass
         else:
             totalStrengthmarks += Smark
-    avgStrength = totalDeliverymarks / len(Strengthmarks)
+    avgStrength = int(totalDeliverymarks / len(Strengthmarks))
 
     for Hmark in Healthmarks:
         if Hmark == None:
             pass
         else:
             totalHealthmarks += Hmark
-    avgHealth = totalDeliverymarks / len(Healthmarks)
+    avgHealth = int(totalDeliverymarks / len(Healthmarks))
 
     for delivery in DeliveryEntries:
         totalDeliveryEntry += delivery
@@ -545,68 +544,18 @@ def Manipulate_Entries(request,slug):
         for mark in marks:
             marking.append(int(mark[i]))
 
-    cele = list(chunked(marking, 2))
+    cele = list(chunked(marking, len(questions)))
     totalEntryMark = map(sum,cele)
 
     for i in indexs:
         for mark in marks:
             marking.append(int(mark[i]))
 
-    individualQMark = list(chunked(marking, 2))
+    individualQMark = list(chunked(marking, len(questions)))
     weightedEntry = zip(entryFields,individualQMark)
 
 
     return render(request,'app/man_entries.html',locals())
-
-
-# TODO GET FIELD ENTRY MARK
-def CalculateMarking(request):
-    form = Form.objects.get(slug='real-survey')
-    questions = form.fields.all()
-    entries = form.entries.all()
-    fields = QuestionMarks.objects.filter(form=form)
-    choices = []
-    entryFields = []
-    marks = []
-    marking = []
-    indexs = []
-
-    for entry in entries:
-        entryFields.append(list(FieldEntry.objects.filter(entry=entry)))
-
-    for mark in fields:
-        marks.append((list(mark.get_marks())))
-        choices.append(list(mark.get_choices()))
-
-
-    for e in entryFields:
-        for entry in e:
-             if (len(choices) != 1):
-                for choice in choices:
-                    if entry in choice:
-                        indexs.append(choice.index(entry))
-             else:
-                indexs.append(choice.index(entry))
-
-
-
-
-    for i in indexs:
-        for mark in marks:
-            marking.append(int(mark[i]))
-
-    cele = list(chunked(marking, 2))
-    totalEntryMark = map(sum,cele)
-
-    for i in indexs:
-        for mark in marks:
-            marking.append(int(mark[i]))
-
-    individualQMark = list(chunked(marking, 2))
-    weightedEntry = zip(entryFields,individualQMark)
-
-
-    return render(request,'app/bla.html',locals())
 
 
 def DeliveryCategory(request):
@@ -671,6 +620,8 @@ def ProgressCategory(request):
 
     for d in ProgressSurveys:
         Progressmarks.append(calculteTotalMark(d.question))
+        print(calculteTotalMark(d.question))
+
 
     for question in survey:
         surveyQuestions.append(question.question.title)
@@ -716,7 +667,7 @@ def surveyAnalysis(request,id):
         for mark in marks:
             marking.append(int(mark[i]))
 
-    individualQMark = list(chunked(marking, 2))
+    individualQMark = list(chunked(marking, len(fields)))
     totalEntryMark = map(sum,individualQMark)
 
     MarkedQuestion = zip(*individualQMark)
@@ -780,7 +731,7 @@ def Generate_Questions(request,id,num):
                 f.save()
             return render (request,'app/indexAdmin.html')
         else:
-            return render (request,'app/Gen_Q')
+            return render (request,'app/Gen_Q.html')
     else:
         fields = FieldFormSet()
     return render(request,'app/Gen_Q.html',{'fields':fields})

@@ -36,7 +36,6 @@ urlpatterns = [
     url(r'^Financial/$', views.FinancialCategory, name='finance'),
     url(r'^Strength/$', views.StrengthCategory, name='Strength'),
     url(r'^Progress/$', views.ProgressCategory, name='progress'),
-    url(r'^bla/$', views.CalculateMarking, name='gen'),
     url(r'^Analysis/(?P<id>[-\w\d]+)/$',views.surveyAnalysis, name = 'analysis_survey'),
     url(r'^deleteSurvey/(?P<id>[-\w\d]+)/$', views.deleteSurvey, name='deleteSurvey'),
 
