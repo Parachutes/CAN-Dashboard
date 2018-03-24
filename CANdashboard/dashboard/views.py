@@ -280,29 +280,29 @@ def indexUser(request):
 
     for p in ProgressSurveys:
         if getCharityNameforSurvey(p.question) != user:
-            pass
+            break
         else:
             Progressmarks.append(calculteTotalMark(p.question))
             ProgressEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
 
     for d in DeliverySurveys:
-        if getCharityNameforSurvey(p.question) != user:
-            pass
+        if getCharityNameforSurvey(d.question) != user:
+            break
         else:
             Deliverymarks.append(calculteTotalMark(d.question))
             DeliveryEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
     for s in StrengthSurveys:
-        if getCharityNameforSurvey(p.question) != user:
-            pass
+        if getCharityNameforSurvey(s.question) != user:
+            break
         else:
             Strengthmarks.append(calculteTotalMark(s.question))
             StrengthEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
     for h in FinancialSurveys:
-        if getCharityNameforSurvey(p.question) != user:
-            pass
+        if getCharityNameforSurvey(h.question) != user:
+            break
         else:
             Healthmarks.append(calculteTotalMark(h.question))
             HealthEntries.append(len(FormEntry.objects.filter(form=p.question)))
@@ -345,7 +345,7 @@ def indexUser(request):
             totalHealthmarks += Hmark
         if len(Healthmarks) == 0:
             avgHealth = totalHealthmarks
-        else:    
+        else:
             avgHealth = int(totalHealthmarks / len(Healthmarks))
 
 
@@ -546,14 +546,8 @@ class SurveyDetail(FormDetail):
     template_name = "app/view_survey.html"
 
 
-
-
-def sad(request):
-    form = Charityentry()
-    return render(request,'app/bla.html',locals())
-
-
 def Manipulate_Entries(request,slug):
+    user = request.user
     ma = Form.objects.get(slug=slug)
     questions = ma.fields.all()
     formentry = FormEntry.objects.filter(form = ma)[:1].get()
@@ -581,8 +575,11 @@ def Manipulate_Entries(request,slug):
         entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
 
     for mark in fields:
-        marks.append((list(mark.get_marks())))
-        choices.append(list(mark.get_choices()))
+        if user != getCharityNameforSurvey(mark.form):
+             break
+        else:
+            marks.append((list(mark.get_marks())))
+            choices.append(list(mark.get_choices()))
 
     for e in entryFields:
         for entry in e:
@@ -611,19 +608,30 @@ def Manipulate_Entries(request,slug):
 
 
 def DeliveryCategory(request):
-    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
+    user = request.user
+    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
     DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
 
     Deliverymarks = []
     surveyQuestions = []
     DeliveryEntries = []
+    survey = []
+
+    for sur in unfilteredsurvey:
+        if user != getCharityNameforSurvey(sur.question):
+            pass
+        else:
+            survey.append(sur)
 
 
     for d in DeliverySurveys:
-        if len(d.question.entries.all()) != 0:
-            Deliverymarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+        if getCharityNameforSurvey(d.question) != user:
+            break
         else:
-            Deliverymarks.append(calculteTotalMark(d.question))
+            if len(d.question.entries.all()) != 0:
+                Deliverymarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            else:
+                Deliverymarks.append(calculteTotalMark(d.question))
         DeliveryEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
@@ -638,19 +646,31 @@ def DeliveryCategory(request):
 
 
 def FinancialCategory(request):
-    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Financial_Health)
+    user = request.user
+    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Financial_Health)
     FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
 
     Financialmarks = []
     surveyQuestions = []
     FinancialEntries = []
+    survey = []
+
+
+    for sur in unfilteredsurvey:
+        if user != getCharityNameforSurvey(sur.question):
+            pass
+        else:
+            survey.append(sur)
 
 
     for d in FinancialSurveys:
-        if len(d.question.entries.all()) != 0:
-            Financialmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+        if getCharityNameforSurvey(d.question) != user:
+            break
         else:
-            Financialmarks.append(calculteTotalMark(d.question))
+            if len(d.question.entries.all()) != 0:
+                Financialmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            else:
+                Financialmarks.append(calculteTotalMark(d.question))
         FinancialEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
@@ -663,18 +683,31 @@ def FinancialCategory(request):
     return render(request,'app/FinancialPage.html',locals())
 
 def StrengthCategory(request):
-    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
+    user = request.user
+    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
     StrengthSurveys = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
 
     Strengthmarks = []
     surveyQuestions = []
     StrengthEntries = []
+    survey = []
+
+
+    for sur in unfilteredsurvey:
+        if user != getCharityNameforSurvey(sur.question):
+            pass
+        else:
+            survey.append(sur)
+
 
     for d in StrengthSurveys:
-        if len(d.question.entries.all()) != 0:
-            Strengthmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+        if getCharityNameforSurvey(d.question) != user:
+            break
         else:
-            Strengthmarks.append(calculteTotalMark(d.question))
+            if len(d.question.entries.all()) != 0:
+                Strengthmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            else:
+                Strengthmarks.append(calculteTotalMark(d.question))
         StrengthEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
@@ -687,19 +720,31 @@ def StrengthCategory(request):
     return render(request,'app/StrengthPage.html',locals())
 
 def ProgressCategory(request):
-    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Progress)
+    user = request.user
+    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Progress)
     ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
 
     Progressmarks = []
     surveyQuestions = []
     ProgressEntries = []
+    survey = []
+
+
+    for sur in unfilteredsurvey:
+        if user != getCharityNameforSurvey(sur.question):
+            pass
+        else:
+            survey.append(sur)
 
 
     for d in ProgressSurveys:
-        if len(d.question.entries.all()) != 0:
-            Progressmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+        if getCharityNameforSurvey(d.question) != user:
+            break
         else:
-            Progressmarks.append(calculteTotalMark(d.question))
+            if len(d.question.entries.all()) != 0:
+                Progressmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            else:
+                Progressmarks.append(calculteTotalMark(d.question))
         ProgressEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
 

@@ -38,7 +38,6 @@ urlpatterns = [
     url(r'^Progress/$', views.ProgressCategory, name='progress'),
     url(r'^Analysis/(?P<id>[-\w\d]+)/$',views.surveyAnalysis, name = 'analysis_survey'),
     url(r'^deleteSurvey/(?P<id>[-\w\d]+)/$', views.deleteSurvey, name='deleteSurvey'),
-    url(r'^bla/$', views.sad, name='meh'),
     # pages for audiences/ users/ administrators
     url(r'^$', views.index, name='index'),
     url(r'^myUser/', views.indexUser, name='indexUser'),
