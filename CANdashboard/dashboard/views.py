@@ -578,39 +578,34 @@ def Manipulate_Entries(request,slug):
 
     forms = Form.objects.get(slug=slug)
     questions = forms.fields.all()
-    entrie = forms.entries.all()
-    unfilteredfields = QuestionMarks.objects.filter(form=forms)
+    unfilteredentrie = forms.entries.all()
+    fields = QuestionMarks.objects.filter(form=forms)
     choices = []
     entryFields = []
     marks = []
     marking = []
     indexs = []
-    fields = []
+    entrie = []
 
-    for fiel in unfilteredfields:
-        if user != getCharityNameforSurvey(fiel.form):
+    for entry in unfilteredentrie:
+
+        if str(user) != getCharityNameforSurvey(entry):
             pass
         else:
-            fields.append(fiel)
+            entrie.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
 
-
-    for entry in entrie:
-        entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
+    # for entry in entrie:
+    #     entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
 
     for mark in fields:
-        if user != getCharityNameforSurvey(mark.form):
-             break
-        else:
-            marks.append((list(mark.get_marks())))
-            choices.append(list(mark.get_choices()))
+        marks.append((list(mark.get_marks())))
+        choices.append(list(mark.get_choices()))
 
-    for e in entryFields:
+    for e in entrie:
         for entry in e:
             for choice in choices:
                 if entry in choice:
                     indexs.append(choice.index(entry))
-
-
 
     for i in indexs:
         for mark in marks:
@@ -624,7 +619,7 @@ def Manipulate_Entries(request,slug):
             marking.append(int(mark[i]))
 
     individualQMark = list(chunked(marking, len(questions)))
-    weightedEntry = zip(entryFields,individualQMark)
+    weightedEntry = zip(entrie,individualQMark)
 
 
     return render(request,'app/man_entries.html',locals())
@@ -785,17 +780,9 @@ def surveyAnalysis(request,id):
                         if entry in choice:
                             indexs.append(choice.index(entry))
 
-    print(entryFields)
-
     for i in indexs:
         for mark in marks:
             marking.append(int(mark[i]))
-
-    print(marking)
-
-    # if len(marking) == 0:
-    #     for index in range(len(fields)):
-    #         marking.append(0)
 
     individualQMark = list(chunked(marking, len(fields)))
     totalEntryMark = map(sum,individualQMark)
