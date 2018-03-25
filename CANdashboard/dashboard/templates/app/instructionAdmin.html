@@ -1,0 +1,68 @@
+{% extends "app/base_siteAdmin.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Instructions and Copyright {% endblock title %}
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+{% block content %}
+
+<div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h1> Instructions and Copyrights</h1>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> Instructions </h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <p>
+                      -> As an administrator, you can: <br/>
+                      &nbsp;&nbsp;&nbsp; -> read the information and statistics on the main page <br/>
+                      &nbsp;&nbsp;&nbsp; -> take surveys on the "Surveys Square" <br/>
+                      &nbsp;&nbsp;&nbsp; -> add a new survey the "Surveys Square" <br/>
+                      &nbsp;&nbsp;&nbsp; -> edit surveys <br/>
+                      &nbsp;&nbsp;&nbsp; -> check the list of charities <br/>
+                      &nbsp;&nbsp;&nbsp; -> add a new charity <br/>
+                      &nbsp;&nbsp;&nbsp; -> send and receive messages with other users and administrators <br/>
+                      &nbsp;&nbsp;&nbsp; -> post this site to the social media
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> Copyrights </h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p><small>
+                      This web application is developed by "Team Panda" of King's College London, team members including "Abzal Dochupailov, Emanuel Spita, Erwanghao (Derek) Yu, Omar (zaki) Nassef, Peter Yakovlev, Shichao Ma, Yaokai (Marco) Wang, Zhishu Lin".
+                      This web application reused some existing codes on Github, including "django-forms-builder", "gentelella", and all those reused codes are under "MIT License" and "BSD 2-Clause License", Please go to following links to find out more information
+                      about these two license: MIT(https://github.com/puikinsh/gentelella/blob/master/LICENSE.txt); BSD 2-Clause(https://github.com/stephenmcd/django-forms-builder/blob/master/LICENSE).
+                      <strong><br/>All rights reserved by CAN Invest.</strong>
+                    </small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+{% endblock content %}
+{% block javascripts %}
+  {{ block.super}}
+{% endblock javascripts %}

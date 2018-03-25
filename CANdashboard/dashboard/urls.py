@@ -29,6 +29,7 @@ urlpatterns = [
 
     url(r'^instructionAudience/$', views.instructionAudience,name='instructionAudience'),
     url(r'^instructionUser/$', views.instructionUser,name='instructionUser'),
+    url(r'^instructionAdmin/$', views.instructionAdmin,name='instructionAdmin'),
 
     url(r'^register/$',views.register_page,name='register'),
     url(r'^accounts/update/$', views.edit_profile, name='update_user'),

@@ -954,3 +954,6 @@ def instructionAudience(request):
 
 def instructionUser(request):
     return render(request, 'app/instructionUser.html')
+
+def instructionAdmin(request):
+    return render(request, 'app/instructionAdmin.html')
