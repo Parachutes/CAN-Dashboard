@@ -1,34 +1,21 @@
 {% extends "app/base_site.html" %}
-
-{% block title %} Login {% endblock title %}
-
+{% block title %} User Login {% endblock title %}
 {% block stylesheets %}
   {{ block.super }}
-  <!-- Animate.css -->
-  <link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">
 {% endblock stylesheets %}
-
 {% block body_class %}login{% endblock body_class %}
-
 {% block body %}
-
-<!-- form method -->
-
-
     <div class="login_wrapper">
       <div class="">
         <section class="login_content">
           <form method="post" class="form" a>
-            <h1> User Login </h1>
+            <h1><i class="fa fa-globe"></i> User Login </h1>
             <div>
               {% csrf_token %}
               {{ form.as_p }}
             </div>
             <div>
-            </div>
-            <div>
               <button type="submit" class="btn btn-primary">Login</button>
-              <a class="reset_pass" href="#">Lost your password?</a>
             </div>
 
             <div class="clearfix"></div>
