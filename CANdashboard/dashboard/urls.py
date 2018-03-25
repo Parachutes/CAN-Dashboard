@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^add/$',views.add_survey,name='add_survey'),
 
     url(r'^instructionAudience/$', views.instructionAudience,name='instructionAudience'),
-
+    url(r'^instructionUser/$', views.instructionUser,name='instructionUser'),
 
     url(r'^register/$',views.register_page,name='register'),
     url(r'^accounts/update/$', views.edit_profile, name='update_user'),

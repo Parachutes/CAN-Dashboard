@@ -951,3 +951,6 @@ def send_message(request):
 #added by Shichao, to show the instruction page
 def instructionAudience(request):
     return render(request, 'app/instructionAudience.html')
+
+def instructionUser(request):
+    return render(request, 'app/instructionUser.html')
