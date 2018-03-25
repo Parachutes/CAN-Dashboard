@@ -793,6 +793,11 @@ def surveyAnalysis(request,id):
         else:
             entries.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
 
+    for unfilentry in entries:
+        for index,unfilen in enumerate(unfilentry):
+            if index == 0:
+                unfilentry.pop(0)
+
 
     for mark in fields:
         marks.append((list(mark.get_marks())))
