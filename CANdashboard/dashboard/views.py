@@ -108,16 +108,21 @@ class UpdateCharity(UpdateView):
 
 
 def getCharityNameforSurvey(forms):
-    forms = Form.objects.get(id=forms.id)
-    fields = QuestionMarks.objects.filter(form=forms)
+    # forms = Form.objects.get(id=forms.id)
+    # #fields = QuestionMarks.objects.filter(form=forms)
+    # entrie = forms.entries.all()
     charityName = None
+    answers = None
 
-    for idx,field in enumerate(fields):
-        if idx==1:
-            charityName = str(field)
+    answers = FieldEntry.objects.filter(entry = forms).values_list('value',flat=True)
 
 
-    return (charityName)
+    for index,field in enumerate(answers):
+            if index==0:
+                charityName = str(field)
+
+
+    return charityName
 
 
 
@@ -141,7 +146,6 @@ def calculteTotalMark(forms):
         marks = []
         marking = []
         indexs = []
-        charityName = None
 
         for entry in entrie:
             entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
@@ -175,7 +179,7 @@ def calculteTotalMark(forms):
         individualQMark = list(chunked(marking, len(questions)))
         weightedEntry = zip(entryFields,individualQMark)
 
-        #print(marking)
+
 
         for ex in totalEntryMark:
             Total += ex
@@ -279,33 +283,16 @@ def indexUser(request):
 
 
     for p in ProgressSurveys:
-        if getCharityNameforSurvey(p.question) != user:
-            break
-        else:
             Progressmarks.append(calculteTotalMark(p.question))
-            ProgressEntries.append(len(FormEntry.objects.filter(form=p.question)))
-
 
     for d in DeliverySurveys:
-        if getCharityNameforSurvey(d.question) != user:
-            break
-        else:
             Deliverymarks.append(calculteTotalMark(d.question))
-            DeliveryEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
     for s in StrengthSurveys:
-        if getCharityNameforSurvey(s.question) != user:
-            break
-        else:
             Strengthmarks.append(calculteTotalMark(s.question))
-            StrengthEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
     for h in FinancialSurveys:
-        if getCharityNameforSurvey(h.question) != user:
-            break
-        else:
             Healthmarks.append(calculteTotalMark(h.question))
-            HealthEntries.append(len(FormEntry.objects.filter(form=p.question)))
 
 
     for Pmark in Progressmarks:
@@ -348,6 +335,34 @@ def indexUser(request):
         else:
             avgHealth = int(totalHealthmarks / len(Healthmarks))
 
+    for ss in StrengthSurveys:
+        for x in ss.question.entries.all():
+            if str(user) != getCharityNameforSurvey(x):
+                pass
+            else:
+                StrengthEntries.append(len(FieldEntry.objects.filter(entry=x)))
+
+
+    for ds in DeliverySurveys:
+        for o in ds.question.entries.all():
+            if str(user) != getCharityNameforSurvey(o):
+                pass
+            else:
+                DeliveryEntries.append(len(FieldEntry.objects.filter(entry=o)))
+
+    for fs in FinancialSurveys:
+        for m in fs.question.entries.all():
+            if str(user) != getCharityNameforSurvey(m):
+                pass
+            else:
+                HealthEntries.append(len(FieldEntry.objects.filter(entry=m)))
+
+    for ps in FinancialSurveys:
+        for l in ps.question.entries.all():
+            if str(user) != getCharityNameforSurvey(l):
+                pass
+            else:
+                ProgressEntries.append(len(FieldEntry.objects.filter(entry=l)))
 
     for delivery in DeliveryEntries:
         totalDeliveryEntry += delivery
@@ -564,12 +579,20 @@ def Manipulate_Entries(request,slug):
     forms = Form.objects.get(slug=slug)
     questions = forms.fields.all()
     entrie = forms.entries.all()
-    fields = QuestionMarks.objects.filter(form=forms)
+    unfilteredfields = QuestionMarks.objects.filter(form=forms)
     choices = []
     entryFields = []
     marks = []
     marking = []
     indexs = []
+    fields = []
+
+    for fiel in unfilteredfields:
+        if user != getCharityNameforSurvey(fiel.form):
+            pass
+        else:
+            fields.append(fiel)
+
 
     for entry in entrie:
         entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
@@ -609,29 +632,20 @@ def Manipulate_Entries(request,slug):
 
 def DeliveryCategory(request):
     user = request.user
-    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Delivery)
     DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
 
     Deliverymarks = []
     surveyQuestions = []
     DeliveryEntries = []
-    survey = []
 
-    for sur in unfilteredsurvey:
-        if user != getCharityNameforSurvey(sur.question):
-            pass
-        else:
-            survey.append(sur)
 
 
     for d in DeliverySurveys:
-        if getCharityNameforSurvey(d.question) != user:
-            break
+        if len(d.question.entries.all()) != 0:
+            Deliverymarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
         else:
-            if len(d.question.entries.all()) != 0:
-                Deliverymarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
-            else:
-                Deliverymarks.append(calculteTotalMark(d.question))
+            Deliverymarks.append(calculteTotalMark(d.question))
         DeliveryEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
@@ -647,30 +661,19 @@ def DeliveryCategory(request):
 
 def FinancialCategory(request):
     user = request.user
-    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Financial_Health)
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Financial_Health)
     FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
 
     Financialmarks = []
     surveyQuestions = []
     FinancialEntries = []
-    survey = []
-
-
-    for sur in unfilteredsurvey:
-        if user != getCharityNameforSurvey(sur.question):
-            pass
-        else:
-            survey.append(sur)
 
 
     for d in FinancialSurveys:
-        if getCharityNameforSurvey(d.question) != user:
-            break
+        if len(d.question.entries.all()) != 0:
+            Financialmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
         else:
-            if len(d.question.entries.all()) != 0:
-                Financialmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
-            else:
-                Financialmarks.append(calculteTotalMark(d.question))
+            Financialmarks.append(calculteTotalMark(d.question))
         FinancialEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
@@ -684,30 +687,19 @@ def FinancialCategory(request):
 
 def StrengthCategory(request):
     user = request.user
-    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
     StrengthSurveys = RelatedSurvey.objects.filter(category=RelatedSurvey.Strength_of_system)
 
     Strengthmarks = []
     surveyQuestions = []
     StrengthEntries = []
-    survey = []
-
-
-    for sur in unfilteredsurvey:
-        if user != getCharityNameforSurvey(sur.question):
-            pass
-        else:
-            survey.append(sur)
 
 
     for d in StrengthSurveys:
-        if getCharityNameforSurvey(d.question) != user:
-            break
+        if len(d.question.entries.all()) != 0:
+            Strengthmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
         else:
-            if len(d.question.entries.all()) != 0:
-                Strengthmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
-            else:
-                Strengthmarks.append(calculteTotalMark(d.question))
+            Strengthmarks.append(calculteTotalMark(d.question))
         StrengthEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
@@ -721,30 +713,19 @@ def StrengthCategory(request):
 
 def ProgressCategory(request):
     user = request.user
-    unfilteredsurvey = RelatedSurvey.objects.filter(category=RelatedSurvey.Progress)
+    survey = RelatedSurvey.objects.filter(category=RelatedSurvey.Progress)
     ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
 
     Progressmarks = []
     surveyQuestions = []
     ProgressEntries = []
-    survey = []
-
-
-    for sur in unfilteredsurvey:
-        if user != getCharityNameforSurvey(sur.question):
-            pass
-        else:
-            survey.append(sur)
 
 
     for d in ProgressSurveys:
-        if getCharityNameforSurvey(d.question) != user:
-            break
+        if len(d.question.entries.all()) != 0:
+            Progressmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
         else:
-            if len(d.question.entries.all()) != 0:
-                Progressmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
-            else:
-                Progressmarks.append(calculteTotalMark(d.question))
+            Progressmarks.append(calculteTotalMark(d.question))
         ProgressEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
 
@@ -760,57 +741,85 @@ def ProgressCategory(request):
 
 
 def surveyAnalysis(request,id):
+    user = request.user
     survey = Form.objects.get(id=id)
-    questions = survey.fields.all()
+    unfilteredquestions = survey.fields.all()
     formentry = FormEntry.objects.filter(form = survey)
     # w = FieldEntry.objects.all().values_list('',flat=True)
     entries = []
-    for entry in formentry:
-        entries.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
+
 
     form = Form.objects.get(id=id)
-    entrie = form.entries.all()
+    unfilteredentrie = form.entries.all()
     fields = QuestionMarks.objects.filter(form=form)
     choices = []
     entryFields = []
     marks = []
     marking = []
     indexs = []
+    entrie = []
+    questions = []
+    questionsForm =[]
 
-    for entry in entrie:
-        entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
+    for entry in unfilteredentrie:
+
+        if str(user) != getCharityNameforSurvey(entry):
+            pass
+        else:
+            entries.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
+
 
     for mark in fields:
         marks.append((list(mark.get_marks())))
         choices.append(list(mark.get_choices()))
 
-    for e in entryFields:
-        for entry in e:
-            for choice in choices:
-                if entry in choice:
-                    indexs.append(choice.index(entry))
+    for e in entries:
+        for index,entry in enumerate(e):
+            if index == 0:
+                pass
+            else:
+                for i,choice in enumerate(choices):
+                    if i == 0:
+                        pass
+                    else:
+                        if entry in choice:
+                            indexs.append(choice.index(entry))
 
-
+    print(entryFields)
 
     for i in indexs:
         for mark in marks:
             marking.append(int(mark[i]))
+
+    print(marking)
+
+    # if len(marking) == 0:
+    #     for index in range(len(fields)):
+    #         marking.append(0)
 
     individualQMark = list(chunked(marking, len(fields)))
     totalEntryMark = map(sum,individualQMark)
 
     MarkedQuestion = zip(*individualQMark)
 
+    for index,question in enumerate(unfilteredquestions):
+        if index != 0:
+            questionsForm.append(question)
+        else:
+            pass
+
+    Qmark = zip(questions,individualQMark)
+
+    for quest in questionsForm:
+        questions.append(quest.label)
+
     SummedQuestion = (map(mean,MarkedQuestion))
 
     weightedQuestion = zip(questions,SummedQuestion)
 
-    Qmark = zip(questions,individualQMark)
-
-
     weightedEntry = zip(entries,totalEntryMark)
 
-    #entries = FieldEntry.objects.filter(entry_id = formentry)
+
     return render(request, 'app/surveyAnalysis.html',locals())
 
 
@@ -870,7 +879,6 @@ def Generate_Questions(request,id,num):
 
 def add_survey(request):
     if request.method == 'POST':
-        print(request.POST)
         forms = Description(request.POST)
         category = relatedSurvey(request.POST)
         if forms.is_valid():

@@ -53,7 +53,7 @@
 
 
               var myData = {
-                labels: [{% for m in Qmark %} "{{m.0}}",{% endfor %}],
+                labels: [{% for m in questions %} "{{m}}",{% endfor %}],
                 datasets: [
                   {% for x in individualQMark  %}
                   {
@@ -206,9 +206,7 @@
                 <tbody>
                   {% for e in weightedEntry %}
                   <tr>
-                    {% for s in e.0 %}
-                    <td>{{s}}</td>
-                    {% endfor %}
+                    <td>{% for s in e.0 %} &nbsp;| {{s}}{% endfor %}</td>
                     <td>{{e.1}}</td>
                   </tr>
                 </tbody>
