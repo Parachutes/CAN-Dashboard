@@ -1,71 +1,44 @@
 {% extends "app/base_site.html" %}
-
-{% block title %} Login {% endblock title %}
-
+{% block title %} Admin Login {% endblock title %}
 {% block stylesheets %}
   {{ block.super }}
-  <!-- Animate.css -->
-  <link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">
 {% endblock stylesheets %}
-
 {% block body_class %}login{% endblock body_class %}
-
 {% block body %}
-
-<!-- form method -->
-
 
     <div class="login_wrapper">
       <div class="">
         <section class="login_content">
           <form method="post" class="form" a>
-            <h1> Admin Login </h1>
+            <h1><i class="fa fa-wrench"></i> Admin Login </h1>
             <div>
               {% csrf_token %}
               {{ form.as_p }}
-
               <form method="post">
               {% csrf_token %}
-              <table class="table">
-                  <tr>
-                      <td><label for="username">Username</label></td>
-                      <td><input id="username" name="username"
-                                 type="text" class="form-control"></td>
-                  </tr>
-                  <tr>
-                      <td><label for="password">Password</label></td>
-                      <td><input id="password" name="password"
-                                 type="password" class="form-control"></td>
-                  </tr>
-              </table>
-              {% if form.errors %}
-                  <p class=" label label-danger">
-                      Your username and password didn't match.
-                      Please try again.
-                  </p>
-              {% endif %}
-
-
-            <!-- TODO add correct form -->
-            </div>
+                <label>Username: </label>
+                <input name="username" type="text">
+                <br/>
+                <label>Password: </label>
+                <input name="password" type="password">
+                {% if form.errors %}
+                  <p class=" label label-danger">Your username and password didn't match. Please try again.</p>
+                {% endif %}
             <div>
+              <button type="submit" class="btn btn-primary">Login</button>
             </div>
-            <div>
-              <button type="submit">Login</button>
-              <a class="reset_pass" href="#">Lost your password?</a>
-            </div>
-
             <div class="clearfix"></div>
-
             <div class="separator">
               <p class="change_link"> A User?
-                <a href="" class="to_register"> Login as a User </a>
+                <a href="/accounts/login/" class="to_register"> Login as a User </a>
               </p>
-
               <div class="clearfix"></div>
               <br />
-
-
+              <div>
+                Powered by <a href="https://can-invest.org.uk"><img src="/static/images/CANLogo.png" height="48" width="180"/></a>
+              </div>
+            </div>
+          </form>
             </div>
           </form>
         </section>
