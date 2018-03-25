@@ -26,13 +26,13 @@ the permissions app: pip install django-admin-view-permission
 
 * An interactive diagrams showing data :+1:
 
-* Summary table of quotes and questions 
+* Summary table of quotes and questions :+1:
 
 * Ability to push the dashboard via email and Network Apps :+1:
 
 * Attractive modern design :+1:
 
-* Integratable with WordPress
+* Integratable with WordPress :-1:
 
 
 
