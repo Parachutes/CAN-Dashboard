@@ -26,6 +26,11 @@ urlpatterns = [
     url(r'^survey_list/$',views.list_survey,name='survey_list'),
     url(r'^charity_list/$',views.list_charity,name='charity_list'),
     url(r'^add/$',views.add_survey,name='add_survey'),
+
+    url(r'^instructionAudience/$', views.instructionAudience,name='instructionAudience'),
+    url(r'^instructionUser/$', views.instructionUser,name='instructionUser'),
+    url(r'^instructionAdmin/$', views.instructionAdmin,name='instructionAdmin'),
+
     url(r'^register/$',views.register_page,name='register'),
     url(r'^accounts/update/$', views.edit_profile, name='update_user'),
     url(r'^accounts/update/change-pass/$', views.change_password, name='change_password'),
@@ -50,6 +55,8 @@ urlpatterns = [
 
 
     url(r'^survey_list/(?P<slug>[-\w\d]+)/$', views.SurveyDetail.as_view(), name='survey_view'),
+
+
 
 
 

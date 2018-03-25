@@ -946,3 +946,14 @@ def send_message(request):
             return render(request,'app/send_message.html',{'form':form})
         else:
             return render(request,'app/send_messageAdmin.html',{'form':form})
+
+
+#added by Shichao, to show the instruction page
+def instructionAudience(request):
+    return render(request, 'app/instructionAudience.html')
+
+def instructionUser(request):
+    return render(request, 'app/instructionUser.html')
+
+def instructionAdmin(request):
+    return render(request, 'app/instructionAdmin.html')
