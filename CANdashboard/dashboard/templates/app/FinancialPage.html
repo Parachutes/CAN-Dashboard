@@ -77,9 +77,8 @@
 
             <script type="text/javascript">
               var myData = {
-                labels: [{% for q in survey %} "{{q.question}}", {% endfor %}],
+                labels: [{% for entry in RadarSurveys%}"{{entry.0}}", {%endfor%} ],
                 datasets: [
-                  {% for mark in Financialmarks %}
                   {
                   label: "Charity",
                   backgroundColor: "rgba(3, 88, 106, 0.2)",
@@ -88,9 +87,8 @@
                   pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
                   pointHoverBackgroundColor: "#fff",
                   pointHoverBorderColor: "rgba(220,220,220,1)",
-                  data: [  "{{mark}}",]
+                  data: [ {% for mark in marksurveys%} "{{mark.1}}", {% endfor %}]
                 },
-                {% endfor %}
               ]
               };
             </script>

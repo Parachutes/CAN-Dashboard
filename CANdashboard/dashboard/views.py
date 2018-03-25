@@ -22,6 +22,7 @@ from more_itertools import chunked
 from statistics import mean
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 
 
@@ -167,15 +168,14 @@ def calculteTotalMark(forms):
 
         for i in indexs:
             for mark in marks:
-                marking.append(int(mark[i]))
+                try:
+                    marking.append(int(mark[i]))
+                except IndexError:
+                    marking.append(0)
+
 
         cele = list(chunked(marking, len(questions)))
         totalEntryMark = map(sum,cele)
-
-        for i in indexs:
-            for mark in marks:
-                marking.append(int(mark[i]))
-
         individualQMark = list(chunked(marking, len(questions)))
         weightedEntry = zip(entryFields,individualQMark)
 
@@ -345,21 +345,21 @@ def indexUser(request):
 
     for ds in DeliverySurveys:
         for o in ds.question.entries.all():
-            if str(user) != getCharityNameforSurvey(o):
+            if str(user).lower() != getCharityNameforSurvey(o).lower():
                 pass
             else:
                 DeliveryEntries.append(len(FieldEntry.objects.filter(entry=o)))
 
     for fs in FinancialSurveys:
         for m in fs.question.entries.all():
-            if str(user) != getCharityNameforSurvey(m):
+            if str(user).lower() != getCharityNameforSurvey(m).lower():
                 pass
             else:
                 HealthEntries.append(len(FieldEntry.objects.filter(entry=m)))
 
     for ps in FinancialSurveys:
         for l in ps.question.entries.all():
-            if str(user) != getCharityNameforSurvey(l):
+            if str(user).lower() != getCharityNameforSurvey(l).lower():
                 pass
             else:
                 ProgressEntries.append(len(FieldEntry.objects.filter(entry=l)))
@@ -588,11 +588,16 @@ def Manipulate_Entries(request,slug):
     entrie = []
 
     for entry in unfilteredentrie:
-
-        if str(user) != getCharityNameforSurvey(entry):
+        if str(user).lower() != str(getCharityNameforSurvey(entry)).lower():
             pass
         else:
             entrie.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
+
+    for unfilentry in entrie:
+        for index,unfilen in enumerate(unfilentry):
+            if index == 0:
+                unfilentry.pop(0)
+
 
     # for entry in entrie:
     #     entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
@@ -611,14 +616,14 @@ def Manipulate_Entries(request,slug):
         for mark in marks:
             marking.append(int(mark[i]))
 
-    cele = list(chunked(marking, len(questions)))
+    cele = list(chunked(marking, len(questions)-1))
     totalEntryMark = map(sum,cele)
 
     for i in indexs:
         for mark in marks:
             marking.append(int(mark[i]))
 
-    individualQMark = list(chunked(marking, len(questions)))
+    individualQMark = list(chunked(marking, len(questions)-1))
     weightedEntry = zip(entrie,individualQMark)
 
 
@@ -650,6 +655,9 @@ def DeliveryCategory(request):
     numberOfEntries =  zip(surveyQuestions,DeliveryEntries)
     Surveys = zip(survey,DeliveryEntries)
 
+    RadarSurveys = zip(surveyQuestions,Deliverymarks)
+    marksurveys = zip(surveyQuestions,Deliverymarks)
+
 
     return render(request,'app/DeliveryPage.html',locals())
 
@@ -666,9 +674,10 @@ def FinancialCategory(request):
 
     for d in FinancialSurveys:
         if len(d.question.entries.all()) != 0:
-            Financialmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            Financialmarks.append(int(calculteTotalMark(d.question)/len(d.question.entries.all())))
         else:
             Financialmarks.append(calculteTotalMark(d.question))
+
         FinancialEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for question in survey:
@@ -678,6 +687,8 @@ def FinancialCategory(request):
     numberOfEntries = zip(surveyQuestions,FinancialEntries)
     Surveys = zip(survey,FinancialEntries)
 
+    RadarSurveys = zip(surveyQuestions,Financialmarks)
+    marksurveys = zip(surveyQuestions,Financialmarks)
     return render(request,'app/FinancialPage.html',locals())
 
 def StrengthCategory(request):
@@ -703,6 +714,8 @@ def StrengthCategory(request):
     StrengthSurveys = zip(surveyQuestions,Strengthmarks)
     numberOfEntries = zip(surveyQuestions,StrengthEntries)
     Surveys = zip(survey,StrengthEntries)
+    RadarSurveys = zip(surveyQuestions,Strengthmarks)
+    marksurveys = zip(surveyQuestions,Strengthmarks)
 
     return render(request,'app/StrengthPage.html',locals())
 
@@ -732,6 +745,9 @@ def ProgressCategory(request):
     numberOfEntries = zip(surveyQuestions,ProgressEntries)
     Surveys = zip(survey,ProgressEntries)
 
+    RadarSurveys = zip(surveyQuestions,Progressmarks)
+    marksurveys = zip(surveyQuestions,Progressmarks)
+
     return render(request,'app/ProgressPage.html',locals())
 
 
@@ -758,7 +774,7 @@ def surveyAnalysis(request,id):
 
     for entry in unfilteredentrie:
 
-        if str(user) != getCharityNameforSurvey(entry):
+        if str(user).lower() != getCharityNameforSurvey(entry).lower():
             pass
         else:
             entries.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
@@ -786,6 +802,7 @@ def surveyAnalysis(request,id):
 
     individualQMark = list(chunked(marking, len(fields)))
     totalEntryMark = map(sum,individualQMark)
+
 
     MarkedQuestion = zip(*individualQMark)
 
@@ -857,6 +874,8 @@ def Generate_Questions(request,id,num):
                 f.form = form.question
                 f.save()
             return render (request,'app/indexAdmin.html')
+        elif len(fields) == 0:
+                messages.add_message(request, messages.INFO, 'Must be at least 1 Question.')
         else:
             return render (request,'app/Gen_Q.html')
     else:

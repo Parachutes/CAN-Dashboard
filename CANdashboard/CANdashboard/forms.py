@@ -56,11 +56,6 @@ class allField(forms.ModelForm):
         model = QuestionMarks
         exclude = ('slug','form')
 
-class Charityentry(forms.ModelForm):
-    class Meta:
-        model = CharityEntry
-        exclude = ()
-
 class addSurvey(forms.ModelForm):
     class Meta:
         model = FormEntry
