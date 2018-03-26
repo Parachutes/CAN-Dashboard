@@ -34,22 +34,19 @@
                     <th>Published From</th>
                     <th>Expires on</th>
                     <th>Login Required</th>
+                    <th>Share</th>
                   </tr>
                 </thead>
 
 
                 <tbody>
                   <tr>
-
-
-                      <!-- TODO add link like this! Shichao, 12th, March -->
-
                     {% for sur in survey %}
-
                     <td><a href="{% url 'survey_view' sur.slug %}">{{sur.title}}</a></td>
                     <td>{{sur.publish_date}}t</td>
                     <td>{{sur.expiry_date}}</td>
                     <td>{{sur.login_required}}</td>
+                    <td><i class="fa fa-facebook-square"></i>&nbsp;<i class="fa fa-twitter-square"></i>&nbsp;<i class="fa fa-linkedin-square"></i>&nbsp;<i class="fa fa-mail-forward"></i></td>
                   </tr>
                   {% endfor %}
                 </tbody>
