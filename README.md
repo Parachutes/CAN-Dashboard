@@ -18,7 +18,7 @@ the permissions app: pip install django-admin-view-permission
 
 * Allow CAN to Develop Surveys :+1:
 
-* Push the Surveys to the Dashboards of the Users / Foward the surveys with the use of messages
+* Push the Surveys to the Dashboards of the Users / Foward the surveys with the use of messages. :+1:
 
 * Access the different Surveys if has permission :+1:
 
