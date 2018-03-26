@@ -69,7 +69,7 @@ class relatedSurvey(forms.ModelForm):
 class Description(forms.ModelForm):
     class Meta:
         model = Form
-        exclude = ('slug','sites','redirect_url','email_from','response')
+        exclude = ('slug','redirect_url','email_from','response')
 
 class Messages(forms.ModelForm):
     class Meta:

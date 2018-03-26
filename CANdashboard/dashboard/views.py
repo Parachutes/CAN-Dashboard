@@ -547,7 +547,7 @@ def Charity_detail(request,Name):
 @login_required
 def list_messages(request):
     user = User.objects.get(username=request.user.username)
-    messages = SurveyMessage.objects.filter(recipient=user)
+    messages = Message.objects.filter(recipient=user)
     mes = {
     "lk": messages
 }
@@ -826,7 +826,7 @@ def ProgressCategory(request):
 
     if user.is_authenticated:
         return render(request,'app/ProgressPage.html',locals())
-    
+
 
 
 def surveyAnalysis(request,id):
