@@ -295,16 +295,32 @@ def indexUser(request):
 
 
     for p in ProgressSurveys:
-            Progressmarks.append(calculteTotalMark(p.question))
+        for pr in p.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(pr):
+                pass
+            else:
+                Progressmarks.append(calculteTotalMark(p.question))
 
     for d in DeliverySurveys:
-            Deliverymarks.append(calculteTotalMark(d.question))
+        for dr in d.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(dr):
+                pass
+            else:
+                Deliverymarks.append(calculteTotalMark(d.question))
 
     for s in StrengthSurveys:
-            Strengthmarks.append(calculteTotalMark(s.question))
+        for sr in s.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(sr):
+                pass
+            else:
+                Strengthmarks.append(calculteTotalMark(s.question))
 
     for h in FinancialSurveys:
-            Healthmarks.append(calculteTotalMark(h.question))
+        for fr in h.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(fr):
+                pass
+            else:
+                Healthmarks.append(calculteTotalMark(h.question))
 
 
     for Pmark in Progressmarks:
@@ -666,16 +682,21 @@ def DeliveryCategory(request):
     DeliveryEntries = []
 
 
-
     for d in DeliverySurveys:
         if len(d.question.entries.all()) != 0:
-            Deliverymarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            for dr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(dr):
+                    continue
+            Deliverymarks.append(format(calculteTotalMark(d.question)/len(d.question.entries.all()), '.2f'))
+            surveyQuestions.append(d.question.title)
         else:
+            for dr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(dr):
+                    continue
             Deliverymarks.append(calculteTotalMark(d.question))
+            surveyQuestions.append(d.question.title)
         DeliveryEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
-    for question in survey:
-        surveyQuestions.append(question.question.title)
 
     weightedSurvey = zip(surveyQuestions,Deliverymarks)
     numberOfEntries =  zip(surveyQuestions,DeliveryEntries)
@@ -698,16 +719,23 @@ def FinancialCategory(request):
     FinancialEntries = []
 
 
+
     for d in FinancialSurveys:
         if len(d.question.entries.all()) != 0:
-            Financialmarks.append(int(calculteTotalMark(d.question)/len(d.question.entries.all())))
+            for fr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(fr):
+                    continue
+            Financialmarks.append(format(calculteTotalMark(d.question)/len(d.question.entries.all()), '.2f'))
+            surveyQuestions.append(d.question.title)
         else:
+            for fr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(fr):
+                    continue
             Financialmarks.append(calculteTotalMark(d.question))
+            surveyQuestions.append(d.question.title)
 
         FinancialEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
-    for question in survey:
-        surveyQuestions.append(question.question.title)
 
     FinancialSurveys = zip(surveyQuestions,Financialmarks)
     numberOfEntries = zip(surveyQuestions,FinancialEntries)
@@ -729,13 +757,19 @@ def StrengthCategory(request):
 
     for d in StrengthSurveys:
         if len(d.question.entries.all()) != 0:
-            Strengthmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            for dr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(dr):
+                    continue
+            Strengthmarks.append(format(calculteTotalMark(d.question)/len(d.question.entries.all()), '.2f'))
+            surveyQuestions.append(d.question.title)
         else:
+            for dr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(dr):
+                    continue
             Strengthmarks.append(calculteTotalMark(d.question))
+            surveyQuestions.append(d.question.title)
         StrengthEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
-    for question in survey:
-        surveyQuestions.append(question.question.title)
 
     StrengthSurveys = zip(surveyQuestions,Strengthmarks)
     numberOfEntries = zip(surveyQuestions,StrengthEntries)
@@ -757,15 +791,21 @@ def ProgressCategory(request):
 
     for d in ProgressSurveys:
         if len(d.question.entries.all()) != 0:
-            Progressmarks.append(calculteTotalMark(d.question)/len(d.question.entries.all()))
+            for dr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(dr):
+                    continue
+            Progressmarks.append(format(calculteTotalMark(d.question)/len(d.question.entries.all()), '.2f'))
+            surveyQuestions.append(d.question.title)
         else:
+            for dr in d.question.entries.all():
+                if request.user.username != getCharityNameforSurvey(dr):
+                    continue
             Progressmarks.append(calculteTotalMark(d.question))
+            surveyQuestions.append(d.question.title)
         ProgressEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
 
 
-    for question in survey:
-        surveyQuestions.append(question.question.title)
 
     ProgressSurveys = zip(surveyQuestions,Progressmarks)
     numberOfEntries = zip(surveyQuestions,ProgressEntries)
