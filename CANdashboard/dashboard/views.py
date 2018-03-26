@@ -704,9 +704,12 @@ def DeliveryCategory(request):
 
     RadarSurveys = zip(surveyQuestions,Deliverymarks)
     marksurveys = zip(surveyQuestions,Deliverymarks)
+    if user.is_superuser:
+        return render(request,'app/DeliveryPageAdmin.html',locals())
+    if user.is_authenticated:
+        return render(request,'app/DeliveryPage.html',locals())
 
 
-    return render(request,'app/DeliveryPage.html',locals())
 
 
 def FinancialCategory(request):
@@ -743,7 +746,10 @@ def FinancialCategory(request):
 
     RadarSurveys = zip(surveyQuestions,Financialmarks)
     marksurveys = zip(surveyQuestions,Financialmarks)
-    return render(request,'app/FinancialPage.html',locals())
+    if user.is_superuser:
+        return render(request,'app/FinancialPageAdmin.html',locals())
+    if user.is_authenticated:
+        return render(request,'app/FinancialPage.html',locals())
 
 def StrengthCategory(request):
     user = request.user
@@ -776,8 +782,10 @@ def StrengthCategory(request):
     Surveys = zip(survey,StrengthEntries)
     RadarSurveys = zip(surveyQuestions,Strengthmarks)
     marksurveys = zip(surveyQuestions,Strengthmarks)
-
-    return render(request,'app/StrengthPage.html',locals())
+    if user.is_superuser:
+        return render(request,'app/StrengthPageAdmin.html',locals())
+    if user.is_authenticated:
+        return render(request,'app/StrengthPage.html',locals())
 
 def ProgressCategory(request):
     user = request.user
@@ -813,8 +821,12 @@ def ProgressCategory(request):
 
     RadarSurveys = zip(surveyQuestions,Progressmarks)
     marksurveys = zip(surveyQuestions,Progressmarks)
+    if user.is_superuser:
+        return render(request,'app/ProgressPageAdmin.html',locals())
 
-    return render(request,'app/ProgressPage.html',locals())
+    if user.is_authenticated:
+        return render(request,'app/ProgressPage.html',locals())
+    
 
 
 def surveyAnalysis(request,id):
