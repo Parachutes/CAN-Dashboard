@@ -262,6 +262,15 @@ def index(request):
         else:
             avgHealth = format(totalHealthmarks / len(Healthmarks), '.2f')
 
+    UKusers = 0
+    USusers = 0
+    GerUsers = 0
+    SPusers = 0
+    UKusers = viewMapData("United Kingdom")
+    USusers = viewMapData("United States")
+    GerUsers = viewMapData("Germany")
+    SPusers= viewMapData("Spain")
+
     return render(request,'app/index.html',locals())
 
 @login_required
@@ -1009,6 +1018,11 @@ def send_message(request):
             return render(request,'app/send_message.html',{'form':form})
         else:
             return render(request,'app/send_messageAdmin.html',{'form':form})
+
+
+def viewMapData(country):
+    countries = Charity.objects.filter(Country=country)
+    return len(countries)
 
 
 #added by Shichao, to show the instruction page
