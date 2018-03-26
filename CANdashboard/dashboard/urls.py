@@ -16,7 +16,7 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url('accounts/', include('django.contrib.auth.urls')),
-    #url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/index/'}),
+    #url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': views.index}),
     url(r'^Generate/(?P<id>[-\w\d]+)/(?P<num>[-\w\d]+)/$', views.Generate_Questions, name="gen_q"),
 
     url(r'^(?P<slug>.*)/sent/$', views.redirectAfterSubmit, name="form_sent"),
@@ -30,6 +30,9 @@ urlpatterns = [
     url(r'^instructionAudience/$', views.instructionAudience,name='instructionAudience'),
     url(r'^instructionUser/$', views.instructionUser,name='instructionUser'),
     url(r'^instructionAdmin/$', views.instructionAdmin,name='instructionAdmin'),
+
+    #url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/accounts/login'}),
+    #url(r'^logout/$', django.contrib.auth.views.logout, name='logout'),
 
     url(r'^register/$',views.register_page,name='register'),
     url(r'^accounts/update/$', views.edit_profile, name='update_user'),
