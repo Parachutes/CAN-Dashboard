@@ -540,17 +540,160 @@ def indexAdmin(request):
 
 
 def Charity_detail(request,Name):
-    user = User.objects.get(username=Name)
-    charity = Charity.objects.get(user=user)
-    Charity_detail = Charity_details.objects.get(Name=charity)
-    #html = "<html><body>It is now %s.</body></html>" %Charity_detail
+    user = request.user
+    ProgressSurveys = RelatedSurvey.objects.filter(category='Progress')
+    DeliverySurveys = RelatedSurvey.objects.filter(category='Delivery')
+    StrengthSurveys = RelatedSurvey.objects.filter(category='Strength_of_system')
+    FinancialSurveys = RelatedSurvey.objects.filter(category='Financial_Health')
+
+    Progressmarks = []
+    totalProgressMark = 0
+    avgProgress = 0
+    ProgressEntries = []
+    Deliverymarks = []
+    totalDeliverymarks = 0
+    avgDelivery = 0
+    DeliveryEntries = []
+    Strengthmarks = []
+    totalStrengthmarks = 0
+    avgStrength = 0
+    StrengthEntries = []
+    Healthmarks = []
+    totalHealthmarks = 0
+    avgHealth = 0
+    HealthEntries = []
+    totalDeliveryEntry = 0
+    totalStrengthEntry = 0
+    totalProgressEntry = 0
+    totalHealthEntry = 0
+
+
+    for p in ProgressSurveys:
+        for pr in p.question.entries.all():
+            if Name != getCharityNameforSurvey(pr):
+                pass
+            else:
+                Progressmarks.append(calculteTotalMark(p.question))
+
+    for d in DeliverySurveys:
+        for dr in d.question.entries.all():
+            if Name != getCharityNameforSurvey(dr):
+                pass
+            else:
+                Deliverymarks.append(calculteTotalMark(d.question))
+
+    for s in StrengthSurveys:
+        for sr in s.question.entries.all():
+            if Name != getCharityNameforSurvey(sr):
+                pass
+            else:
+                Strengthmarks.append(calculteTotalMark(s.question))
+
+    for h in FinancialSurveys:
+        for fr in h.question.entries.all():
+            if Name != getCharityNameforSurvey(fr):
+                pass
+            else:
+                Healthmarks.append(calculteTotalMark(h.question))
+
+
+    for Pmark in Progressmarks:
+        if Pmark  == None:
+            pass
+        else:
+            totalProgressMark += Pmark
+        if len(ProgressSurveys) == 0:
+            avgProgress = totalProgressMark
+        else:
+            avgProgress = format(totalProgressMark / len(ProgressSurveys), '.2f')
+
+    for Dmark in Deliverymarks:
+        if Dmark == None:
+            pass
+        else:
+            totalDeliverymarks += Dmark
+        if len(Deliverymarks) == 0:
+            avgDelivery = totalDeliverymarks
+        else:
+            avgDelivery = format(totalDeliverymarks / len(Deliverymarks), '.2f')
+
+    for Smark in Strengthmarks:
+        if Smark == None:
+            pass
+        else:
+            totalStrengthmarks += Smark
+        if len(Strengthmarks) == 0:
+            avgStrength = totalStrengthmarks
+        else:
+            avgStrength = format(totalStrengthmarks / len(Strengthmarks), '.2f')
+
+    for Hmark in Healthmarks:
+        if Hmark == None:
+            pass
+        else:
+            totalHealthmarks += Hmark
+        if len(Healthmarks) == 0:
+            avgHealth = totalHealthmarks
+        else:
+            avgHealth = format(totalHealthmarks / len(Healthmarks), '.2f')
+
+    for ss in StrengthSurveys:
+        for x in ss.question.entries.all():
+            if Name != getCharityNameforSurvey(x):
+                pass
+            else:
+                StrengthEntries.append(len(FieldEntry.objects.filter(entry=x)))
+
+
+    for ds in DeliverySurveys:
+        for o in ds.question.entries.all():
+            if Name != getCharityNameforSurvey(o):
+                pass
+            else:
+                DeliveryEntries.append(len(FieldEntry.objects.filter(entry=o)))
+
+    for fs in FinancialSurveys:
+        for m in fs.question.entries.all():
+            if Name != getCharityNameforSurvey(m):
+                pass
+            else:
+                HealthEntries.append(len(FieldEntry.objects.filter(entry=m)))
+
+    for ps in FinancialSurveys:
+        for l in ps.question.entries.all():
+            if Name  != getCharityNameforSurvey(l):
+                pass
+            else:
+                ProgressEntries.append(len(FieldEntry.objects.filter(entry=l)))
+
+    for delivery in DeliveryEntries:
+        totalDeliveryEntry += delivery
+
+    for health in HealthEntries:
+        totalHealthEntry += health
+
+    for strength in StrengthEntries:
+        totalStrengthEntry += strength
+
+    for progress in ProgressEntries:
+        totalProgressEntry += progress
+
+
+    CategorisedEntries = []
+
+    CategorisedEntries.append((RelatedSurvey.Progress,totalProgressEntry))
+    CategorisedEntries.append((RelatedSurvey.Strength_of_system,totalStrengthEntry))
+    CategorisedEntries.append((RelatedSurvey.Financial_Health,totalHealthEntry))
+    CategorisedEntries.append((RelatedSurvey.Delivery,totalDeliveryEntry))
+
+
     if user.is_authenticated:
         if user.is_superuser:
-            return render(request,'app/indexAdmin.html',{'Charity_detail':Charity_detail})
+            return render(request,'app/CharityViewAdmin.html',locals())
         else:
-            return render(request,'app/indexUser.html',{'Charity_detail':Charity_detail})
+            return render(request,'app/CharityViewUser.html',locals())
     else:
-        return render(request,'app/index.html',{'Charity_detail':Charity_detail})
+        return render(request,'app/CharityView.html',locals())
 
 
 @login_required
