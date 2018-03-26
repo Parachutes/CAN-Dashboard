@@ -42,18 +42,18 @@
                 <tbody>
                   <tr>
 
-
-                      <!-- TODO add link like this! Shichao, 12th, March -->
-
                     {% for sur in survey %}
 
                     <td><a href="{% url 'survey_view' sur.slug %}">{{sur.title}}</a></td>
                     <td>{{sur.publish_date}}t</td>
                     <td>{{sur.expiry_date}}</td>
                     <td>{{sur.login_required}}</td>
-                    <td><a href="http://www.facebook.com/sharer.php?u={% url 'survey_view' sur.slug %}"><i class="fa fa-facebook-square" data-toggle="tooltip" data-placement="top" title="Facebook"></i></a>&nbsp;<a href="https://twitter.com/intent/tweet?text={% url 'survey_view' sur.slug %}">
-                      <i class="fa fa-twitter-square" data-toggle="tooltip" data-placement="top" title="Twitter"></i></a>&nbsp;<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={% url 'survey_view' sur.slug %}"><i class="fa fa-linkedin-square" data-toggle="tooltip" data-placement="top" title="Linkedin"></i></a> &nbsp;
-                      <a href="mailto:?Subject={{sur.title}} email&amp;Body=Link%20here%20 {% url 'survey_view' sur.slug %}"><i class="fa fa-mail-forward"></i></a></td>
+                    <td>
+                      <a href="http://www.facebook.com/sharer.php?u={% url 'survey_view' sur.slug %}"><i class="fa fa-facebook-square" data-toggle="tooltip" data-placement="top" title="Facebook"></i></a>&nbsp;
+                      <a href="https://twitter.com/intent/tweet?text={% url 'survey_view' sur.slug %}"><i class="fa fa-twitter-square" data-toggle="tooltip" data-placement="top" title="Twitter"></i></a>&nbsp;
+                      <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={% url 'survey_view' sur.slug %}"><i class="fa fa-linkedin-square" data-toggle="tooltip" data-placement="top" title="Linkedin"></i></a>&nbsp;
+                      <a href="mailto:?Subject={{sur.title}} email&amp;Body=Link%20here%20 {% url 'survey_view' sur.slug %}"><i class="fa fa-mail-forward" data-toggle="tooltip" data-placement="top" title="E-mail"></i></a>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
