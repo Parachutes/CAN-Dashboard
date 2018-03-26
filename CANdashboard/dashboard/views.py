@@ -373,21 +373,21 @@ def indexUser(request):
 
     for ds in DeliverySurveys:
         for o in ds.question.entries.all():
-            if str(user).lower() != getCharityNameforSurvey(o).lower():
+            if request.user.username != getCharityNameforSurvey(o):
                 pass
             else:
                 DeliveryEntries.append(len(FieldEntry.objects.filter(entry=o)))
 
     for fs in FinancialSurveys:
         for m in fs.question.entries.all():
-            if str(user).lower() != getCharityNameforSurvey(m).lower():
+            if request.user.username != getCharityNameforSurvey(m):
                 pass
             else:
                 HealthEntries.append(len(FieldEntry.objects.filter(entry=m)))
 
     for ps in FinancialSurveys:
         for l in ps.question.entries.all():
-            if str(user).lower() != getCharityNameforSurvey(l).lower():
+            if request.user.username  != getCharityNameforSurvey(l):
                 pass
             else:
                 ProgressEntries.append(len(FieldEntry.objects.filter(entry=l)))
@@ -630,7 +630,7 @@ def Manipulate_Entries(request,slug):
     entrie = []
 
     for entry in unfilteredentrie:
-        if str(user).lower() != str(getCharityNameforSurvey(entry)).lower():
+        if request.user.username  != str(getCharityNameforSurvey(entry)):
             pass
         else:
             entrie.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
@@ -840,7 +840,7 @@ def surveyAnalysis(request,id):
 
     for entry in unfilteredentrie:
 
-        if str(user).lower() != getCharityNameforSurvey(entry).lower():
+        if request.user.username  != getCharityNameforSurvey(entry):
             pass
         else:
             entries.append(list(FieldEntry.objects.filter(entry = entry).values_list('value',flat=True)))
