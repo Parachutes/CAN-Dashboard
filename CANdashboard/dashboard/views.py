@@ -227,28 +227,40 @@ def index(request):
             pass
         else:
             totalProgressMark += Pmark
-    avgProgress = int(totalProgressMark / len(ProgressSurveys))
+        if len(ProgressSurveys) == 0:
+            avgProgress = totalProgressMark
+        else:
+            avgProgress = format(totalProgressMark / len(ProgressSurveys), '.2f')
 
     for Dmark in Deliverymarks:
         if Dmark == None:
             pass
         else:
             totalDeliverymarks += Dmark
-    avgDelivery = int(totalDeliverymarks / len(Deliverymarks))
+        if len(Deliverymarks) == 0:
+            avgDelivery = totalDeliverymarks
+        else:
+            avgDelivery = format(totalDeliverymarks / len(Deliverymarks), '.2f')
 
     for Smark in Strengthmarks:
         if Smark == None:
             pass
         else:
             totalStrengthmarks += Smark
-    avgStrength = int(totalDeliverymarks / len(Strengthmarks))
+        if len(Strengthmarks) == 0:
+            avgStrength = totalStrengthmarks
+        else:
+            avgStrength = format(totalStrengthmarks / len(Strengthmarks), '.2f')
 
     for Hmark in Healthmarks:
         if Hmark == None:
             pass
         else:
             totalHealthmarks += Hmark
-    avgHealth = int(totalDeliverymarks / len(Healthmarks))
+        if len(Healthmarks) == 0:
+            avgHealth = totalHealthmarks
+        else:
+            avgHealth = format(totalHealthmarks / len(Healthmarks), '.2f')
 
     return render(request,'app/index.html',locals())
 
