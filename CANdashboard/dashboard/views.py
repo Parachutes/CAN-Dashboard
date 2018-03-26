@@ -295,16 +295,32 @@ def indexUser(request):
 
 
     for p in ProgressSurveys:
-            Progressmarks.append(calculteTotalMark(p.question))
+        for pr in p.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(pr):
+                pass
+            else:
+                Progressmarks.append(calculteTotalMark(p.question))
 
     for d in DeliverySurveys:
-            Deliverymarks.append(calculteTotalMark(d.question))
+        for dr in d.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(dr):
+                pass
+            else:
+                Deliverymarks.append(calculteTotalMark(d.question))
 
     for s in StrengthSurveys:
-            Strengthmarks.append(calculteTotalMark(s.question))
+        for sr in s.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(sr):
+                pass
+            else:
+                Strengthmarks.append(calculteTotalMark(s.question))
 
     for h in FinancialSurveys:
-            Healthmarks.append(calculteTotalMark(h.question))
+        for fr in h.question.entries.all():
+            if request.user.username != getCharityNameforSurvey(fr):
+                pass
+            else:
+                Healthmarks.append(calculteTotalMark(h.question))
 
 
     for Pmark in Progressmarks:
