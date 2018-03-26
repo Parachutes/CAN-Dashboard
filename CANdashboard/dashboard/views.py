@@ -978,10 +978,9 @@ def redirectAfterSubmit(request,slug):
 def send_message(request):
     user = request.user
     if request.method == 'POST':
-        form = SendMessage(request.POST)
+        form = Messages(request.POST)
         if form.is_valid():
-            message = SurveyMessage(sender=user,recipient=form.cleaned_data['recipient'],content=form.cleaned_data['content'],survey=form.cleaned_data['survey'])
-            message.save()
+            message = form.save()
             message_sent.send(sender= message,from_user=message.sender,to=message.recipient)
             if user.is_superuser:
                 return render(request,'app/indexAdmin.html')
@@ -993,7 +992,7 @@ def send_message(request):
             else:
                 return render(request,'app/send_messageAdmin.html')
     else:
-        form = SendMessage()
+        form = Messages()
         if not user.is_superuser:
             return render(request,'app/send_message.html',{'form':form})
         else:

@@ -53,11 +53,6 @@ class RelatedSurvey(models.Model):
     question = models.ForeignKey(Form)
     category = models.CharField(max_length=1, choices=Charity_Categories)
 
-class SurveyMessage(Message):
-    survey = models.ForeignKey(Form)
-
-    def __str__(self):
-        return self.content
 
 
 class QuestionMarks(Field):

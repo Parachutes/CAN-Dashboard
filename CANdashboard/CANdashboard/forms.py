@@ -71,8 +71,7 @@ class Description(forms.ModelForm):
         model = Form
         exclude = ('slug','sites','redirect_url','email_from','response')
 
-
-class SendMessage(forms.ModelForm):
+class Messages(forms.ModelForm):
     class Meta:
-        model = SurveyMessage
-        exclude = ('slug','sender','sent_at','read_at')
+        model = Message
+        exclude = ('sender','read_at','sent_at')
