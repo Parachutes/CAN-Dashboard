@@ -1,9 +1,9 @@
 <!-- DONE the template / Shichao-->
 
 {% extends "app/base_siteAdmin.html" %}
-{% load crispy_forms_tags %}
-{% block title %} Send {% endblock title %}
 
+{% block title %} Send {% endblock title %}
+{% load crispy_forms_tags %}
 {% block stylesheets %}
   {{ block.super }}
 {% endblock stylesheets %}
@@ -27,7 +27,7 @@
             <form method="post" class="form" a>
               <div>
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{form|crispy}}
               </div>
 
           </div>
