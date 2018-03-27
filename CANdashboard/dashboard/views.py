@@ -803,9 +803,6 @@ def Manipulate_Entries(request,slug):
                 unfilentry.pop(0)
 
 
-    # for entry in entrie:
-    #     entryFields.append(list(FieldEntry.objects.filter(entry=entry).values_list('value',flat=True)))
-
     for mark in fields:
         marks.append((list(mark.get_marks())))
         choices.append(list(mark.get_choices()))
@@ -816,18 +813,27 @@ def Manipulate_Entries(request,slug):
                 if entry in choice:
                     indexs.append(choice.index(entry))
 
-    for i in indexs:
-        for mark in marks:
-            marking.append(int(mark[i]))
+    chunkedindex = chunked(indexs,len(fields))
 
-    cele = list(chunked(marking, len(questions)-1))
+    c =zip(chunkedindex,marks)
+    newMarking = []
+
+    for b in chunkedindex:
+            newMarking.append(zip(b,marks))
+
+    for c in newMarking:
+        for x in c:
+            marking.append(int((x[1][x[0]])))
+
+
+    cele = list(chunked(marking, len(fields)))
     totalEntryMark = map(sum,cele)
 
     for i in indexs:
         for mark in marks:
             marking.append(int(mark[i]))
 
-    individualQMark = list(chunked(marking, len(questions)-1))
+    individualQMark = list(chunked(marking, len(fields)))
     weightedEntry = zip(entrie,individualQMark)
 
 
@@ -1024,7 +1030,6 @@ def surveyAnalysis(request,id):
             if index == 0:
                 unfilentry.pop(0)
 
-
     for mark in fields:
         marks.append((list(mark.get_marks())))
         choices.append(list(mark.get_choices()))
@@ -1033,39 +1038,54 @@ def surveyAnalysis(request,id):
         for index,entry in enumerate(e):
             if index == 0:
                 pass
+            elif index ==1:
+                pass
             else:
                 for i,choice in enumerate(choices):
-                    if i == 0:
-                        pass
-                    else:
                         if entry in choice:
                             indexs.append(choice.index(entry))
 
-    for i in indexs:
-        for mark in marks:
-            marking.append(int(mark[i]))
+    chunkedindex = chunked(indexs,len(fields))
+
+    c =zip(chunkedindex,marks)
+    newMarking = []
+
+    for b in chunkedindex:
+            newMarking.append(zip(b,marks))
+
+    for c in newMarking:
+        for x in c:
+            marking.append(int((x[1][x[0]])))
+
 
     individualQMark = list(chunked(marking, len(fields)))
     totalEntryMark = map(sum,individualQMark)
+
+    for i in individualQMark:
+        print(i)
+
 
 
     MarkedQuestion = zip(*individualQMark)
 
     for index,question in enumerate(unfilteredquestions):
-        if index != 0:
-            questionsForm.append(question)
-        else:
+        if index == 0:
             pass
+        elif index == 1:
+            pass
+        elif index == 2:
+            pass
+        else:
+            questionsForm.append(question)
 
     Qmark = zip(questions,individualQMark)
 
     for quest in questionsForm:
         questions.append(quest.label)
 
-    SummedQuestion = (map(mean,MarkedQuestion))
 
+    SummedQuestion = map(mean,MarkedQuestion)
     weightedQuestion = zip(questions,SummedQuestion)
-
     weightedEntry = zip(entries,totalEntryMark)
 
 
@@ -1112,8 +1132,12 @@ def Generate_Questions(request,id,num):
     if request.method == 'POST':
         fields = FieldFormSet(request.POST)
         if fields.is_valid():
+            user_name = Field(form = form.question,label='Name', field_type= 1)
+            position = Field(form = form.question,label='Charity Position', field_type= 1)
             charity_name = Field(form = form.question,label='Which Charity is Survey Intended To', field_type= 1)
             charity_name.save()
+            user_name.save()
+            position.save()
             for field in fields:
                 f = field.save(commit=False)
                 f.form = form.question
