@@ -754,8 +754,15 @@ def loginAdmin(request):
 
 
 
+#For viewing the survey, Shichao Ma
 class SurveyDetail(FormDetail):
     template_name = "app/view_survey.html"
+
+class SurveyDetailUser(FormDetail):
+    template_name = "app/view_surveyUser.html"
+
+class SurveyDetailAdmin(FormDetail):
+    template_name = "app/view_surveyAdmin.html"
 
 
 def Manipulate_Entries(request,slug):
