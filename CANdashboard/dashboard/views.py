@@ -423,8 +423,11 @@ def indexUser(request):
     CategorisedEntries.append((RelatedSurvey.Financial_Health,totalHealthEntry))
     CategorisedEntries.append((RelatedSurvey.Delivery,totalDeliveryEntry))
 
-
-    return render(request,'app/indexUser.html',locals())
+    user = request.user
+    if user.is_superuser:
+        return render(request, 'app/indexAdmin.html', locals())
+    else:
+        return render(request, 'app/indexUser.html', locals())
 
 
 @login_required
