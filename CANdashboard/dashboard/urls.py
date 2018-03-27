@@ -56,13 +56,10 @@ urlpatterns = [
     url(r'^(?P<Name>[-\w\d]+)/$', views.Charity_detail, name='char_det'), #checkout TODO
 
 
-
+    #For viewing a survey, Shichao Ma
     url(r'^survey_list/(?P<slug>[-\w\d]+)/$', views.SurveyDetail.as_view(), name='survey_view'),
-
-
-
-
-
+    url(r'^survey_list/U/(?P<slug>[-\w\d]+)/$', views.SurveyDetailUser.as_view(), name='survey_viewUser'),
+    url(r'^survey_list/A/(?P<slug>[-\w\d]+)/$', views.SurveyDetailAdmin.as_view(), name='survey_viewAdmin'),
 
 
 
