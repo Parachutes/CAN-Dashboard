@@ -30,7 +30,6 @@
                     <th> Charity Name </th>
                     <th> Country </th>
                     <th> Email </th>
-                    <th> Overall Score </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,7 +39,6 @@
                     <td><a href="{% url 'char_det' char %}">{{char.Name}}</a></td>
                     <td> {{char.Country}} </td>
                     <td> {{char.email}} </td>
-                    <td> 50 </td>
                   </tr>
                   {%endfor%}
                 </tbody>
