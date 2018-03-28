@@ -137,11 +137,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'dashboard', 'static'),
 )
-<<<<<<< HEAD
-=======
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-django_heroku.settings(locals())
-
-# Activate Django-Heroku.
-#django_heroku.settings(locals())
->>>>>>> f74f589743bb43b831e87f1da57885307d85ed63
