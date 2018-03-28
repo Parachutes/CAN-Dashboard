@@ -15,49 +15,11 @@
         <div class="title_left">
           <h1> Messages Inbox </h1>
         </div>
-
-        <!--<div class="title_right">
-          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>-->
-
       </div>
-
-      <!--<div class="clearfix"></div>-->
-
       <div class="row">
         <div class="col-md-12">
           <div class="x_panel">
-            <!--<div class="x_title">
-              <h2>Inbox Design<small>User Mail</small></h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
-                    </li>
-                    <li><a href="#">Settings 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>-->
             <div class="x_content">
-
-                <!-- /MAIL LIST -->
-
-                <!-- CONTENT MAIL -->
                 {% for messages in lk%}
                 <div class="col-sm-9 mail_view">
                   <div class="inbox-body">
@@ -65,10 +27,7 @@
                       <div class="col-md-8">
                         <div class="btn-group">
                           <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-reply"></i> Reply</button>
-                          <button class="btn btn-sm btn-default" type="button"  data-placement="top" data-toggle="tooltip" data-original-title="Forward"><i class="fa fa-share"></i></button>
-                          <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></button>
-                          <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
-                        </div>
+                          </div>
                       </div>
                       <div class="col-md-4 text-right">
                         <p class="date"> {{messages.sent_at}}</p>
@@ -84,39 +43,11 @@
                       </div>
                       <p> {{messages.content}}<p>
                     </div>
-                    <div class="view-mail">
-                    </div>
-                    <div class="attachment">
-                      <p>
-                        <span><i class="fa fa-paperclip"></i> 1 attachments — </span>
-                        <a href="#">Download Survey</a> |
-                        <a href="#">View all surveys</a>
-                      </p>
-                      <ul>
-                        <li>
-                          <div class="file-name">
-                            Survey
-                          </div>
-                          <span>12KB</span>
-
-
-                          <div class="links">
-                            <a href="#">View</a> -
-                            <a href="#">Download</a>
-                          </div>
-                        </li>
-                      </ul>
-
-                    </div>
-
                   </div>
                   <br>
 
                 </div>
-
-
-{%endfor%}
-                <!-- /CONTENT MAIL -->
+              {%endfor%}
               </div>
             </div>
           </div>
