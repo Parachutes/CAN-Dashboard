@@ -584,7 +584,8 @@ def send_message(request):
     if request.method == 'POST':
         form = Messages(request.POST)
         if form.is_valid():
-            message = form.save()
+            message = form.save(commit=False)
+            message.sender = user
             message_sent.send(sender= message,from_user=message.sender,to=message.recipient)
             if user.is_superuser:
                 return render(request,'app/indexAdmin.html')
