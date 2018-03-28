@@ -118,6 +118,8 @@ LOGIN_REDIRECT_URL = '/profile/'
 
 AUTH_USER_MODEL = 'auth.User'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
