@@ -1,13 +1,12 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.forms import ModelForm
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.models import User
 from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, AbstractForm,Field
-from directmessages.models import Message
 
 class Charity(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     Name = models.CharField(max_length=80)
     Country = models.CharField(max_length=20, blank=True)
     Website = models.URLField(blank=True,default = '')
@@ -30,7 +29,7 @@ class Charity(models.Model):
         return reverse('Charity:Charity',args=[self.slug])
 
 class Charity_details(models.Model):
-    Name = models.ForeignKey(Charity)
+    Name = models.ForeignKey(Charity,on_delete=models.CASCADE)
     Delivery = models.IntegerField(blank=True, default = 0)   #1
     Financial_health = models.IntegerField(blank=True, default = 0)   #2
     Strength_of_system = models.IntegerField(blank=True, default = 0) #3
@@ -50,7 +49,7 @@ class RelatedSurvey(models.Model):
         (Strength_of_system, 'Strength_of_system'),
         (Progress, 'Progress'),
     )
-    question = models.ForeignKey(Form)
+    question = models.ForeignKey(Form,on_delete=models.CASCADE)
     category = models.CharField(max_length=1, choices=Charity_Categories)
 
 
