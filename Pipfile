@@ -11,6 +11,8 @@ django-crispy-forms = "==1.7.2"
 more-itertools = "==4.1.0"
 django-admin-view-permission = "==1.6"
 whitenoise = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 
