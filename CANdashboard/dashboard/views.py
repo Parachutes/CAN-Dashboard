@@ -506,7 +506,7 @@ def DeleteEntry(request, slug,entry_id):
 
 
     delentry = FormEntry.objects.get(id=entry_id).delete()
-    return HttpResponseRedirect(reverse('indexUser'))
+    return redirect('manipulate_entries', args=(ma.slug,))
 
 
 
