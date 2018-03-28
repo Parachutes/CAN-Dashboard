@@ -62,7 +62,6 @@
               <form method="post" class="form">
 
 
-                <!-- TODO LOOP OVER EACH ONE ONCE AGAIN TO GET INDIVIDUAL ENTRIES -->
                 <table id="datatable" class="table table-striped table-bordered">
                   <thead>
                     <tr>
@@ -76,7 +75,7 @@
                   <tr>
                     <td>{{s.0}} </td>
                     <td>{{s.1}}</td>
-                    <td> <a href="{% url 'delete_entry' slug=ma.slug entry_id=forloop.counter %}" <span class="fa fa-trash-o centre"></span></a> </td>
+                    <td> <a href="{% url 'delete_entry' slug=ma.slug entry_id=s.2 %}" <span class="fa fa-trash-o centre"></span></a> </td>
                   </tr>
                   {% endfor %}
               </tbody>

@@ -298,7 +298,7 @@ def Manipulate_Entries(request,slug):
     formentry = FormEntry.objects.filter(form = ma)[:1].get()
     form = FieldEntry.objects.filter(entry_id = formentry)
     entryTable = EntriesForm(ma,RequestContext(request),formentry,form,request.POST or None)
-
+    delentriesID = FormEntry.objects.filter(form = ma).values_list('id',flat=True)
     entries = FormEntry.objects.filter(form = ma)
     entryAnswers = entries.all()
     answers = []
@@ -360,7 +360,7 @@ def Manipulate_Entries(request,slug):
             marking.append(int(mark[i]))
 
     individualQMark = list(chunked(marking, len(fields)))
-    weightedEntry = zip(entrie,individualQMark)
+    weightedEntry = zip(entrie,individualQMark,delentriesID)
 
 
     return render(request,'app/man_entries.html',locals())
@@ -504,8 +504,9 @@ def DeleteEntry(request, slug,entry_id):
     for e in entry:
         lis.append(list(FieldEntry.objects.filter(entry_id=e).values_list('value',flat=True)))
 
-    delentry = entry[int(entry_id)-1].delete()
-    return render(request,'app/surveyAnalysis.html')
+
+    delentry = FormEntry.objects.get(id=entry_id).delete()
+    return HttpResponseRedirect(reverse('indexUser'))
 
 
 
