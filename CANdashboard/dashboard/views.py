@@ -467,11 +467,6 @@ def surveyAnalysis(request,id):
     individualQMark = list(chunked(marking, len(fields)))
     totalEntryMark = map(sum,individualQMark)
 
-    for i in individualQMark:
-        print(i)
-
-
-
     MarkedQuestion = zip(*individualQMark)
 
     for index,question in enumerate(unfilteredquestions):
@@ -498,7 +493,7 @@ def surveyAnalysis(request,id):
         return render(request, 'app/surveyAnalysisAdmin.html',locals())
     if user.is_authenticated:
         return render(request, 'app/surveyAnalysis.html',locals())
- 
+
 
 
 
@@ -589,6 +584,7 @@ def send_message(request):
         if form.is_valid():
             message = form.save(commit=False)
             message.sender = user
+            message.save()
             message_sent.send(sender= message,from_user=message.sender,to=message.recipient)
             if user.is_superuser:
                 return render(request,'app/indexAdmin.html')
@@ -870,8 +866,6 @@ def getUserInfo(request,Name):
     for progress in ProgressEntries:
         totalProgressEntry += progress
 
-
-    print(totalHealthmarks,totalDeliverymarks,totalProgressMark,totalStrengthmarks)
 
     CategorisedEntries = []
 
