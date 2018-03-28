@@ -1,2 +1,8 @@
 Django==1.10
+pip==9.0.3
+django-forms-builder==0.14.0
+django-directmessages==0.9.7
+django-crispy-forms==1.7.2
+more_itertools==4.1.0
+django-admin-view-permission==1.6
 
