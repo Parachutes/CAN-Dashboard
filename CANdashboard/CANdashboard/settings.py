@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'dashboard',
     'directmessages',
     'crispy_forms',
+    'django_heroku'
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -121,6 +122,14 @@ AUTH_USER_MODEL = 'auth.User'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -128,9 +137,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'dashboard', 'static'),
-    '/venv/lib/python3.6/site-packages/django/contrib/admin/static/'
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+django_heroku.settings(locals())
 
 # Activate Django-Heroku.
 #django_heroku.settings(locals())
