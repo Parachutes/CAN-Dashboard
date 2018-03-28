@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'dashboard',
     'directmessages',
     'crispy_forms',
+    'numpy',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -19,7 +19,7 @@ from django.views import View
 from forms_builder.forms.signals import form_invalid, form_valid
 from forms_builder.forms.utils import now, split_choices
 from more_itertools import chunked
-from statistics import mean
+from numpy import mean
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
