@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "==1.10"
+django-forms-builder = "==0.14.0"
+django-directmessages = "==0.9.7"
+django-crispy-forms = "==1.7.2"
+more-itertools = "==4.1.0"
+django-admin-view-permission = "==1.6"
+whitenoise = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
