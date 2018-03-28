@@ -584,7 +584,7 @@ def send_message(request):
         if form.is_valid():
             message = form.save(commit=False)
             message.sender = user
-            message.save(on_delete=models.CASCADE)
+            message.save()
             message_sent.send(sender= message,from_user=message.sender,to=message.recipient)
             if user.is_superuser:
                 return render(request,'app/indexAdmin.html')
