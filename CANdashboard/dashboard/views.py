@@ -494,8 +494,11 @@ def surveyAnalysis(request,id):
     weightedQuestion = zip(questions,SummedQuestion)
     weightedEntry = zip(entries,totalEntryMark)
 
-
-    return render(request, 'app/surveyAnalysis.html',locals())
+    if user.is_superuser:
+        return render(request, 'app/surveyAnalysisAdmin.html',locals())
+    if user.is_authenticated:
+        return render(request, 'app/surveyAnalysis.html',locals())
+ 
 
 
 
