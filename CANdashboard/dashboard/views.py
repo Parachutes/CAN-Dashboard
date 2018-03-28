@@ -383,7 +383,6 @@ def FinancialCategory(request):
         return render(request,'app/FinancialPage.html',locals())
 
 
-
 def StrengthCategory(request):
     user = request.user
     Surveys,StrengthSurveys,RadarSurveys,marksurveys = getCategoryInfo(request,"Strength_of_system")
@@ -888,17 +887,16 @@ def getCategoryInfo(request,Name):
         if len(d.question.entries.all()) != 0:
             for dr in d.question.entries.all():
                 if request.user.username != getCharityNameforSurvey(dr):
-                    continue
+                    marks.append(0)
             marks.append(format(calculteTotalMark(d.question)/len(d.question.entries.all()), '.2f'))
             surveyQuestions.append(d.question.title)
         else:
             for dr in d.question.entries.all():
                 if request.user.username != getCharityNameforSurvey(dr):
-                    continue
+                    marks.append(0)
             marks.append(calculteTotalMark(d.question))
             surveyQuestions.append(d.question.title)
         Entries.append(len(FormEntry.objects.filter(form=d.question)))
-
 
     CatSurveys = zip(surveyQuestions,marks)
     numberOfEntries = zip(surveyQuestions,Entries)
