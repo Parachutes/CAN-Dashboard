@@ -4,6 +4,7 @@ from collections import OrderedDict
 from django.apps import apps
 from django.core import serializers
 from django.core.management.base import BaseCommand, CommandError
+from django.core.management.utils import parse_apps_and_model_labels
 from django.db import DEFAULT_DB_ALIAS, router
 
 
@@ -42,15 +43,15 @@ class Command(BaseCommand):
                  '(use multiple --exclude to exclude multiple apps/models).',
         )
         parser.add_argument(
-            '--natural-foreign', action='store_true', dest='use_natural_foreign_keys', default=False,
+            '--natural-foreign', action='store_true', dest='use_natural_foreign_keys',
             help='Use natural foreign keys if they are available.',
         )
         parser.add_argument(
-            '--natural-primary', action='store_true', dest='use_natural_primary_keys', default=False,
+            '--natural-primary', action='store_true', dest='use_natural_primary_keys',
             help='Use natural primary keys if they are available.',
         )
         parser.add_argument(
-            '-a', '--all', action='store_true', dest='use_base_manager', default=False,
+            '-a', '--all', action='store_true', dest='use_base_manager',
             help="Use Django's base manager to dump all models stored in the database, "
                  "including those that would otherwise be filtered or modified by a custom manager.",
         )
@@ -77,31 +78,17 @@ class Command(BaseCommand):
         pks = options['primary_keys']
 
         if pks:
-            primary_keys = pks.split(',')
+            primary_keys = [pk.strip() for pk in pks.split(',')]
         else:
             primary_keys = []
 
-        excluded_apps = set()
-        excluded_models = set()
-        for exclude in excludes:
-            if '.' in exclude:
-                try:
-                    model = apps.get_model(exclude)
-                except LookupError:
-                    raise CommandError('Unknown model in excludes: %s' % exclude)
-                excluded_models.add(model)
-            else:
-                try:
-                    app_config = apps.get_app_config(exclude)
-                except LookupError as e:
-                    raise CommandError(str(e))
-                excluded_apps.add(app_config)
+        excluded_models, excluded_apps = parse_apps_and_model_labels(excludes)
 
         if len(app_labels) == 0:
             if primary_keys:
                 raise CommandError("You can only use --pks option with one model")
-            app_list = OrderedDict(
-                (app_config, None) for app_config in apps.get_app_configs()
+            app_list = OrderedDict.fromkeys(
+                app_config for app_config in apps.get_app_configs()
                 if app_config.models_module is not None and app_config not in excluded_apps
             )
         else:
@@ -179,15 +166,14 @@ class Command(BaseCommand):
                     if count_only:
                         yield queryset.order_by().count()
                     else:
-                        for obj in queryset.iterator():
-                            yield obj
+                        yield from queryset.iterator()
 
         try:
             self.stdout.ending = None
             progress_output = None
             object_count = 0
             # If dumpdata is outputting to stdout, there is no way to display progress
-            if (output and self.stdout.isatty() and options['verbosity'] > 0):
+            if output and self.stdout.isatty() and options['verbosity'] > 0:
                 progress_output = self.stdout
                 object_count = sum(get_objects(count_only=True))
             stream = open(output, 'w') if output else None
