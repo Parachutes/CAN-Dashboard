@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'b5o@v@)d61f51o0jo1bv%0h)_&y@o&nx3f0ie-@5vdm2cai66e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['candashboard.pythonanywhere.com']
 
