@@ -16,7 +16,7 @@ more-itertools: pip3 install more_itertools
 
 the permissions app: pip3 install django-admin-view-permission
 
-numpy: pip3 install numpy
+selenuim: pip3 install selenium
 
 ## Requirements
 
@@ -43,6 +43,8 @@ numpy: pip3 install numpy
 ## Testing
 
 Tests are to be run in the Django Directory of the app, with the use of Selenuim
+
+python3 manage.py test tests
 
 ## Deployment
 
