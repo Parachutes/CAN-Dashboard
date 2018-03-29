@@ -71,4 +71,16 @@ Initial Work - Prototype
 
 This project is licensed under free license.
 
+## Sample Accounts
+* You can use them to login our websites
+* Username(password)
+
+Admin:
+    1) SampleAdmin1(sampleadmin1)
+    2) SampleAdmin2(sampleadmin2)
+
+Charity(aka User):
+    1) SampleCharity1(samplecharity1)
+    2) SampleCharity2(samplecharity2)
+
 
