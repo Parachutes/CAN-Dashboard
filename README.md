@@ -2,6 +2,8 @@
 
 CAN Dashboard, creates and sends Surveys. Visualizes the data in a dashboard.
 
+This web application has been deployed on pythonanywhere:  http://candashboard.pythonanywhere.com
+
 ## Getting Started
 
 django-forms-builder: pip3 install -U django-forms-builder
