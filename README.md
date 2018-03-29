@@ -46,9 +46,9 @@ Tests are to be run in the Django Directory of the app, with the use of Selenuim
 
 ## Deployment
 
-Go to manage.py File
+Domain = [https://candashboard.pythonanywhere.com]
 
-Trial Domain = []
+Go to manage.py File
 
 Insert : python manage.py runserver
 
