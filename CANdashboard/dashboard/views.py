@@ -362,8 +362,10 @@ def Manipulate_Entries(request,slug):
     individualQMark = list(chunked(marking, len(fields)))
     weightedEntry = zip(entrie,individualQMark,delentriesID)
 
-
-    return render(request,'app/man_entries.html',locals())
+    if user.is_superuser():
+        return render (request,'app/man_entriesAdmin.html',locals())
+    else:
+        return render(request,'app/man_entries.html',locals())
 
 
 def DeliveryCategory(request):
