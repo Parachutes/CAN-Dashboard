@@ -362,7 +362,7 @@ def Manipulate_Entries(request,slug):
     individualQMark = list(chunked(marking, len(fields)))
     weightedEntry = zip(entrie,individualQMark,delentriesID)
 
-    if user.is_superuser():
+    if user.is_superuser:
         return render (request,'app/man_entriesAdmin.html',locals())
     else:
         return render(request,'app/man_entries.html',locals())
