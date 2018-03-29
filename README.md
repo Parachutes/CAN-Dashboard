@@ -4,15 +4,17 @@ CAN Dashboard, creates and sends Surveys. Visualizes the data in a dashboard.
 
 ## Getting Started
 
-django-forms-builder: pip install -U django-forms-builder
+django-forms-builder: pip3 install -U django-forms-builder
  
-direct messaging between users: pip install django-directmessages
+direct messaging between users: pip3 install django-directmessages
 
-crispy forms : pip install django-crispy-forms
+crispy forms : pip3 install django-crispy-forms
 
-more-itertools: pip install more_itertools
+more-itertools: pip3 install more_itertools
 
-the permissions app: pip install django-admin-view-permission
+the permissions app: pip3 install django-admin-view-permission
+
+numpy: pip3 install numpy
 
 ## Requirements
 
@@ -43,6 +45,8 @@ Tests are to be run in the Django Directory of the app, with the use of Selenuim
 ## Deployment
 
 Go to manage.py File
+
+Trial Domain = []
 
 Insert : python manage.py runserver
 
