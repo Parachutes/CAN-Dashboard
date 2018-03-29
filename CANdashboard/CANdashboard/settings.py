@@ -25,7 +25,7 @@ SECRET_KEY = 'b5o@v@)d61f51o0jo1bv%0h)_&y@o&nx3f0ie-@5vdm2cai66e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['candashboard.pythonanywhere.com']
+ALLOWED_HOSTS = ['.candashboard.pythonanywhere.com']
 
 
 # Application definition
