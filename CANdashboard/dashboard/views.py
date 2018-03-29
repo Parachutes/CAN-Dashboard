@@ -31,7 +31,7 @@ from forms_builder.forms.models import FormManager,Form, FormEntry, FieldEntry, 
 import forms_builder.forms.views
 from forms_builder.forms.forms import EntriesForm,FormForForm
 
-
+@login_required
 def register_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -252,7 +252,7 @@ def list_charity(request):
     else:
         return render(request,'app/charities_list.html',chars)
 
-
+@login_required
 def loginAdmin(request):
     context = {}
     if request.method == 'POST':
@@ -290,7 +290,7 @@ class SurveyDetailUser(FormDetail):
 class SurveyDetailAdmin(FormDetail):
     template_name = "app/view_surveyAdmin.html"
 
-
+@login_required
 def Manipulate_Entries(request,slug):
     user = request.user
     ma = Form.objects.get(slug=slug)
@@ -367,7 +367,7 @@ def Manipulate_Entries(request,slug):
     else:
         return render(request,'app/man_entries.html',locals())
 
-
+@login_required
 def DeliveryCategory(request):
     user = request.user
     Surveys,weightedSurvey,RadarSurveys,marksurveys = getCategoryInfo(request,"Delivery")
@@ -375,7 +375,7 @@ def DeliveryCategory(request):
         return render(request,'app/DeliveryPageAdmin.html',locals())
     if user.is_authenticated:
         return render(request,'app/DeliveryPage.html',locals())
-
+@login_required
 def FinancialCategory(request):
     user = request.user
     Surveys,FinancialSurveys,RadarSurveys,marksurveys = getCategoryInfo(request,"Financial_Health")
@@ -384,7 +384,7 @@ def FinancialCategory(request):
     if user.is_authenticated:
         return render(request,'app/FinancialPage.html',locals())
 
-
+@login_required
 def StrengthCategory(request):
     user = request.user
     Surveys,StrengthSurveys,RadarSurveys,marksurveys = getCategoryInfo(request,"Strength_of_system")
@@ -393,6 +393,7 @@ def StrengthCategory(request):
     if user.is_authenticated:
         return render(request,'app/StrengthPage.html',locals())
 
+@login_required
 def ProgressCategory(request):
     user = request.user
     Surveys,ProgressSurveys,RadarSurveys,marksurveys = getCategoryInfo(request,"Progress")
@@ -403,7 +404,7 @@ def ProgressCategory(request):
         return render(request,'app/ProgressPage.html',locals())
 
 
-
+@login_required
 def surveyAnalysis(request,id):
     user = request.user
     survey = Form.objects.get(id=id)
@@ -497,7 +498,7 @@ def surveyAnalysis(request,id):
 
 
 
-
+@login_required
 def DeleteEntry(request, slug,entry_id):
     ma = Form.objects.get(slug=slug)
     entry = FormEntry.objects.filter(form = ma)
@@ -525,12 +526,12 @@ def list_survey(request):
     else:
         return render(request,'app/survey_square.html',surv)
 
-
+@login_required
 def deleteSurvey(request,id):
     Relatedform = RelatedSurvey.objects.filter(question_id=id).delete()
     return render(request,'app/indexUser.html')
 
-
+@login_required
 def Generate_Questions(request,id,num):
     form = RelatedSurvey.objects.get(question_id=id)
     FieldFormSet = formset_factory(form=allField,extra=int(num))
@@ -557,7 +558,7 @@ def Generate_Questions(request,id,num):
         fields = FieldFormSet()
     return render(request,'app/Gen_Q.html',{'fields':fields})
 
-
+@login_required
 def add_survey(request):
     if request.method == 'POST':
         forms = Description(request.POST)
@@ -614,9 +615,11 @@ def viewMapData(country):
 def instructionAudience(request):
     return render(request, 'app/instructionAudience.html')
 
+@login_required
 def instructionUser(request):
     return render(request, 'app/instructionUser.html')
 
+@login_required
 def instructionAdmin(request):
     return render(request, 'app/instructionAdmin.html')
 
