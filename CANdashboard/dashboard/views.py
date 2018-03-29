@@ -653,15 +653,15 @@ def getAverageInfo():
 
     for d in DeliverySurveys:
         Deliverymarks.append(calculteTotalMark(d.question))
-        DeliveryEntries.append(len(FormEntry.objects.filter(form=p.question)))
+        DeliveryEntries.append(len(FormEntry.objects.filter(form=d.question)))
 
     for s in StrengthSurveys:
         Strengthmarks.append(calculteTotalMark(s.question))
-        StrengthEntries.append(len(FormEntry.objects.filter(form=p.question)))
+        StrengthEntries.append(len(FormEntry.objects.filter(form=s.question)))
 
     for h in FinancialSurveys:
         Healthmarks.append(calculteTotalMark(h.question))
-        HealthEntries.append(len(FormEntry.objects.filter(form=p.question)))
+        HealthEntries.append(len(FormEntry.objects.filter(form=h.question)))
 
 
     for Pmark in Progressmarks:
