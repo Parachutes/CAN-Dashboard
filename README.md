@@ -1,5 +1,7 @@
 # CAN Charity Dashboard (SEG-Major-Project)
 
+*This is a major project developed by Team Panda from Jan 2018 to Apr 2018.
+
 CAN Dashboard, creates and sends Surveys. Visualizes the data in a dashboard.
 
 This web application has been deployed on pythonanywhere:  http://candashboard.pythonanywhere.com
