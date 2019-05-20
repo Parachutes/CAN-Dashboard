@@ -130,3 +130,5 @@ STATIC_ROOT = '/home/candashboard/SEG-Major-project/CANdashboard/static'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'dashboard', 'static'),
 )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
